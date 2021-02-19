@@ -1,9 +1,8 @@
-export interface Article {
+export interface ArticleModel {
   id: string
   name: string
   description: string
   imageUrl?: string
   content: BinaryType
-  userId: string
   categoryId: string
 }
