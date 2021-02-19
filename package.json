@@ -21,5 +21,10 @@
     "lint-staged": "^10.5.4",
     "sucrase": "^3.17.1",
     "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.4"
   }
 }
