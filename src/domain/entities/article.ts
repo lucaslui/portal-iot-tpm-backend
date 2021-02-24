@@ -1,8 +1,10 @@
 export interface ArticleModel {
   id: string
-  name: string
+  title: string
   description: string
-  imageUrl?: string
   content: BinaryType
+  imageUrl?: string
+  createdAt?: Date
+  userId: string
   categoryId: string
 }

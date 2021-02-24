@@ -1,5 +1,5 @@
 import { ArticleModel } from '@/domain/entities/article'
 
 export interface LoadArticles {
-  load: (page: number) => Promise<ArticleModel[]>
+  load: (page?: number) => Promise<ArticleModel[]>
 }
