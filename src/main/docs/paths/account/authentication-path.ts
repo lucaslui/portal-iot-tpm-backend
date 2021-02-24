@@ -1,10 +1,11 @@
-export const loginPath = {
+export const accessPath = {
   post: {
-    tags: ['Acesso e Registro de Usuários'],
-    summary: 'API para autenticar usuários',
-    description: 'Essa rota pode ser executada por **qualquer usuário**',
+    tags: ['acesso'],
+    summary: 'API para permitir o acesso do autor para alguns recursos do autor',
+    description: 'Essa rota pode ser executada por **qualquer pesssoa**',
     requestBody: {
       required: true,
+      description: 'Informações necessárias para efetuar a autenticação',
       content: {
         'application/json': {
           schema: {

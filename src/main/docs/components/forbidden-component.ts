@@ -3,7 +3,13 @@ export const forbiddenComponent = {
   content: {
     'application/json': {
       schema: {
-        $ref: '#/schemas/error'
+        type: 'object',
+        properties: {
+          error: {
+            type: 'string',
+            example: 'Access denied'
+          }
+        }
       }
     }
   }

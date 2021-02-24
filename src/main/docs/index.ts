@@ -1,21 +1,26 @@
-import { bindHemsPath, loginPath, signupPath } from './paths'
-import { accountSchema , bindHemsSchema, errorSchema , loginParamsSchema, signupParamsSchema, dataMeasuresSchema } from './schemas'
-import { notFoundComponent , badRequestComponent , serverErrorComponent , unauthorizedComponent, forbiddenComponent } from './components'
-import { apiKeyAuthSchema } from './schemas/api-key-auth-schema'
-import { hemsDeviceDataPath } from './paths/load-device-data-path'
+import { accessPath } from './paths/account'
+import { addArticlePath, deleteArticlePath, editArticlePath, loadArticleByIdPath, loadArticleByCategoryPath, loadArticlesPath } from './paths/article'
+import { accountSchema, apiKeyAuthSchema, loginParamsSchema, signupParamsSchema } from './schemas/account'
+import { addArticleSchema, articleHeaderSchema, articleSchema } from './schemas/article'
+import { categorySchema } from './schemas/category'
+import { notFoundComponent , badRequestComponent , serverErrorComponent , unauthorizedComponent, forbiddenComponent, noContentComponent } from './components'
+import { addCategoryPath } from './paths/category'
+import { addCategorySchema } from './schemas/category/add-category-schema'
 
 export default {
   openapi: '3.0.0',
   info: {
-    title: 'API Software em Nuvem',
+    title: 'Backend do Blog',
     description:
-      'Essa API trata de servir **dados de medições** que foram enviados e armazenados na nuvem. ' +
-      'Os dados são originários dos **dispositivos HEMS** instalados nas casas. ' +
-      'Além disso, a API conta com um serviço de **acesso e registro de usuários** visto que grande parte dos dados são de cunho pessoal ou privado.',
+      'Documentação da API que trata de armazenar e servir as entidades de **artigos** e **categorias** do blog. A API também permite o acesso restrito do autor para o gerencimentado das entidades.',
     version: '1.0.0',
+    contact: {
+      name: 'Lucas Lui Motta',
+      url: 'https://lucaslui.github.io/blog/home'
+    },
     license: {
-      name: `© ${new Date().getFullYear()} Copel. Todos os direitos reservados.`,
-      url: 'https://www.copel.com/'
+      name: 'GPL v3.0 License',
+      url: 'https://www.gnu.org/licenses/gpl-3.0.en.html'
     }
   },
   servers: [{
@@ -23,34 +28,56 @@ export default {
     description: 'servidor principal'
   }],
   tags: [{
-    name: 'Acesso e Registro de Usuários',
-    description: 'APIs relacionadas ao acesso e registro dos usuários do sistema'
+    name: 'acesso',
+    description: 'Operações relacionadas com o acesso restrito do blog.'
   },{
-    name: 'Dispositivo HEMS',
-    description: 'APIs relacionadas ao vínculo e obtenção de dados do dispositivos HEMS'
+    name: 'artigos',
+    description: 'Operações relacionadas com os artigos do blog.'
+  },{
+    name: 'categorias',
+    description: 'Operações relacionadas com as categorias do blog.'
   }],
   paths: {
-    '/login': loginPath,
-    '/signup': signupPath,
-    '/hems/bind': bindHemsPath,
-    '/hems/{deviceId}/data': hemsDeviceDataPath
+    '/acesso': accessPath,
+    '/artigos': {
+      post: addArticlePath,
+      put: editArticlePath,
+      get: loadArticlesPath
+    },
+    '/artigos/{categoryId}': {
+      get: loadArticleByCategoryPath
+    },
+    '/artigos/{articleId}': {
+      get: loadArticleByIdPath,
+      delete: deleteArticlePath
+    },
+    '/categorias': {
+      post: addCategoryPath
+    }
   },
   schemas: {
     account: accountSchema,
     loginParams: loginParamsSchema,
     signupParams: signupParamsSchema,
-    bindHems: bindHemsSchema,
-    error: errorSchema,
-    dataMeasures: dataMeasuresSchema
+    article: articleSchema,
+    articleHeader: articleHeaderSchema,
+    addArticle: addArticleSchema,
+    category: categorySchema,
+    addCategory: addCategorySchema
   },
   components: {
     badRequest: badRequestComponent,
     unauthorized: unauthorizedComponent,
+    noContent: noContentComponent,
     notFound: notFoundComponent,
     serverError: serverErrorComponent,
     forbidden: forbiddenComponent,
     securitySchemes: {
       apiKeyAuth: apiKeyAuthSchema
+    },
+    schemas: {
+      Artigo: articleSchema,
+      Categoria: categorySchema
     }
   }
 }
