@@ -3,7 +3,7 @@ import { LoadAccountByTokenRepository } from '@/data/protocols/database/load-acc
 import { LoadAccountByUsernameRepository } from '@/data/protocols/database/load-account-by-username-repository'
 import { UpdateAccessTokenRepository } from '@/data/protocols/database/update-access-token-repository'
 import { AccountModel } from '@/domain/entities/account'
-import { MongoHelper } from '../helpers/mongo-helper'
+import { MongoHelper } from './mongo-helper'
 
 export class AccountMongoRepository implements LoadAccountByIdRepository, LoadAccountByUsernameRepository, UpdateAccessTokenRepository, LoadAccountByTokenRepository {
   async loadById (accountId: string): Promise<AccountModel> {
@@ -12,9 +12,9 @@ export class AccountMongoRepository implements LoadAccountByIdRepository, LoadAc
     return account && MongoHelper.map(account)
   }
 
-  async loadByUsername (email: string): Promise<AccountModel> {
+  async loadByUsername (username: string): Promise<AccountModel> {
     const accountCollection = await MongoHelper.getCollection('accounts')
-    const account = await accountCollection.findOne({ email })
+    const account = await accountCollection.findOne({ username })
     return account && MongoHelper.map(account)
   }
 

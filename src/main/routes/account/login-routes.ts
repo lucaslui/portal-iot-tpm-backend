@@ -6,6 +6,6 @@ import { Router } from 'express'
 
 const router = Router()
 
-router.post('/login', adaptRoute(makeLoginController()))
+router.post('/acesso', adaptRoute(makeLoginController()))
 
 export { router as loginRouter }

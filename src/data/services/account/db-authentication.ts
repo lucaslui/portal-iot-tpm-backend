@@ -6,14 +6,14 @@ import { Authentication, AuthenticationModel } from '@/domain/usecases/account/a
 
 export class DbAuthentication implements Authentication {
   constructor (
-    private readonly loadAccountByEmailRepository: LoadAccountByUsernameRepository,
+    private readonly loadAccountByUsernameRepository: LoadAccountByUsernameRepository,
     private readonly hashComparer: HashComparer,
     private readonly encrypter: Encrypter,
     private readonly updateAccessTokenRepository: UpdateAccessTokenRepository
   ) {}
 
   async auth (authentication: AuthenticationModel): Promise<string> {
-    const account = await this.loadAccountByEmailRepository.loadByUsername(authentication.username)
+    const account = await this.loadAccountByUsernameRepository.loadByUsername(authentication.username)
     if (account) {
       const isAuthorized = await this.hashComparer.compare(authentication.password, account.password)
       if (isAuthorized) {
