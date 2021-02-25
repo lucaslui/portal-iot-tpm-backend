@@ -20,7 +20,7 @@ export const loadCategoriesByParentPath = {
   }],
   responses: {
     200: {
-      description: 'Ok: dados obtidos com sucesso',
+      description: 'Ok: operação realizada com sucesso',
       content: {
         'application/json': {
           schema: {

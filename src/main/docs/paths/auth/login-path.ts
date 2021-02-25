@@ -16,11 +16,11 @@ export const loginPath = {
     },
     responses: {
       200: {
-        description: 'Ok: acesso efetuado com sucesso',
+        description: 'Ok: operação realizada com sucesso',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/schemas/account'
+              $ref: '#/schemas/accessToken'
             }
           }
         }

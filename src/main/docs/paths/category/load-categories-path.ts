@@ -4,7 +4,7 @@ export const loadCategoriesPath = {
   description: 'Carrega todas as categorias em uma estrutura de árvore. Essa rota pode ser executada por qualquer **usuário**.',
   responses: {
     200: {
-      description: 'Ok: dados obtidos com sucesso',
+      description: 'Ok: operação realizada com sucesso',
       content: {
         'application/json': {
           schema: {

@@ -1,7 +1,7 @@
 export const editUserProfilePath = {
   tags: ['Usuários'],
-  summary: 'Edita o perfil do usuário',
-  description: 'Edita o perfil do usuário. Todos os dados do perfil do usuário são obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
+  summary: 'Editar o próprio perfil',
+  description: 'O usuário pode editar o próprio perfil. Todos os dados do perfil do usuário são obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
   security: [{
     apiKeyAuth: []
   }],
@@ -11,7 +11,7 @@ export const editUserProfilePath = {
     content: {
       'application/json': {
         schema: {
-          $ref: '#/schemas/user'
+          $ref: '#/schemas/profile'
         }
       }
     }

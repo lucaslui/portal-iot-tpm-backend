@@ -18,7 +18,7 @@ export const addCategoryPath = {
   },
   responses: {
     200: {
-      description: 'Ok: categoria criada com sucesso',
+      description: 'Ok: operação realizada com sucesso',
       content: {
         'application/json': {
           schema: {

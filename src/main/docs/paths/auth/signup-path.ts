@@ -15,11 +15,11 @@ export const signupPath = {
     },
     responses: {
       200: {
-        description: 'Ok: conta criada com sucesso',
+        description: 'Ok: operação realizada com sucesso',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/schemas/account'
+              $ref: '#/schemas/accessToken'
             }
           }
         }

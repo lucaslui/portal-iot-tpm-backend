@@ -1,7 +1,7 @@
 export const loadUsersPath = {
   tags: ['Usuários'],
-  summary: 'Carrega uma lista dos usuários',
-  description: 'Carrega uma lista dos usuários. Aceita um parâmetro de paginação que é opcional, caso seja enviado a lista de usuários é dividida em páginas com 10 artigos por página.  Essa rota pode ser executada por qualquer **usuário**.',
+  summary: 'Carrega uma lista com todos os usuários',
+  description: 'Carrega uma lista com todos os usuários cadastrados no blog. Aceita um parâmetro de paginação que é opcional, caso seja enviado a lista de usuários é dividida em páginas com 10 usuários por página.  Essa rota só pode ser executada por um **administrador**.',
   security: [{
     apiKeyAuth: []
   }],
@@ -15,7 +15,7 @@ export const loadUsersPath = {
   }],
   responses: {
     200: {
-      description: 'Ok: dados obtidos com sucesso',
+      description: 'Ok: operação realizada com sucesso',
       content: {
         'application/json': {
           schema: {
@@ -26,6 +26,9 @@ export const loadUsersPath = {
           }
         }
       }
+    },
+    403: {
+      $ref: '#/components/forbidden'
     },
     404: {
       $ref: '#/components/notFound'

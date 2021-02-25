@@ -1,13 +1,12 @@
 import { loginPath, signupPath } from './paths/auth'
-import { editUserProfilePath, loadUsersPath } from './paths/user'
-import { addArticlePath, deleteArticlePath, editArticlePath, loadArticleByIdPath, loadArticleByCategoryPath, loadArticlesPath } from './paths/article'
+import { editUserProfilePath, loadUserProfilePath, loadUsersPath } from './paths/user'
+import { addArticlePath, deleteArticlePath, editArticlePath, loadArticleByIdPath, loadArticleByCategoryPath, loadArticlesPath, loadArticleByUserPath } from './paths/article'
 import { addCategoryPath, deleteCategoryPath, editCategoryPath, loadCategoriesByParentPath, loadCategoriesPath, loadCategoryByIdPath } from './paths/category'
-import { accountSchema, apiKeyAuthSchema, loginParamsSchema, signupParamsSchema } from './schemas/auth'
+import { accessTokenSchema, apiKeyAuthSchema, loginParamsSchema, signupParamsSchema } from './schemas/auth'
 import { addArticleSchema, articleHeaderSchema, articleSchema } from './schemas/article'
 import { addCategorySchema, categorySchema, categoriesTreeSchema } from './schemas/category'
 import { notFoundComponent , badRequestComponent , serverErrorComponent , unauthorizedComponent, forbiddenComponent, noContentComponent } from './components'
-import { userSchema } from './schemas/user'
-
+import { userProfileSchema, userSchema } from './schemas/user'
 
 export default {
   openapi: '3.0.0',
@@ -49,10 +48,16 @@ export default {
       put: editUserProfilePath,
       get: loadUsersPath
     },
+    '/users/{userId}': {
+      get: loadUserProfilePath
+    },
     '/articles': {
       post: addArticlePath,
       put: editArticlePath,
       get: loadArticlesPath
+    },
+    '/articles/{userId}': {
+      get: loadArticleByUserPath
     },
     '/articles/{categoryId}': {
       get: loadArticleByCategoryPath
@@ -75,10 +80,11 @@ export default {
     }
   },
   schemas: {
-    account: accountSchema,
+    accessToken: accessTokenSchema,
     loginParams: loginParamsSchema,
     signupParams: signupParamsSchema,
     user: userSchema,
+    profile: userProfileSchema,
     article: articleSchema,
     articleHeader: articleHeaderSchema,
     addArticle: addArticleSchema,

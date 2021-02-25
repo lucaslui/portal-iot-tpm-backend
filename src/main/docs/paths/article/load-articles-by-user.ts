@@ -1,11 +1,11 @@
-export const loadArticleByCategoryPath = {
+export const loadArticleByUserPath = {
   tags: ['Artigos'],
-  summary: 'Carrega uma lista de artigos por categoria (como valores de cabeçalho, i.e. sem conteúdo)',
-  description: 'Carrega uma lista de artigos por categoria (como valores de cabeçalho, i.e. sem conteúdo). Aceita um parâmetro de paginação que é opcional, caso seja enviado a lista de artigos é dividida em páginas com 10 artigos por página. O identicador único da categoria é obrigatório. Aceita um parâmetro de paginação que é opcional. Essa rota pode ser executada por qualquer **usuário**.',
+  summary: 'Carrega uma lista de artigos feita por um determinado autor (como valores de cabeçalho, i.e. sem conteúdo)',
+  description: 'Carrega uma lista de artigos feita por um determinado autor  (como valores de cabeçalho, i.e. sem conteúdo). Aceita um parâmetro de paginação que é opcional, caso seja enviado a lista de artigos é dividida em páginas com 10 artigos por página. O identicador único da categoria é obrigatório. Aceita um parâmetro de paginação que é opcional. Essa rota pode ser executada por qualquer **usuário**.',
   parameters: [{
-    name: 'categoryId',
+    name: 'userId',
     in: 'path',
-    description: 'O identificador único da categoria',
+    description: 'O identificador único do usuário',
     required: true,
     schema: {
       type: 'string'

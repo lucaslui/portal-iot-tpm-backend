@@ -18,7 +18,7 @@ export const addArticlePath = {
   },
   responses: {
     200: {
-      description: 'Ok: artigo criado com sucesso',
+      description: 'Ok: operação realizada com sucesso',
       content: {
         'application/json': {
           schema: {
