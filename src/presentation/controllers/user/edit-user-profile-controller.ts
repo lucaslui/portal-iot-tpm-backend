@@ -1,5 +1,5 @@
 import { EditUserProfile } from '@/domain/usecases/user/edit-user-profile'
-import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http-helper'
+import { badRequest, ok, serverError } from '@/presentation/helpers/http-helper'
 import { Controller } from '@/presentation/protocols/controller'
 import { HttpRequest, HttpResponse } from '@/presentation/protocols/http'
 import { Validation } from '@/presentation/protocols/validation'
