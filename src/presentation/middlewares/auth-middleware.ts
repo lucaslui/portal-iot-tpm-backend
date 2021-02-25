@@ -6,7 +6,7 @@ import { Middleware } from '../protocols/middleware'
 
 export class AuthMiddleware implements Middleware {
   constructor (
-    private readonly loadAccountByToken: LoadUserByToken,
+    private readonly loadUserByToken: LoadUserByToken,
     private readonly role?: string
   ) {}
 
@@ -14,9 +14,9 @@ export class AuthMiddleware implements Middleware {
     try {
       const accessToken = httpRequest.headers?.['x-access-token']
       if (accessToken) {
-        const account = await this.loadAccountByToken.load(accessToken, this.role)
-        if (account) {
-          return ok({ accountId: account.id })
+        const user = await this.loadUserByToken.load(accessToken, this.role)
+        if (user) {
+          return ok({ userId: user.id })
         }
       }
       return forbidden(new AccessDeniedError())
