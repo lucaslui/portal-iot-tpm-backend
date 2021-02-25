@@ -45,31 +45,31 @@ export default {
   paths: {
     '/login': loginPath,
     '/signup': signupPath,
-    '/usuarios': {
+    '/users': {
       put: editUserProfilePath,
       get: loadUsersPath
     },
-    '/artigos': {
+    '/articles': {
       post: addArticlePath,
       put: editArticlePath,
       get: loadArticlesPath
     },
-    '/artigos/{categoryId}': {
+    '/articles/{categoryId}': {
       get: loadArticleByCategoryPath
     },
-    '/artigos/{articleId}': {
+    '/articles/{articleId}': {
       get: loadArticleByIdPath,
       delete: deleteArticlePath
     },
-    '/categorias': {
+    '/categories': {
       post: addCategoryPath,
       put: editCategoryPath,
       get: loadCategoriesPath
     },
-    '/categorias/{categoryParentId}': {
+    '/categories/{categoryParentId}': {
       get: loadCategoriesByParentPath
     },
-    '/categorias/{categoryId}': {
+    '/categories/{categoryId}': {
       get: loadCategoryByIdPath,
       delete: deleteCategoryPath
     }
