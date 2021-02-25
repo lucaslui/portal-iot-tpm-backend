@@ -1,5 +1,5 @@
-import { UserModel } from '@/domain/entities/user'
+import { ProfileModel } from '@/domain/entities/user'
 
 export interface EditUserProfile {
-  edit: (user: UserModel) => Promise<UserModel>
+  edit: (userId: string, userProfile: ProfileModel) => Promise<ProfileModel>
 }
