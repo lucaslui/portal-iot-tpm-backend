@@ -1,7 +1,7 @@
 export const loadArticleByCategoryPath = {
-  tags: ['artigos'],
-  summary: 'Carrega uma lista dos 10 artigos mais recententes por categoria (como valores de cabeçalho, i.e. sem conteúdo)',
-  description: 'Carrega uma lista dos 10 artigos mais recententes por categoria (como valores de cabeçalho, i.e. sem conteúdo). O identicador único da categoria é obrigatório. Aceita um parâmetro de paginação que é opcional. Essa rota pode ser executada por qualquer **usuário**.',
+  tags: ['Artigos'],
+  summary: 'Carrega uma lista de artigos por categoria (como valores de cabeçalho, i.e. sem conteúdo)',
+  description: 'Carrega uma lista de artigos por categoria (como valores de cabeçalho, i.e. sem conteúdo). Aceita um parâmetro de paginação que é opcional, caso seja enviado a lista de artigos é dividida em páginas com 10 artigos por página. O identicador único da categoria é obrigatório. Aceita um parâmetro de paginação que é opcional. Essa rota pode ser executada por qualquer **usuário**.',
   parameters: [{
     name: 'categoryId',
     in: 'path',
@@ -9,6 +9,13 @@ export const loadArticleByCategoryPath = {
     required: true,
     schema: {
       type: 'string'
+    }
+  }, {
+    name: 'page',
+    in: 'query',
+    description: 'A página de artigos desejada',
+    schema: {
+      type: 'integer'
     }
   }],
   responses: {

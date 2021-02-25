@@ -1,17 +1,17 @@
-export const editArticlePath = {
-  tags: ['Artigos'],
-  summary: 'Edita os dados e conteúdos de um artigo',
-  description: 'Edita os dados e conteúdos de um artigo. Todos os valores do artigo são obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
+export const editUserProfilePath = {
+  tags: ['Usuários'],
+  summary: 'Edita o perfil do usuário',
+  description: 'Edita o perfil do usuário. Todos os dados do perfil do usuário são obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
   security: [{
     apiKeyAuth: []
   }],
   requestBody: {
     required: true,
-    description: 'Dados atualizados do artigo',
+    description: 'Dados atualizados do perfil do usuário',
     content: {
       'application/json': {
         schema: {
-          $ref: '#/schemas/article'
+          $ref: '#/schemas/user'
         }
       }
     }

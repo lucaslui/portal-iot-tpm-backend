@@ -1,15 +1,7 @@
 export const loadCategoriesPath = {
-  tags: ['categorias'],
-  summary: 'Carrega uma lista com as categorias ',
-  description: 'Carrega uma lista dos 10 artigos mais recententes. Aceita um parâmetro de paginação que é opcional. Essa rota pode ser executada por qualquer **usuário**.',
-  parameters: [{
-    name: 'page',
-    in: 'query',
-    description: 'A página de artigos desejada',
-    schema: {
-      type: 'integer'
-    }
-  }],
+  tags: ['Categorias'],
+  summary: 'Carrega todas as categorias em uma estrutura de árvore',
+  description: 'Carrega todas as categorias em uma estrutura de árvore. Essa rota pode ser executada por qualquer **usuário**.',
   responses: {
     200: {
       description: 'Ok: dados obtidos com sucesso',
@@ -18,7 +10,7 @@ export const loadCategoriesPath = {
           schema: {
             type: 'array',
             items: {
-              $ref: '#/schemas/articleHeader'
+              $ref: '#/schemas/categoriesTree'
             }
           }
         }

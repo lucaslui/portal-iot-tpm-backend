@@ -1,5 +1,5 @@
 export const addArticlePath = {
-  tags: ['artigos'],
+  tags: ['Artigos'],
   summary: 'Adiciona um novo artigo ao blog',
   description: 'Adiciona um novo artigo ao blog. Título, descrição, conteúdo e categoria são campos obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
   security: [{

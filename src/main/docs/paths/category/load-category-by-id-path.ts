@@ -1,11 +1,11 @@
 export const loadCategoryByIdPath = {
-  tags: ['categorias'],
-  summary: 'Carrega o conteúdo de um artigo pelo identificador',
-  description: 'Carrega o conteúdo de um artigo pelo identificador. O identicador do artigo é obrigatório. Essa rota pode ser executada por qualquer **usuário**.',
+  tags: ['Categorias'],
+  summary: 'Carrega os dados de um artigo pelo identificador',
+  description: 'Carrega os dados de um artigo pelo identificador. O identicador da categoria é obrigatório. Essa rota pode ser executada por qualquer **usuário**.',
   parameters: [{
-    name: 'articleId',
+    name: 'categoryId',
     in: 'path',
-    description: 'O identificador único do artigo',
+    description: 'O identificador único da categoria',
     required: true,
     schema: {
       type: 'string'

@@ -1,11 +1,13 @@
-import { accessPath } from './paths/account'
+import { loginPath, signupPath } from './paths/auth'
+import { editUserProfilePath, loadUsersPath } from './paths/user'
 import { addArticlePath, deleteArticlePath, editArticlePath, loadArticleByIdPath, loadArticleByCategoryPath, loadArticlesPath } from './paths/article'
-import { accountSchema, apiKeyAuthSchema, loginParamsSchema, signupParamsSchema } from './schemas/account'
+import { addCategoryPath, deleteCategoryPath, editCategoryPath, loadCategoriesByParentPath, loadCategoriesPath, loadCategoryByIdPath } from './paths/category'
+import { accountSchema, apiKeyAuthSchema, loginParamsSchema, signupParamsSchema } from './schemas/auth'
 import { addArticleSchema, articleHeaderSchema, articleSchema } from './schemas/article'
-import { categorySchema } from './schemas/category'
+import { addCategorySchema, categorySchema, categoriesTreeSchema } from './schemas/category'
 import { notFoundComponent , badRequestComponent , serverErrorComponent , unauthorizedComponent, forbiddenComponent, noContentComponent } from './components'
-import { addCategoryPath } from './paths/category'
-import { addCategorySchema } from './schemas/category/add-category-schema'
+import { userSchema } from './schemas/user'
+
 
 export default {
   openapi: '3.0.0',
@@ -28,17 +30,25 @@ export default {
     description: 'servidor principal'
   }],
   tags: [{
-    name: 'acesso',
-    description: 'Operações relacionadas com o acesso restrito do blog.'
+    name: 'Autenticação',
+    description: 'Operações relacionadas com o acesso e cadastro do usuário.'
   },{
-    name: 'artigos',
+    name: 'Usuários',
+    description: 'Operações relacionadas com os usuários do blog.'
+  },{
+    name: 'Artigos',
     description: 'Operações relacionadas com os artigos do blog.'
   },{
-    name: 'categorias',
+    name: 'Categorias',
     description: 'Operações relacionadas com as categorias do blog.'
   }],
   paths: {
-    '/acesso': accessPath,
+    '/login': loginPath,
+    '/signup': signupPath,
+    '/usuarios': {
+      put: editUserProfilePath,
+      get: loadUsersPath
+    },
     '/artigos': {
       post: addArticlePath,
       put: editArticlePath,
@@ -52,18 +62,29 @@ export default {
       delete: deleteArticlePath
     },
     '/categorias': {
-      post: addCategoryPath
+      post: addCategoryPath,
+      put: editCategoryPath,
+      get: loadCategoriesPath
+    },
+    '/categorias/{categoryParentId}': {
+      get: loadCategoriesByParentPath
+    },
+    '/categorias/{categoryId}': {
+      get: loadCategoryByIdPath,
+      delete: deleteCategoryPath
     }
   },
   schemas: {
     account: accountSchema,
     loginParams: loginParamsSchema,
     signupParams: signupParamsSchema,
+    user: userSchema,
     article: articleSchema,
     articleHeader: articleHeaderSchema,
     addArticle: addArticleSchema,
     category: categorySchema,
-    addCategory: addCategorySchema
+    addCategory: addCategorySchema,
+    categoriesTree: categoriesTreeSchema
   },
   components: {
     badRequest: badRequestComponent,
@@ -76,6 +97,7 @@ export default {
       apiKeyAuth: apiKeyAuthSchema
     },
     schemas: {
+      Usuário: userSchema,
       Artigo: articleSchema,
       Categoria: categorySchema
     }

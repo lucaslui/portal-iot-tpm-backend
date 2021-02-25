@@ -1,19 +1,21 @@
-export const editArticlePath = {
-  tags: ['categorias'],
+export const editCategoryPath = {
+  tags: ['Categorias'],
   summary: 'Edita os dados de uma categoria',
   description: 'Edita os dados de uma categoria. Todos os valores da categoria são obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
   security: [{
     apiKeyAuth: []
   }],
-  parameters: [{
-    name: 'categoryId',
-    in: 'path',
-    description: 'O identificador único da categoria',
+  requestBody: {
     required: true,
-    schema: {
-      type: 'string'
+    description: 'Dados atualizados da categoria',
+    content: {
+      'application/json': {
+        schema: {
+          $ref: '#/schemas/category'
+        }
+      }
     }
-  }],
+  },
   responses: {
     204: {
       $ref: '#/components/noContent'

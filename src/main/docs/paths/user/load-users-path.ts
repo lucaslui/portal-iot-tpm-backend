@@ -1,7 +1,10 @@
-export const loadArticlesPath = {
-  tags: ['Artigos'],
-  summary: 'Carrega uma lista de artigos (como valores de cabeçalho, i.e. sem conteúdo)',
-  description: 'Carrega uma lista de artigos (como valores de cabeçalho, i.e. sem conteúdo). Aceita um parâmetro de paginação que é opcional, caso seja enviado a lista de artigos é dividida em páginas com 10 artigos por página.  Essa rota pode ser executada por qualquer **usuário**.',
+export const loadUsersPath = {
+  tags: ['Usuários'],
+  summary: 'Carrega uma lista dos usuários',
+  description: 'Carrega uma lista dos usuários. Aceita um parâmetro de paginação que é opcional, caso seja enviado a lista de usuários é dividida em páginas com 10 artigos por página.  Essa rota pode ser executada por qualquer **usuário**.',
+  security: [{
+    apiKeyAuth: []
+  }],
   parameters: [{
     name: 'page',
     in: 'query',
@@ -18,7 +21,7 @@ export const loadArticlesPath = {
           schema: {
             type: 'array',
             items: {
-              $ref: '#/schemas/articleHeader'
+              $ref: '#/schemas/user'
             }
           }
         }

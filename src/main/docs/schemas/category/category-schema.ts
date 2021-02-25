@@ -22,6 +22,7 @@ export const categorySchema = {
     id: '507f191e810c19729de860ea',
     name: 'Sensores e Atuadores',
     description: 'Tutoriais e notícias envolvendo sensores e atuadores',
-    categoryId: 'Internet das Coisas'
-  }
+    categoryParentId: '469f191e8155c19729de860ea'
+  },
+  required: ['id', 'name', 'description', 'categoryParentId']
 }

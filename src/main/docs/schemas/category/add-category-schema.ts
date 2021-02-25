@@ -11,14 +11,13 @@ export const addCategorySchema = {
     },
     categoryParentId: {
       type: 'string',
-      description: 'A indentificação única da categoria pai do artigo (se houver)'
+      description: 'A indentificação única da categoria pai do artigo (obs: quando não há uma categoria pai, colocar "geral")'
     }
   },
   example: {
-    id: '507f191e810c19729de860ea',
     name: 'Sensores e Atuadores',
     description: 'Tutoriais e notícias envolvendo sensores e atuadores',
-    categoryId: 'Internet das Coisas'
+    categoryParentId: 'Internet das Coisas'
   },
-  required: ['name', 'description']
+  required: ['name', 'description', 'categoryParentId']
 }

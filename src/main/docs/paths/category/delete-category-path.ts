@@ -1,7 +1,7 @@
-export const deleteArticlePath = {
-  tags: ['categorias'],
+export const deleteCategoryPath = {
+  tags: ['Categorias'],
   summary: 'Deleta uma categoria no blog',
-  description: 'Deleta uma categoria no blog. O identicador do categoria é obrigatório. Essa rota só pode ser executada por **usuários autenticados**',
+  description: 'Deleta uma categoria no blog. O identicador da categoria é obrigatório. Essa rota só pode ser executada por **usuários autenticados**',
   security: [{
     apiKeyAuth: []
   }],

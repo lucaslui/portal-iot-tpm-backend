@@ -1,5 +1,5 @@
 export const loadArticleByIdPath = {
-  tags: ['artigos'],
+  tags: ['Artigos'],
   summary: 'Carrega o conteúdo de um artigo pelo identificador',
   description: 'Carrega o conteúdo de um artigo pelo identificador. O identicador do artigo é obrigatório. Essa rota pode ser executada por qualquer **usuário**.',
   parameters: [{
