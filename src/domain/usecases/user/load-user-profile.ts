@@ -1,5 +1,5 @@
-import { UserModel } from '@/domain/entities/user'
+import { ProfileModel } from '@/domain/entities/user'
 
 export interface LoadUserProfile {
-  loadProfile: (userId: string) => Promise<UserModel>
+  loadProfile: (userId: string) => Promise<ProfileModel>
 }
