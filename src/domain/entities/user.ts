@@ -3,7 +3,7 @@ export interface UserModel {
   name: string
   email: string
   password: string
-  profile: ProfileModel
+  profile?: ProfileModel
 }
 
 export interface ProfileModel {
