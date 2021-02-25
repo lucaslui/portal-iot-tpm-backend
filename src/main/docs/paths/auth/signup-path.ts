@@ -5,6 +5,7 @@ export const signupPath = {
     description: 'Criar conta de usuário para permitir acesso a alguns recursos do blog (publicar artigos). Essa rota pode ser executada por **qualquer usuário**',
     requestBody: {
       required: true,
+      description: 'Parâmetro de cadastro do usuário',
       content: {
         'application/json': {
           schema: {

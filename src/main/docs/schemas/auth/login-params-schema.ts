@@ -2,10 +2,12 @@ export const loginParamsSchema = {
   type: 'object',
   properties: {
     email: {
-      type: 'string'
+      type: 'string',
+      description: 'E-mail de cadastro do usuário'
     },
     password: {
-      type: 'string'
+      type: 'string',
+      description: 'Senha de cadastro do usuário'
     }
   },
   example: {

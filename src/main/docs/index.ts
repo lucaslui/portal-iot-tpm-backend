@@ -7,6 +7,7 @@ import { addArticleSchema, articleHeaderSchema, articleSchema } from './schemas/
 import { addCategorySchema, categorySchema, categoriesTreeSchema } from './schemas/category'
 import { notFoundComponent , badRequestComponent , serverErrorComponent , unauthorizedComponent, forbiddenComponent, noContentComponent } from './components'
 import { userProfileSchema, userSchema } from './schemas/user'
+import { changeUserPasswordPath } from './paths/user/change-user-password-path'
 
 export default {
   openapi: '3.0.0',
@@ -44,8 +45,13 @@ export default {
   paths: {
     '/login': loginPath,
     '/signup': signupPath,
+    '/users/password': {
+      put: changeUserPasswordPath
+    },
+    '/users/profile': {
+      put: editUserProfilePath
+    },
     '/users': {
-      put: editUserProfilePath,
       get: loadUsersPath
     },
     '/users/{userId}': {

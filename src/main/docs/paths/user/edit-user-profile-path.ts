@@ -1,6 +1,6 @@
 export const editUserProfilePath = {
   tags: ['Usuários'],
-  summary: 'Editar o próprio perfil',
+  summary: 'Editar o perfil do usuário',
   description: 'O usuário pode editar o próprio perfil. Todos os dados do perfil do usuário são obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
   security: [{
     apiKeyAuth: []

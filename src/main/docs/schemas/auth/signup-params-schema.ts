@@ -2,16 +2,20 @@ export const signupParamsSchema = {
   type: 'object',
   properties: {
     name: {
-      type: 'string'
+      type: 'string',
+      description: 'Nome do usuário'
     },
     email: {
-      type: 'string'
+      type: 'string',
+      description: 'E-mail do usuário'
     },
     password: {
-      type: 'string'
+      type: 'string',
+      description: 'Senha do usuário'
     },
     passwordConfirmation: {
-      type: 'string'
+      type: 'string',
+      description: 'Confirmação de senha do usuário'
     }
   },
   example: {
