@@ -1,5 +1,5 @@
 import { EditUserProfile } from '@/domain/usecases/user/edit-user-profile'
-import { badRequest, ok, serverError } from '@/presentation/helpers/http-helper'
+import { badRequest, noContent, ok, serverError } from '@/presentation/helpers/http-helper'
 import { Controller } from '@/presentation/protocols/controller'
 import { HttpRequest, HttpResponse } from '@/presentation/protocols/http'
 import { Validation } from '@/presentation/protocols/validation'
@@ -18,8 +18,8 @@ export class EditUserProfileController implements Controller {
       }
       const userId = httpRequest.userId
       const userProfile = httpRequest.body
-      const newUserProfile = await this.editUserProfile.edit(userId, userProfile)
-      return ok({ newUserProfile })
+      await this.editUserProfile.editProfile(userId, userProfile)
+      return noContent()
     } catch (error) {
       return serverError(error)
     }

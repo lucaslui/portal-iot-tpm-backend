@@ -17,7 +17,7 @@ export class LoadUsersController implements Controller {
         return badRequest(error)
       }
       const { page } = httpRequest.query
-      const users = await this.loadUsers.load(page)
+      const users = await this.loadUsers.loadUsers(page)
       return ok({ users })
     } catch (error) {
       return serverError(error)
