@@ -1,4 +1,4 @@
-import { LoadAccountByToken } from '@/domain/usecases/account/load-account-by-token'
+import { LoadUserByToken } from '@/domain/usecases/auth/load-user-by-token'
 import { AccessDeniedError } from '../errors/access-denied-error'
 import { forbidden, ok, serverError } from '../helpers/http-helper'
 import { HttpRequest, HttpResponse } from '../protocols/http'
@@ -6,7 +6,7 @@ import { Middleware } from '../protocols/middleware'
 
 export class AuthMiddleware implements Middleware {
   constructor (
-    private readonly loadAccountByToken: LoadAccountByToken,
+    private readonly loadAccountByToken: LoadUserByToken,
     private readonly role?: string
   ) {}
 

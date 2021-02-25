@@ -1,4 +1,4 @@
-import { Authentication } from '@/domain/usecases/account/authentication'
+import { LoadUsers } from '@/domain/usecases/user/load-users'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http-helper'
 import { Controller } from '@/presentation/protocols/controller'
 import { HttpRequest, HttpResponse } from '@/presentation/protocols/http'
@@ -6,7 +6,7 @@ import { Validation } from '@/presentation/protocols/validation'
 
 export class LoginController implements Controller {
   constructor (
-    private readonly authentication: Authentication,
+    private readonly loadUsers: LoadUsers,
     private readonly validation: Validation
   ) { }
 
@@ -16,11 +16,8 @@ export class LoginController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      const { username, password } = httpRequest.body
-      const accessToken = await this.authentication.auth({
-        username,
-        password
-      })
+      const { page } = httpRequest.query
+      const accessToken = await this.loadUsers.load(page)
       if (!accessToken) {
         return unauthorized()
       }
