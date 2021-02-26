@@ -2,8 +2,9 @@ export interface UserModel {
   id: string
   name: string
   email: string
-  password: string
+  password?: string
   profile?: ProfileModel
+  createdAt: Date
 }
 
 export interface ProfileModel {
