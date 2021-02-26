@@ -23,9 +23,6 @@ export const editUserProfilePath = {
     400: {
       $ref: '#/components/badRequest'
     },
-    403: {
-      $ref: '#/components/forbidden'
-    },
     404: {
       $ref: '#/components/notFound'
     },

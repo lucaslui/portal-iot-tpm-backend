@@ -1,6 +1,4 @@
-import { userProfileSchema } from './user-profile-schema'
-
-export const userSchema = {
+export const userResumeSchema = {
   type: 'object',
   properties: {
     id: {
@@ -15,11 +13,10 @@ export const userSchema = {
       type: 'string',
       description: 'E-mail do usuário'
     },
-    password: {
+    nickname: {
       type: 'string',
-      description: 'Senha do usuário'
+      description: 'Um nome/apelido que deseja ser chamado'
     },
-    profile: userProfileSchema,
     createdAt: {
       type: 'date',
       description: 'Data de criação do usuário'
@@ -29,8 +26,7 @@ export const userSchema = {
     id: '507f191e810c19729de860ea',
     name: 'Lucas Lui Motta',
     email: 'lucasluimotta@gmail.com',
-    password: 'abc78591e810c18749de860ea507f1301e810c19729de860ea',
-    createdAt: ''
+    nickname: '# Lucas Lui #'
   },
-  required: ['id', 'name', 'email']
+  required: ['id', 'name', 'email', 'nickname']
 }
