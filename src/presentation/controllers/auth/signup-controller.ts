@@ -23,7 +23,8 @@ export class SignUpController implements Controller {
       const account = await this.createUser.create({
         name,
         email,
-        password
+        password,
+        createdAt: new Date()
       })
       if (!account) {
         return forbidden(new EmailInUseError())

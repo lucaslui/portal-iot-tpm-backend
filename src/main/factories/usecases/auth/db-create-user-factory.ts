@@ -6,6 +6,6 @@ import { UserMongoRepository } from '@/infrastructure/database/mongodb/user-mong
 export const makeDbCreateUser = (): CreateUser => {
   const salt = 12
   const bcryptAdapter = new BcryptAdapter(salt)
-  const accountMongoRepository = new UserMongoRepository()
-  return new DbCreateUser(bcryptAdapter, accountMongoRepository, accountMongoRepository)
+  const userMongoRepository = new UserMongoRepository()
+  return new DbCreateUser(bcryptAdapter, userMongoRepository, userMongoRepository)
 }
