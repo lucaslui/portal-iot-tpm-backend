@@ -1,3 +1,3 @@
 export interface ChangeUserPasswordRepository {
-  changePassword: (hashedPassword: string) => Promise<boolean>
+  changePassword: (userId: string, hashedPassword: string) => Promise<void>
 }

@@ -18,7 +18,7 @@ export class DbChangeUserPassword implements ChangeUserPassword {
       const isAuthorized = await this.hashComparer.compare(oldPassword, user.password)
       if (isAuthorized) {
         const hashedPassword = await this.hasher.hash(newPassword)
-        await this.changeUserPasswordRepository.changePassword(hashedPassword)
+        await this.changeUserPasswordRepository.changePassword(userId, hashedPassword)
         return true
       }
     }
