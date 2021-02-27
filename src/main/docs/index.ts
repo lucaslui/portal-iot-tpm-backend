@@ -59,7 +59,6 @@ export default {
     },
     '/articles': {
       post: addArticlePath,
-      put: editArticlePath,
       get: loadArticlesPath
     },
     '/articles/{userId}': {
@@ -70,11 +69,11 @@ export default {
     },
     '/articles/{articleId}': {
       get: loadArticleByIdPath,
+      put: editArticlePath,
       delete: deleteArticlePath
     },
     '/categories': {
       post: addCategoryPath,
-      put: editCategoryPath,
       get: loadCategoriesPath
     },
     '/categories/{categoryParentId}': {
@@ -82,6 +81,7 @@ export default {
     },
     '/categories/{categoryId}': {
       get: loadCategoryByIdPath,
+      put: editCategoryPath,
       delete: deleteCategoryPath
     }
   },

@@ -5,13 +5,22 @@ export const editArticlePath = {
   security: [{
     apiKeyAuth: []
   }],
+  parameters: [{
+    name: 'articleId',
+    in: 'path',
+    description: 'O identificador único do artigo',
+    required: true,
+    schema: {
+      type: 'string'
+    }
+  }],
   requestBody: {
     required: true,
     description: 'Dados atualizados do artigo',
     content: {
       'application/json': {
         schema: {
-          $ref: '#/schemas/article'
+          $ref: '#/schemas/addArticle'
         }
       }
     }

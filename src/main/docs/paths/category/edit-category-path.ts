@@ -5,13 +5,22 @@ export const editCategoryPath = {
   security: [{
     apiKeyAuth: []
   }],
+  parameters: [{
+    name: 'categoryId',
+    in: 'path',
+    description: 'O identificador único da categoria',
+    required: true,
+    schema: {
+      type: 'string'
+    }
+  }],
   requestBody: {
     required: true,
     description: 'Dados atualizados da categoria',
     content: {
       'application/json': {
         schema: {
-          $ref: '#/schemas/category'
+          $ref: '#/schemas/addCategory'
         }
       }
     }
