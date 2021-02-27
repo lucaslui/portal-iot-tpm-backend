@@ -4,7 +4,7 @@ export interface ArticleModel {
   description: string
   content: BinaryType
   imageUrl?: string
-  createdAt?: Date
   userId: string
   categoryId: string
+  createdAt: Date
 }
