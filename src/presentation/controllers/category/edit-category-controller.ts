@@ -1,12 +1,12 @@
-import { EditArticle } from '@/domain/usecases/article/edit-article'
-import { badRequest, noContent, serverError, unauthorized } from '@/presentation/helpers/http-helper'
+import { EditCategory } from '@/domain/usecases/category/edit-category'
+import { badRequest, noContent, notFound, serverError } from '@/presentation/helpers/http-helper'
 import { Controller } from '@/presentation/protocols/controller'
 import { HttpRequest, HttpResponse } from '@/presentation/protocols/http'
 import { Validation } from '@/presentation/protocols/validation'
 
-export class EditArticleController implements Controller {
+export class EditCategoryController implements Controller {
   constructor (
-    private readonly editArticle: EditArticle,
+    private readonly editCategory: EditCategory,
     private readonly validation: Validation
   ) {}
 
@@ -16,16 +16,15 @@ export class EditArticleController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      const { title, description, content, imageUrl, categoryId } = httpRequest.body
-      const isSuccessful = await this.editArticle.edit(httpRequest.userId, {
-        title,
+      const { categoryId } = httpRequest.params
+      const { name, description, categoryParentId } = httpRequest.body
+      const isSuccessful = await this.editCategory.edit(categoryId, {
+        name,
         description,
-        content,
-        imageUrl,
-        categoryId
+        categoryParentId
       })
       if (!isSuccessful) {
-        return unauthorized()
+        return notFound()
       }
       return noContent()
     } catch (error) {

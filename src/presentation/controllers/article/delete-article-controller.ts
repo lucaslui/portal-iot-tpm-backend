@@ -11,8 +11,8 @@ export class DeleteArticleController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { articleId } = httpRequest.params
-      const article = await this.deleteArticle.delete(httpRequest.userId, articleId)
-      if (!article) {
+      const isSuccessful = await this.deleteArticle.delete(httpRequest.userId, articleId)
+      if (!isSuccessful) {
         return unauthorized()
       }
       return noContent()
