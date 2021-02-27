@@ -6,9 +6,10 @@ import { UpdateAccessTokenRepository } from '@/data/protocols/database/auth/upda
 import { ChangeUserPasswordRepository } from '@/data/protocols/database/user/change-user-password-repository'
 import { EditUserProfileRepository } from '@/data/protocols/database/user/edit-user-profile-respository'
 import { LoadUsersRepository } from '@/data/protocols/database/user/load-users-repository'
-import { LoadUserProfileRepository } from '@/data/protocols/database/user/load-users-repository copy'
+import { LoadUserProfileRepository } from '@/data/protocols/database/user/load-user-profile-repository'
 import { ProfileModel, UserModel } from '@/domain/entities/user'
 import { CreateUserParamsModel } from '@/domain/usecases/auth/create-user'
+import { ObjectId } from 'mongodb'
 import { MongoHelper } from './mongo-helper'
 
 export class UserMongoRepository implements
@@ -56,10 +57,8 @@ ChangeUserPasswordRepository {
 
   async loadProfile (userId: string): Promise<ProfileModel> {
     const userCollection = await MongoHelper.getCollection('users')
-    const user = await userCollection.findOne({
-      _id: userId
-    })
-    return user.profile
+    const user = await userCollection.findOne({ _id: new ObjectId(userId) })
+    return user?.profile || null
   }
 
   async loadUsers (page?: number): Promise<UserModel[]> {
