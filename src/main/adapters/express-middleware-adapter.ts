@@ -14,7 +14,7 @@ export const adaptMiddleware = (middleware: Middleware) => {
       next()
     } else {
       res.status(httpResponse.statusCode).json({
-        error: httpResponse.body.message
+        error: httpResponse.body?.message
       })
     }
   }

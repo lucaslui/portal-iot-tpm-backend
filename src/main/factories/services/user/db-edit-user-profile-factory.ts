@@ -4,5 +4,5 @@ import { UserMongoRepository } from '@/infrastructure/database/mongodb/user-mong
 
 export const makeDbEditUserProfile = (): EditUserProfile => {
   const userMongoRepository = new UserMongoRepository()
-  return new DbEditUserProfile(userMongoRepository)
+  return new DbEditUserProfile(userMongoRepository, userMongoRepository)
 }
