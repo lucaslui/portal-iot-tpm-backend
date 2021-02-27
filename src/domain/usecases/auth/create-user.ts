@@ -1,8 +1,9 @@
-import { UserModel } from '@/domain/entities/user'
+import { ProfileModel, UserModel } from '@/domain/entities/user'
 
 export type CreateUserParamsModel = {
   name: string
   email: string
+  profile: ProfileModel
   password: string
   createdAt: Date
 }
