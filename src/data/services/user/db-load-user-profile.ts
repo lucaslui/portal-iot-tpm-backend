@@ -1,4 +1,4 @@
-import { LoadUserProfileRepository } from '@/data/protocols/database/user/load-users-repository copy'
+import { LoadUserProfileRepository } from '@/data/protocols/database/user/load-user-profile-repository'
 import { ProfileModel } from '@/domain/entities/user'
 import { LoadUserProfile } from '@/domain/usecases/user/load-user-profile'
 
