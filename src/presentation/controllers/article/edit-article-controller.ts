@@ -16,8 +16,9 @@ export class EditArticleController implements Controller {
       if (error) {
         return badRequest(error)
       }
+      const { articleId } = httpRequest.params
       const { title, description, content, imageUrl, categoryId } = httpRequest.body
-      const isSuccessful = await this.editArticle.edit(httpRequest.userId, {
+      const isSuccessful = await this.editArticle.edit(httpRequest.userId, articleId, {
         title,
         description,
         content,
