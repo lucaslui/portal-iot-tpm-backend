@@ -24,6 +24,7 @@ export class SignUpController implements Controller {
         name,
         email,
         password,
+        profile: {},
         createdAt: new Date()
       })
       if (!account) {
