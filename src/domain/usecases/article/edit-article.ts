@@ -1,7 +1,5 @@
-import { ArticleModel } from '@/domain/entities/article'
-
 export interface EditArticle {
-  edit: (userId: string, article: EditArticleModel) => Promise<ArticleModel>
+  edit: (userId: string, article: EditArticleModel) => Promise<boolean>
 }
 
 export interface EditArticleModel {
