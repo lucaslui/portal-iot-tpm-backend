@@ -1,5 +1,5 @@
 export interface EditArticle {
-  edit: (userId: string, article: EditArticleModel) => Promise<boolean>
+  edit: (userId: string, articleId: string, newArticle: EditArticleModel) => Promise<boolean>
 }
 
 export interface EditArticleModel {
