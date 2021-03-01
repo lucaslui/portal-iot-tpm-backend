@@ -1,5 +1,14 @@
 import { ArticleModel } from '@/domain/entities/article'
 
 export interface LoadArticles {
-  load: (page?: number) => Promise<ArticleModel[]>
+  load: (query?: LoadArticlesQueryModel) => Promise<ArticleModel[]>
+}
+
+export type LoadArticlesQueryModel = {
+  page?: number
+  articleId?: string
+  userId?: string
+  categoryId?: string
+  month?: number
+  year?: number
 }

@@ -1,5 +1,11 @@
 import { CategoryModel } from '@/domain/entities/category'
 
 export interface LoadCategories {
-  load: (page?: number) => Promise<CategoryModel[]>
+  load: (query?: LoadCategoriesQueryModel) => Promise<CategoryModel[]>
+}
+
+export type LoadCategoriesQueryModel = {
+  page?: number
+  categoryId?: string
+  categoryParentId?: number
 }
