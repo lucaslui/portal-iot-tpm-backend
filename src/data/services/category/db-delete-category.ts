@@ -1,15 +1,15 @@
 import { DeleteCategoryRepository } from '@/data/protocols/database/category/delete-category-repository'
-import { LoadCategoryByIdRepository } from '@/data/protocols/database/category/load-category-by-id-repository'
+import { LoadCategoriesRepository } from '@/data/protocols/database/category/load-categories-repository'
 import { DeleteCategory } from '@/domain/usecases/category/delete-category'
 
 export class DbDeleteCategory implements DeleteCategory {
   constructor (
-    private readonly loadCategoryByIdRepository: LoadCategoryByIdRepository,
+    private readonly loadCategoriesRepository: LoadCategoriesRepository,
     private readonly deleteCategoryRepository: DeleteCategoryRepository
   ) { }
 
   async delete (categoryId: string): Promise<boolean> {
-    const category = await this.loadCategoryByIdRepository.loadById(categoryId)
+    const category = await this.loadCategoriesRepository.load({ categoryId })
     if (category) {
       await this.deleteCategoryRepository.delete(categoryId)
       return true
