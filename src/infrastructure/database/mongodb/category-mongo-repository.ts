@@ -6,66 +6,61 @@ import { EditCategoryModel } from '@/domain/usecases/category/edit-category'
 import { AddCategoryRepository } from '@/data/protocols/database/category/add-category-repository'
 import { DeleteCategoryRepository } from '@/data/protocols/database/category/delete-category-repository'
 import { EditCategoryRepository } from '@/data/protocols/database/category/edit-category-repository'
-import { LoadCategoriesByParentRepository } from '@/data/protocols/database/category/load-categories-by-parent-repository'
 import { LoadCategoriesRepository } from '@/data/protocols/database/category/load-categories-repository'
-import { LoadCategoryByIdRepository } from '@/data/protocols/database/category/load-category-by-id-repository'
+import { LoadCategoriesQueryModel } from '@/domain/usecases/category/load-categories'
 
 export class CategoryMongoRepository implements
 AddCategoryRepository,
 DeleteCategoryRepository,
 EditCategoryRepository,
-LoadCategoriesByParentRepository,
-LoadCategoriesRepository,
-LoadCategoryByIdRepository {
+LoadCategoriesRepository {
   async add (category: AddCategoryModel): Promise<CategoryModel> {
-    const articleCollection = await MongoHelper.getCollection('categories')
-    const result = await articleCollection.insertOne(category)
+    const categoryCollection = await MongoHelper.getCollection('categories')
+    const { categoryParentId, ...rest } = category
+    const result = await categoryCollection.insertOne({ ...rest, categoryParentId: new ObjectId(categoryParentId) })
     const categoryAdded = result.ops[0]
     return MongoHelper.map(categoryAdded)
   }
 
   async delete (categoryId: string): Promise<void> {
-    const articleCollection = await MongoHelper.getCollection('categories')
-    await articleCollection.deleteOne({ _id: new ObjectId(categoryId) })
+    const categoryCollection = await MongoHelper.getCollection('categories')
+    await categoryCollection.deleteOne({ _id: new ObjectId(categoryId) })
   }
 
   async edit (categoryId: string, category: EditCategoryModel): Promise<void> {
-    const articleCollection = await MongoHelper.getCollection('categories')
-    await articleCollection.updateOne({ _id: new ObjectId(categoryId) }, {
+    const categoryCollection = await MongoHelper.getCollection('categories')
+    await categoryCollection.updateOne({ _id: new ObjectId(categoryId) }, {
       $set: {
         name: category.name,
         description: category.description,
-        categoryParentId: category.categoryParentId
+        categoryParentId: new ObjectId(category.categoryParentId)
       }
     })
   }
 
-  async load (page?: number): Promise<CategoryModel[]> {
-    const articleCollection = await MongoHelper.getCollection('categories')
-    const articles = await articleCollection.aggregate([{
-      $rename: {
-        _id: 'id'
-      }
-    }]).toArray()
-    return articles
-  }
+  async load (query?: LoadCategoriesQueryModel): Promise<CategoryModel[]> {
+    const categoryCollection = await MongoHelper.getCollection('categories')
+    const pipeline: object[] = []
 
-  async loadById (categoryId: string): Promise<CategoryModel> {
-    const articleCollection = await MongoHelper.getCollection('categories')
-    const category = await articleCollection.findOne({ _id: new ObjectId(categoryId) })
-    return category && MongoHelper.map(category)
-  }
+    if (query.categoryId) {
+      pipeline.push({ $match: { _id: new ObjectId(query.categoryId) } })
+    } else if (query.categoryParentId) {
+      pipeline.push({ $match: { categoryParentId: new ObjectId(query.categoryParentId) } })
+    }
 
-  async loadByParent (categoryParentId: string, page?: number): Promise<CategoryModel[]> {
-    const articleCollection = await MongoHelper.getCollection('categories')
-    const categories = await articleCollection.aggregate([{
-      $match: {
-        categoryParentId
-      },
-      $rename: {
-        _id: 'id'
+    pipeline.push({
+      $project: {
+        _id: false,
+        id: '$_id',
+        name: '$name',
+        description: '$description',
+        categoryParentId: '$categoryParentId'
       }
-    }]).toArray()
+    })
+
+    pipeline.push({ $skip: query.page ? (query.page * 10 - 10) : 0 }, { $limit: 10 })
+
+    const categories = await categoryCollection.aggregate(pipeline).toArray()
     return categories
   }
 }
