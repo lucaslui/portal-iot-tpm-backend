@@ -1,7 +1,7 @@
 import { loginPath, signupPath } from './paths/auth'
 import { editUserProfilePath, loadUserProfilePath, loadUsersPath } from './paths/user'
-import { addArticlePath, deleteArticlePath, editArticlePath, loadArticleByIdPath, loadArticleByCategoryPath, loadArticlesPath, loadArticleByUserPath } from './paths/article'
-import { addCategoryPath, deleteCategoryPath, editCategoryPath, loadCategoriesByParentPath, loadCategoriesPath, loadCategoryByIdPath } from './paths/category'
+import { addArticlePath, deleteArticlePath, editArticlePath, loadArticlesPath } from './paths/article'
+import { addCategoryPath, deleteCategoryPath, editCategoryPath, loadCategoriesPath } from './paths/category'
 import { accessTokenSchema, apiKeyAuthSchema, loginParamsSchema, signupParamsSchema } from './schemas/auth'
 import { addArticleSchema, articleHeaderSchema, articleSchema } from './schemas/article'
 import { addCategorySchema, categorySchema, categoriesTreeSchema } from './schemas/category'
@@ -14,7 +14,7 @@ export default {
   info: {
     title: 'Backend do Blog',
     description:
-      'Documentação da API que trata de armazenar e servir as entidades de **artigos** e **categorias** do blog. A API também permite o acesso restrito do autor para o gerencimentado das entidades.',
+      'Documentação da API que trata de armazenar e servir as entidades de **artigos** e **categorias** do blog. A API também permite a criação de contas de usuários autores e administradores.',
     version: '1.0.0',
     contact: {
       name: 'Lucas Lui Motta',
@@ -31,7 +31,7 @@ export default {
   }],
   tags: [{
     name: 'Autenticação',
-    description: 'Operações relacionadas com o acesso e cadastro do usuário.'
+    description: 'Operações relacionadas com o acesso do usuário no blog.'
   },{
     name: 'Usuários',
     description: 'Operações relacionadas com os usuários do blog.'
@@ -61,14 +61,7 @@ export default {
       post: addArticlePath,
       get: loadArticlesPath
     },
-    '/articles/{userId}': {
-      get: loadArticleByUserPath
-    },
-    '/articles/{categoryId}': {
-      get: loadArticleByCategoryPath
-    },
     '/articles/{articleId}': {
-      get: loadArticleByIdPath,
       put: editArticlePath,
       delete: deleteArticlePath
     },
@@ -76,11 +69,7 @@ export default {
       post: addCategoryPath,
       get: loadCategoriesPath
     },
-    '/categories/{categoryParentId}': {
-      get: loadCategoriesByParentPath
-    },
     '/categories/{categoryId}': {
-      get: loadCategoryByIdPath,
       put: editCategoryPath,
       delete: deleteCategoryPath
     }

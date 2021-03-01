@@ -1,7 +1,7 @@
 export const loadUserProfilePath = {
   tags: ['Usuários'],
   summary: 'Carrega o perfil de determinado usuário',
-  description: 'Carrega o perfil de determinado usuário. O identificador do usuário é obrigatório. Essa rota pode ser executada por qualquer **usuário**.',
+  description: 'Carrega o perfil de determinado usuário. O identificador do usuário é obrigatório. Essa rota pode ser executada por **qualquer usuário**.',
   parameters: [{
     name: 'userId',
     in: 'path',

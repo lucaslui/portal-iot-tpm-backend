@@ -1,7 +1,7 @@
 export const addCategoryPath = {
   tags: ['Categorias'],
-  summary: 'Adiciona uma nova categoria ao blog',
-  description: 'Adiciona uma nova categoria ao blog. Nome, descrição e identificador da categoria pai são obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
+  summary: 'Adicionar uma nova categoria ao blog',
+  description: 'Adicionar uma nova categoria ao blog. Nome, descrição e identificador da categoria pai são obrigatórios. Essa rota só pode ser executada por **administradores**',
   security: [{
     apiKeyAuth: []
   }],

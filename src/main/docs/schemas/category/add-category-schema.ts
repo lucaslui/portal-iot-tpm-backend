@@ -15,9 +15,9 @@ export const addCategorySchema = {
     }
   },
   example: {
-    name: 'Sensores e Atuadores',
-    description: 'Tutoriais e notícias envolvendo sensores e atuadores',
-    categoryParentId: 'Internet das Coisas'
+    name: 'Internet das Coisas',
+    description: 'Tutoriais e notícias envolvendo a Internet das Coisas (IoT)',
+    categoryParentId: '603bb03cf134dd2ce7d4f64b'
   },
   required: ['name', 'description', 'categoryParentId']
 }

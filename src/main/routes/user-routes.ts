@@ -13,7 +13,7 @@ const router = Router()
 
 router.put('/password', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeChangeUserPasswordController()))
 router.put('/profile', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeEditUserProfileController()))
-router.get('/', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeLoadUsersController()))
+router.get('/', adaptMiddleware(makeAuthMiddleware('admin')), adaptRoute(makeLoadUsersController()))
 router.get('/:userId', adaptRoute(makeLoadUserProfileController()))
 
 export { router as userRouter }

@@ -1,7 +1,7 @@
 export const editCategoryPath = {
   tags: ['Categorias'],
   summary: 'Edita os dados de uma categoria',
-  description: 'Edita os dados de uma categoria. Todos os valores da categoria são obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
+  description: 'Edita os dados de uma categoria. Todos os valores da categoria são obrigatórios. Essa rota só pode ser executada por **administradores**',
   security: [{
     apiKeyAuth: []
   }],
