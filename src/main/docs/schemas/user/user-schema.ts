@@ -30,7 +30,7 @@ export const userSchema = {
     name: 'Lucas Lui Motta',
     email: 'lucasluimotta@gmail.com',
     password: 'abc78591e810c18749de860ea507f1301e810c19729de860ea',
-    createdAt: ''
+    createdAt: '2021-01-27T13:23:15.450Z'
   },
   required: ['id', 'name', 'email']
 }

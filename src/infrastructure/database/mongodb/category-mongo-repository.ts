@@ -33,6 +33,7 @@ LoadCategoriesRepository {
       $set: {
         name: category.name,
         description: category.description,
+        imageUrl: category.imageUrl,
         categoryParentId: new ObjectId(category.categoryParentId)
       }
     })
@@ -54,6 +55,7 @@ LoadCategoriesRepository {
         id: '$_id',
         name: '$name',
         description: '$description',
+        imageUrl: '$imageUrl',
         categoryParentId: '$categoryParentId'
       }
     })

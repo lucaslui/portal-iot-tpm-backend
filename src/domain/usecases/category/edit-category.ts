@@ -5,5 +5,6 @@ export interface EditCategory {
 export interface EditCategoryModel {
   name: string
   description: string
+  imageUrl?: string
   categoryParentId?: string
 }

@@ -32,7 +32,7 @@ export const loadCategoriesPath = {
           schema: {
             type: 'array',
             items: {
-              $ref: '#/schemas/categoriesTree'
+              $ref: '#/schemas/category'
             }
           }
         }
