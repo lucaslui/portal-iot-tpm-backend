@@ -14,11 +14,13 @@ export default {
   info: {
     title: 'Backend do Blog',
     description:
-      'Documentação da API que trata de armazenar e servir as entidades de **artigos** e **categorias** do blog. A API também permite a criação de contas de usuários autores e administradores.',
+      'Documentação da API que trata de armazenar e servir as entidades de **artigos** e **categorias** do blog.' +
+      'A API também permite a criação de contas de usuários autores e administradores.\n\n' +
+      '<a href="https://lucaslui.github.io/blog/home"> Link para o Blog </a>',
     version: '1.0.0',
     contact: {
       name: 'Lucas Lui Motta',
-      url: 'https://lucaslui.github.io/blog/home'
+      url: 'https://www.linkedin.com/in/lucas-lui-motta/'
     },
     license: {
       name: 'GPL v3.0 License',
