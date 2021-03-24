@@ -10,21 +10,8 @@ export class DbLoadCategories implements LoadCategories {
   async load (query?: LoadCategoriesQueryModel): Promise<CategoryModel[]> {
     const categories = await this.loadCategoriesRepository.load(query)
     if (categories) {
-      return this.toTree(categories)
+      return categories
     }
     return null
-  }
-
-  toTree (categories: CategoryModel[], tree?: any[]): CategoryModel[] {
-    if (!tree) {
-      const notParentId = (category): Boolean => !category.categoryParentId
-      tree = categories.filter(notParentId)
-    }
-    tree = tree.map(parentNode => {
-      const isChild = (node): Boolean => node.categoryParentId?.toString() === parentNode.id.toString()
-      parentNode.children = this.toTree(categories, categories.filter(isChild))
-      return parentNode
-    })
-    return tree
   }
 }

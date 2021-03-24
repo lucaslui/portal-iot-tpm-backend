@@ -8,6 +8,7 @@ import { addCategorySchema, categorySchema, categoriesTreeSchema } from './schem
 import { notFoundComponent , badRequestComponent , serverErrorComponent , unauthorizedComponent, forbiddenComponent, noContentComponent } from './components'
 import { userProfileSchema, userSchema } from './schemas/user'
 import { changeUserPasswordPath } from './paths/user/change-user-password-path'
+import { loadCategoriesTreePath } from './paths/category/load-categories-tree-path'
 
 export default {
   openapi: '3.0.0',
@@ -70,6 +71,9 @@ export default {
     '/categories': {
       post: addCategoryPath,
       get: loadCategoriesPath
+    },
+    '/categories/tree': {
+      get: loadCategoriesTreePath
     },
     '/categories/{categoryId}': {
       put: editCategoryPath,
