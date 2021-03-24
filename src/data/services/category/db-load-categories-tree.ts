@@ -12,7 +12,8 @@ export class DbLoadCategoriesTree implements LoadCategoriesTree {
     if (categories) {
       let tree = this.toTree(categories)
       if (query?.categoryId) {
-        tree = categories.filter((category): Boolean => category.id?.toString() === query.categoryId.toString())
+        const category = tree.filter((category): Boolean => category.id?.toString() === query.categoryId.toString())
+        tree = category[0].children
       }
       return tree
     }
