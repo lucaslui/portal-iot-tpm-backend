@@ -7,5 +7,5 @@ export interface LoadCategories {
 export type LoadCategoriesQueryModel = {
   page?: number
   categoryId?: string
-  categoryParentId?: number
+  categoryParentId?: string
 }

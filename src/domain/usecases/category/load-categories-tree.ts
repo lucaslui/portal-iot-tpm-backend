@@ -1,5 +1,9 @@
 export interface LoadCategoriesTree {
-  load: () => Promise<CategoriesTreeModel[]>
+  load: (query?: LoadCategoriesTreeQueryModel) => Promise<CategoriesTreeModel[]>
+}
+
+export type LoadCategoriesTreeQueryModel = {
+  categoryId?: string
 }
 
 export type CategoriesTreeModel = {

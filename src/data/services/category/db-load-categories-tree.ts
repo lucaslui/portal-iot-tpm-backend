@@ -1,17 +1,20 @@
 import { LoadCategoriesRepository } from '@/data/protocols/database/category/load-categories-repository'
 import { CategoryModel } from '@/domain/entities/category'
-import { LoadCategoriesQueryModel } from '@/domain/usecases/category/load-categories'
-import { CategoriesTreeModel, LoadCategoriesTree } from '@/domain/usecases/category/load-categories-tree'
+import { CategoriesTreeModel, LoadCategoriesTree, LoadCategoriesTreeQueryModel } from '@/domain/usecases/category/load-categories-tree'
 
 export class DbLoadCategoriesTree implements LoadCategoriesTree {
   constructor (
     private readonly loadCategoriesRepository: LoadCategoriesRepository
   ) { }
 
-  async load (query?: LoadCategoriesQueryModel): Promise<CategoriesTreeModel[]> {
-    const categories = await this.loadCategoriesRepository.load(query)
+  async load (query?: LoadCategoriesTreeQueryModel): Promise<CategoriesTreeModel[]> {
+    const categories = await this.loadCategoriesRepository.load()
     if (categories) {
-      return this.toTree(categories)
+      let tree = this.toTree(categories)
+      if (query?.categoryId) {
+        tree = categories.filter((category): Boolean => category.id?.toString() === query.categoryId.toString())
+      }
+      return tree
     }
     return null
   }

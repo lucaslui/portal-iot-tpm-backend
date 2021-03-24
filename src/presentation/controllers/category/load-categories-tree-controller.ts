@@ -10,7 +10,10 @@ export class LoadCategoriesTreeController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const categoriesTree = await this.loadCategoriesTree.load()
+      const { categoryId } = httpRequest.query
+      const categoriesTree = await this.loadCategoriesTree.load({
+        categoryId
+      })
       return ok(categoriesTree)
     } catch (error) {
       return serverError(error)
