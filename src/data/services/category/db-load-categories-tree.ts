@@ -1,13 +1,14 @@
 import { LoadCategoriesRepository } from '@/data/protocols/database/category/load-categories-repository'
 import { CategoryModel } from '@/domain/entities/category'
-import { LoadCategories, LoadCategoriesQueryModel } from '@/domain/usecases/category/load-categories'
+import { LoadCategoriesQueryModel } from '@/domain/usecases/category/load-categories'
+import { CategoriesTreeModel, LoadCategoriesTree } from '@/domain/usecases/category/load-categories-tree'
 
-export class DbLoadCategoriesTree implements LoadCategories {
+export class DbLoadCategoriesTree implements LoadCategoriesTree {
   constructor (
     private readonly loadCategoriesRepository: LoadCategoriesRepository
   ) { }
 
-  async load (query?: LoadCategoriesQueryModel): Promise<CategoryModel[]> {
+  async load (query?: LoadCategoriesQueryModel): Promise<CategoriesTreeModel[]> {
     const categories = await this.loadCategoriesRepository.load(query)
     if (categories) {
       return this.toTree(categories)
@@ -15,7 +16,7 @@ export class DbLoadCategoriesTree implements LoadCategories {
     return null
   }
 
-  toTree (categories: CategoryModel[], tree?: any[]): CategoryModel[] {
+  toTree (categories: CategoryModel[], tree?: CategoriesTreeModel[]): CategoriesTreeModel[] {
     if (!tree) {
       const notParentId = (category): Boolean => !category.categoryParentId
       tree = categories.filter(notParentId)

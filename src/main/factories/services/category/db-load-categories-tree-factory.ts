@@ -1,8 +1,8 @@
-import { DbLoadCategories } from '@/data/services/category/db-load-categories'
-import { LoadCategories } from '@/domain/usecases/category/load-categories'
+import { DbLoadCategoriesTree } from '@/data/services/category/db-load-categories-tree'
+import { LoadCategoriesTree } from '@/domain/usecases/category/load-categories-tree'
 import { CategoryMongoRepository } from '@/infrastructure/database/mongodb/category-mongo-repository'
 
-export const makeDbLoadTreeCategories = (): LoadCategories => {
+export const makeDbLoadCategoriesTree = (): LoadCategoriesTree => {
   const categoryMongoRepository = new CategoryMongoRepository()
-  return new DbLoadCategories(categoryMongoRepository)
+  return new DbLoadCategoriesTree(categoryMongoRepository)
 }

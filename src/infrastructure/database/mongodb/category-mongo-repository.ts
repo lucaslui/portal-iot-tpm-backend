@@ -43,10 +43,10 @@ LoadCategoriesRepository {
     const categoryCollection = await MongoHelper.getCollection('categories')
     const pipeline: object[] = []
 
-    if (query.categoryId) {
+    if (query?.categoryId) {
       pipeline.push({ $match: { _id: new ObjectId(query.categoryId) } })
-    } else if (query.categoryParentId) {
-      pipeline.push({ $match: { categoryParentId: new ObjectId(query.categoryParentId) } })
+    } else if (query?.categoryParentId) {
+      pipeline.push({ $match: { categoryParentId: query.categoryParentId } })
     }
 
     pipeline.push({
@@ -60,7 +60,7 @@ LoadCategoriesRepository {
       }
     })
 
-    pipeline.push({ $skip: query.page ? (query.page * 10 - 10) : 0 }, { $limit: 10 })
+    pipeline.push({ $skip: query?.page ? (query.page * 10 - 10) : 0 }, { $limit: 10 })
 
     const categories = await categoryCollection.aggregate(pipeline).toArray()
     return categories
