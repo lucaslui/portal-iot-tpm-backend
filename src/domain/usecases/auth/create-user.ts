@@ -1,4 +1,4 @@
-import { ProfileModel, UserModel } from '@/domain/entities/user'
+import { ProfileModel } from '@/domain/entities/user'
 
 export type CreateUserParamsModel = {
   name: string
@@ -9,5 +9,5 @@ export type CreateUserParamsModel = {
 }
 
 export interface CreateUser {
-  create (createUserParams: CreateUserParamsModel): Promise<UserModel>
+  create (createUserParams: CreateUserParamsModel): Promise<string>
 }

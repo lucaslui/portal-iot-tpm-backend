@@ -1,5 +1,5 @@
 import { ArticleModel } from '@/domain/entities/article'
-import { ObjectId } from 'mongodb'
+
 import { MongoHelper } from './mongo-helper'
 import { AddArticleRepository } from '@/data/protocols/database/article/add-article-repository'
 import { DeleteArticleRepository } from '@/data/protocols/database/article/delete-article-repository'
@@ -17,25 +17,25 @@ LoadArticlesRepository {
   async add (article: AddArticleModel): Promise<ArticleModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const { userId, categoryId, ...rest } = article
-    const result = await articleCollection.insertOne({ ...rest, userId: new ObjectId(userId), categoryId: new ObjectId(categoryId) })
+    const result = await articleCollection.insertOne({ ...rest, userId: MongoHelper.toObjectId(userId), categoryId: MongoHelper.toObjectId(categoryId) })
     const articleAdded = result.ops[0]
     return MongoHelper.map(articleAdded)
   }
 
   async delete (articleId: string): Promise<void> {
     const articleCollection = await MongoHelper.getCollection('articles')
-    await articleCollection.deleteOne({ _id: new ObjectId(articleId) })
+    await articleCollection.deleteOne({ _id: MongoHelper.toObjectId(articleId) })
   }
 
   async edit (articleId: string, newArticle: EditArticleModel): Promise<void> {
     const articleCollection = await MongoHelper.getCollection('articles')
-    await articleCollection.updateOne({ _id: new ObjectId(articleId) }, {
+    await articleCollection.updateOne({ _id: MongoHelper.toObjectId(articleId) }, {
       $set: {
         title: newArticle.title,
         description: newArticle.description,
         content: newArticle.content,
         imageUrl: newArticle.imageUrl,
-        categoryId: new ObjectId(newArticle.categoryId)
+        categoryId: newArticle.categoryId
       }
     })
   }
@@ -45,13 +45,13 @@ LoadArticlesRepository {
     const pipeline: object[] = []
 
     if (query.articleId) {
-      pipeline.push({ $match: { _id: new ObjectId(query.articleId) } })
+      pipeline.push({ $match: { _id: MongoHelper.toObjectId(query.articleId) } })
     } else if (query.userId || query.categoryId) {
       if (query.userId) {
-        pipeline.push({ $match: { userId: new ObjectId(query.userId) } })
+        pipeline.push({ $match: { userId: MongoHelper.toObjectId(query.userId) } })
       }
       if (query.categoryId) {
-        pipeline.push({ $match: { categoryId: new ObjectId(query.categoryId) } })
+        pipeline.push({ $match: { categoryId: MongoHelper.toObjectId(query.categoryId) } })
       }
     }
 

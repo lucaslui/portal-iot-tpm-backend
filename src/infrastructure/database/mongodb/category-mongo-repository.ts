@@ -1,5 +1,4 @@
 import { CategoryModel } from '@/domain/entities/category'
-import { ObjectId } from 'mongodb'
 import { MongoHelper } from './mongo-helper'
 import { AddCategoryModel } from '@/domain/usecases/category/add-category'
 import { EditCategoryModel } from '@/domain/usecases/category/edit-category'
@@ -17,24 +16,24 @@ LoadCategoriesRepository {
   async add (category: AddCategoryModel): Promise<CategoryModel> {
     const categoryCollection = await MongoHelper.getCollection('categories')
     const { categoryParentId, ...rest } = category
-    const result = await categoryCollection.insertOne({ ...rest, categoryParentId: new ObjectId(categoryParentId) })
+    const result = await categoryCollection.insertOne({ ...rest, categoryParentId: MongoHelper.toObjectId(categoryParentId) })
     const categoryAdded = result.ops[0]
     return MongoHelper.map(categoryAdded)
   }
 
   async delete (categoryId: string): Promise<void> {
     const categoryCollection = await MongoHelper.getCollection('categories')
-    await categoryCollection.deleteOne({ _id: new ObjectId(categoryId) })
+    await categoryCollection.deleteOne({ _id: MongoHelper.toObjectId(categoryId) })
   }
 
   async edit (categoryId: string, category: EditCategoryModel): Promise<void> {
     const categoryCollection = await MongoHelper.getCollection('categories')
-    await categoryCollection.updateOne({ _id: new ObjectId(categoryId) }, {
+    await categoryCollection.updateOne({ _id: MongoHelper.toObjectId(categoryId) }, {
       $set: {
         name: category.name,
         description: category.description,
         imageUrl: category.imageUrl,
-        categoryParentId: new ObjectId(category.categoryParentId)
+        categoryParentId: MongoHelper.toObjectId(category.categoryParentId)
       }
     })
   }
@@ -44,7 +43,7 @@ LoadCategoriesRepository {
     const pipeline: object[] = []
 
     if (query?.categoryId) {
-      pipeline.push({ $match: { _id: new ObjectId(query.categoryId) } })
+      pipeline.push({ $match: { _id: MongoHelper.toObjectId(query.categoryId) } })
     } else if (query?.categoryParentId) {
       pipeline.push({ $match: { categoryParentId: query.categoryParentId } })
     }

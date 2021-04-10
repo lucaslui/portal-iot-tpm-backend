@@ -24,9 +24,13 @@ export const MongoHelper = {
     return this.client.db().collection(name)
   },
 
+  toObjectId: (data: any): ObjectId => {
+    return new ObjectId(data)
+  },
+
   map: (data: any): any => {
     const { _id, ...rest } = data
-    return { ...rest, id: new ObjectId(_id).toHexString() }
+    return { ...rest, id: _id }
   },
 
   mapCollection: (collection: any[]): any[] => {

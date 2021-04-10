@@ -9,7 +9,6 @@ import { LoadUsersRepository } from '@/data/protocols/database/user/load-users-r
 import { LoadUserProfileRepository } from '@/data/protocols/database/user/load-user-profile-repository'
 import { ProfileModel, UserModel } from '@/domain/entities/user'
 import { CreateUserParamsModel } from '@/domain/usecases/auth/create-user'
-import { ObjectId } from 'mongodb'
 import { MongoHelper } from './mongo-helper'
 
 export class UserMongoRepository implements
@@ -26,12 +25,12 @@ ChangeUserPasswordRepository {
     const userCollection = await MongoHelper.getCollection('users')
     const result = await userCollection.insertOne(createUserParams)
     const user = result.ops[0]
-    return MongoHelper.map(user)
+    return user && MongoHelper.map(user)
   }
 
   async loadById (userId: string): Promise<UserModel> {
     const userCollection = await MongoHelper.getCollection('users')
-    const user = await userCollection.findOne({ _id: userId })
+    const user = await userCollection.findOne({ _id: MongoHelper.toObjectId(userId) })
     return user && MongoHelper.map(user)
   }
 
@@ -57,7 +56,7 @@ ChangeUserPasswordRepository {
 
   async loadProfile (userId: string): Promise<ProfileModel> {
     const userCollection = await MongoHelper.getCollection('users')
-    const user = await userCollection.findOne({ _id: new ObjectId(userId) })
+    const user = await userCollection.findOne({ _id: MongoHelper.toObjectId(userId) })
     return user?.profile || null
   }
 
@@ -76,16 +75,16 @@ ChangeUserPasswordRepository {
 
   async updateAccessToken (id: string, token: string): Promise<void> {
     const userCollection = await MongoHelper.getCollection('users')
-    await userCollection.updateOne({ _id: id }, { $set: { accessToken: token } })
+    await userCollection.updateOne({ _id: MongoHelper.toObjectId(id) }, { $set: { accessToken: token } })
   }
 
   async changePassword (userId: string, hashedPassword: string): Promise<void> {
     const userCollection = await MongoHelper.getCollection('users')
-    await userCollection.updateOne({ _id: userId }, { $set: { password: hashedPassword } })
+    await userCollection.updateOne({ _id: MongoHelper.toObjectId(userId) }, { $set: { password: hashedPassword } })
   }
 
   async editProfile (userId: string, userProfile: ProfileModel): Promise<void> {
     const userCollection = await MongoHelper.getCollection('users')
-    await userCollection.updateOne({ _id: userId }, { $set: { profile: userProfile } })
+    await userCollection.updateOne({ _id: MongoHelper.toObjectId(userId) }, { $set: { profile: userProfile } })
   }
 }
