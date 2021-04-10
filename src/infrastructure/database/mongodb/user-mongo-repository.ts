@@ -21,11 +21,11 @@ LoadUsersRepository,
 LoadUserProfileRepository,
 EditUserProfileRepository,
 ChangeUserPasswordRepository {
-  async create (createUserParams: CreateUserParamsModel): Promise<UserModel> {
+  async create (createUserParams: CreateUserParamsModel): Promise<boolean> {
     const userCollection = await MongoHelper.getCollection('users')
     const result = await userCollection.insertOne(createUserParams)
     const user = result.ops[0]
-    return user && MongoHelper.map(user)
+    return user !== null
   }
 
   async loadById (userId: string): Promise<UserModel> {

@@ -9,5 +9,5 @@ export type CreateUserParamsModel = {
 }
 
 export interface CreateUser {
-  create (createUserParams: CreateUserParamsModel): Promise<string>
+  create (createUserParams: CreateUserParamsModel): Promise<boolean>
 }
