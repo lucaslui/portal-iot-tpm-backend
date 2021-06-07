@@ -4,6 +4,7 @@
 [//]: # (Nome do Projeto)
 [//]: # (<p align="center">Escrever uma breve descrição</p>)
 
+[//]: # (Badges)
 <p align="center">
 
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lucaslui/blog-backend">
@@ -29,10 +30,10 @@
   </a>
 </p>
 
+[//]: # (Tabela de Conteúdos)
 <p align="center">
  <a href="#overview">Overview</a> •
- <a href="#roadmap">Roadmap</a> • 
- <a href="#tecnologias">Tecnologias</a> • 
+ <a href="#demo">Demo</a> • 
  <a href="#contribuicao">Contribuição</a> • 
  <a href="#licence">Licença</a> • 
  <a href="#author">Autor</a>
@@ -40,7 +41,7 @@
 
 <h4 align="center"> 🚧  Em construção...  🚧 </h4>
 
-<h2> 💻 Overview </h2>
+<h2 id="overview"> 💻 Overview </h2>
 
 O objetivo da API é armazenar e servir as entidades de **artigos** e **categorias** do blog, permitindo também permite a criação de contas de usuários autores e administradores.
 
@@ -54,7 +55,7 @@ O objetivo da API é armazenar e servir as entidades de **artigos** e **categori
 - [x] Cadastro de usuário
 - [ ] Cadastro de produtos
 
-## Demo
+<h2 id="demo"> 🧪 Demo </h2>
 
   - [**Link para o blog**](https://lucaslui.github.io/blog/)
 
