@@ -39,7 +39,8 @@
  <a href="#install">Install</a> • 
  <a href="#usage">Usage</a> • 
  <a href="#contributing">Contributing</a> • 
- <a href="#licence">Licence</a>
+ <a href="#licence">Licence</a> • 
+ <a href="#author">Author</a>
 </p>
 
 <h4 align="center"> 🚧  Status do Projeto: Em construção...  🚧 </h4>
@@ -111,7 +112,7 @@ Please make sure to update tests as appropriate.
 Copyright © 2020 [Lucas Lui](https://github.com/lucaslui).<br />
 This project is [GPL 3.0](./license) licensed. See the [LICENSE](./license) for more information.
 
-<h2 id="contributing"> 🤝 Author </h2>
+<h2 id="author"> 👤 Author </h2>
 
 <a href="https://github.com/lucaslui">
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/10131629?s=400&u=d8e06eb899dd25a7509a969dc4641e1de62762ed&v=4" width="100px;" alt=""/> <br />
