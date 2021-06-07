@@ -2,7 +2,7 @@
 <h1 align="center"> API Genérica para Criação de Blogs </h1>
 
 [//]: # (Nome do Projeto)
-<p align="center"> API criada para gerenciar blogs em geral, sendo a idéia do projeto vinda no desenvolvimento do meu blog "Espaço de conhecimento em IoT"</p>
+<p align="center"> API criada para gerenciar blogs em geral, sendo a idéia do projeto originada do desenvolvimento do meu blog "Espaço de conhecimento em IoT"</p>
 
 [//]: # (Badges)
 <p align="center">
