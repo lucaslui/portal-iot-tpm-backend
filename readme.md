@@ -76,6 +76,8 @@ A API armazena e disponibiliza **artigos** e **categorias** do blog, permitindo 
 
 <h2 id="technologies"> 🧰 Technologies </h2>
 
+The following tools were used in the construction of the project:
+
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Express](https://expressjs.com/pt-br/)
@@ -91,11 +93,22 @@ Before starting, you will need to have the following tools installed on your mac
 
 <h2 id="install"> 🏗️ Install </h2>
 
-```sh
-  npm install
+From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/lucaslui/blog-backend
+
+# Go into the repository
+$ cd blog-backend
+
+# Install dependencies
+$ npm install
 ```
 
 <h2 id="usage"> 🚀 Usage </h2>
+
+From your command line:
 
 ```sh
   npm start
@@ -114,7 +127,7 @@ This project is [GPL 3.0](./license) licensed. See the [LICENSE](./license) for 
 
 <h2 id="author"> 👤 Author </h2>
 
-<img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/10131629?s=400&u=d8e06eb899dd25a7509a969dc4641e1de62762ed&v=4" width="50px;" alt=""/> Created by [Lucas Lui](https://github.com/lucaslui) 👋🏽 Contact me!
+Created by [Lucas Lui](https://github.com/lucaslui) 👋🏽 Contact me!
 
-[![Linkedin Badge](https://img.shields.io/badge/-Lucas-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-lui-motta/)](https://www.linkedin.com/in/lucas-lui-motta/) 
-[![Gmail Badge](https://img.shields.io/badge/-lucasluimotta@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:lucasluimotta@gmail.com)](mailto:lucasluimotta@gmail.com)
+[![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-lui-motta/)](https://www.linkedin.com/in/lucas-lui-motta/) 
+[![Gmail Badge](https://img.shields.io/badge/-Email-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:lucasluimotta@gmail.com)](mailto:lucasluimotta@gmail.com)
