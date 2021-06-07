@@ -61,12 +61,14 @@ O objetivo da API é armazenar e servir as entidades de **artigos** e **categori
 
   - [**Link para a documentação da API no Swagger**](https://dashboard.heroku.com/apps/espaco-de-conhecimento-backend)
 
+## 🧰 Technologies
+
 ## 🛠 Prerequisites
 
 - npm >= 5.5.0
 - node >= 12.0
 
-## 🤝 Install
+## 🏗️ Install
 
 ```sh
   npm install
