@@ -134,5 +134,3 @@ Created by [Lucas Lui](https://github.com/lucaslui) 👋🏽 Contact me!
 
 [![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-lui-motta/)](https://www.linkedin.com/in/lucas-lui-motta/) 
 [![Gmail Badge](https://img.shields.io/badge/-Email-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:lucasluimotta@gmail.com)](mailto:lucasluimotta@gmail.com)
-
-Copyright © 2020 [Lucas Lui](https://github.com/lucaslui).
