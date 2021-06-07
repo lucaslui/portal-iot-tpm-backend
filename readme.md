@@ -65,9 +65,9 @@ The API stores and makes available **articles** and **categories** of the blog, 
 
 <h2 id="demo"> 🧪 Demo </h2>
 
-  - [**Blog Frontend hosted in Github Pages**](https://lucaslui.github.io/blog/)
+  - [**API hosted in Heroku**](https://espaco-de-conhecimento-backend.herokuapp.com/docs/)
 
-  - [**Swagger of the Blog API hosted in Heroky**](https://dashboard.heroku.com/apps/espaco-de-conhecimento-backend)
+  - [**Frontend hosted in Github Pages**](https://lucaslui.github.io/blog/)
 
 <h2 id="technologies"> 🧰 Technologies </h2>
 
