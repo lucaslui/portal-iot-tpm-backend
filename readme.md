@@ -8,19 +8,14 @@
 
 O objetivo da API é armazenar e servir as entidades de **artigos** e **categorias** do blog, permitindo também permite a criação de contas de usuários autores e administradores.
 
--------------------------------------------------------------
-
 ## Diagrama Geral do Projeto
 
 [![alt text](./docs/architecture/general-vision.png "Link para o treinamento")](https://www.udemy.com/course/tdd-com-mango/?referralCode=B53CE5CA2B9AFA5A6FA1)
 
--------------------------------------------------------------
 
 ## [**Link para o blog**](https://lucaslui.github.io/blog/)
 
 ## [**Link para a documentação da API no Swagger**](https://dashboard.heroku.com/apps/espaco-de-conhecimento-backend)
-
--------------------------------------------------------------
 
 ## APIs construídas para o Blog
 
