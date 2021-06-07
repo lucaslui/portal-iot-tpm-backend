@@ -1,8 +1,8 @@
 [//]: # (Título e Descrição)
-<h1 align="center"> API do projeto "Espaço de conhecimento em IoT" </h1>
+<h1 align="center"> API Genérica para Criação de Blogs </h1>
 
 [//]: # (Nome do Projeto)
-<p align="center"> Esse API faz parte de um projeto para construir um blog na área de IoT.</p>
+<p align="center"> API criada para gerenciar blogs em geral, sendo a idéia do projeto vinda no desenvolvimento do meu blog "Espaço de conhecimento em IoT"</p>
 
 [//]: # (Badges)
 <p align="center">
