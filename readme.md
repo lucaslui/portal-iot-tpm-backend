@@ -115,8 +115,8 @@ This project is [GPL 3.0](./license) licensed. See the [LICENSE](./license) for 
 <h2 id="author"> 👤 Author </h2>
 
 <a href="https://github.com/lucaslui">
- <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/10131629?s=400&u=d8e06eb899dd25a7509a969dc4641e1de62762ed&v=4" width="100px;" alt=""/> <br />
-<sub><b>Lucas Lui</b></sub></a> <a href="https://blog.rocketseat.com.br/author/thiago//" title="Rocketseat">🚀</a>
+<img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/10131629?s=400&u=d8e06eb899dd25a7509a969dc4641e1de62762ed&v=4" width="100px;" alt=""/> <br/>
+<sub><b>Lucas Lui</b></sub></a>
 
 👋🏽 Entre em contato!
 
