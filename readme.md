@@ -34,9 +34,13 @@
 <p align="center">
  <a href="#overview">Overview</a> •
  <a href="#demo">Demo</a> • 
- <a href="#contribuicao">Contribuição</a> • 
- <a href="#licence">Licença</a> • 
- <a href="#author">Autor</a>
+ <a href="#technologies">Technologies</a> • 
+ <a href="#prerequisites">Prerequisites</a> • 
+ <a href="#install">Install</a> • 
+ <a href="#usage">Usage</a> • 
+ <a href="#contributing">Contributing</a> • 
+ <a href="#licence">Licence</a> • 
+ <a href="#author">Author</a>
 </p>
 
 <h4 align="center"> 🚧  Em construção...  🚧 </h4>
@@ -46,7 +50,7 @@
 O objetivo da API é armazenar e servir as entidades de **artigos** e **categorias** do blog, permitindo também permite a criação de contas de usuários autores e administradores.
 
 <h1 align="center">
-    <img alt="NextLevelWeek" title="#NextLevelWeek" src="./docs/architecture/general-vision.png" />
+    <img alt="general-vision" title="#general-vision" src="./docs/architecture/general-vision.png" />
 </h1>
 
 [//]: # (Listar as Funcionalidades da Aplicação.)
@@ -61,31 +65,37 @@ O objetivo da API é armazenar e servir as entidades de **artigos** e **categori
 
   - [**Link para a documentação da API no Swagger**](https://dashboard.heroku.com/apps/espaco-de-conhecimento-backend)
 
-## 🧰 Technologies
+<h2 id="technologies"> 🧰 Technologies </h2>
 
-## 🛠 Prerequisites
+  - node.js
+  - express
+  - mongodb
+  - swagger
 
-- npm >= 5.5.0
-- node >= 12.0
+<h2 id="prerequisites"> 🛠 Prerequisites </h2>
 
-## 🏗️ Install
+  - npm >= 5.5.0
+  - node >= 12.0
+
+<h2 id="install"> 🏗️ Install </h2>
 
 ```sh
   npm install
 ```
 
-## 🚀 Usage
+<h2 id="install"> 🚀 Usage </h2>
 
 ```sh
   npm start
 ```
-## 🤝 Contributing
+
+<h2 id="install"> 🤝 Contributing </h2>
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## 📝 License
+<h2 id="install"> 📝 License </h2>
 
 Copyright © 2020 [Lucas Lui](https://github.com/lucaslui).<br />
 This project is [GPL 3.0](./license) licensed. See the [LICENSE](./license) for more information.
