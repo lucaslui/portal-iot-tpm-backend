@@ -1,5 +1,5 @@
 [//]: # (Título e Descrição)
-<h1 align="center"> API Genérica para Blogs </h1>
+<h1 align="center"> General API for Blogs </h1>
 
 [//]: # (Nome do Projeto)
 <p align="center"> Criado para gerenciar blogs em geral, sendo a idéia originada do desenvolvimento do meu blog "Espaço de conhecimento em IoT"</p>
@@ -120,9 +120,18 @@ From your command line:
 
 <h2 id="contributing"> 🤝 Contributing </h2>
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+[//]: # (Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change).
 
-Please make sure to update tests as appropriate.
+[//]: # (Please make sure to update tests as appropriate.)
+
+All kinds of contributions are very welcome and appreciated!
+
+-   ⭐️ Star the project
+-   🐛 Find and report issues
+-   📥 Submit PRs to help solve issues or add features
+-   ✋ Influence the future of API with feature requests
+
+And make sure to read the [Contributing Guide](/CONTRIBUTION.md) before making a pull request.
 
 <h2 id="license"> 📝 License </h2>
 
@@ -130,7 +139,7 @@ This project is [GPL 3.0](./license) licensed. See the [LICENSE](./license) for 
 
 <h2 id="author"> 👤 Author </h2>
 
-Created by [Lucas Lui](https://github.com/lucaslui) 👋🏽 Contact me!
+Created by [Lucas Lui](https://github.com/lucaslui) 👋🏽 Please feel free to contact me!
 
 [![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-lui-motta/)](https://www.linkedin.com/in/lucas-lui-motta/) 
 [![Gmail Badge](https://img.shields.io/badge/-Email-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:lucasluimotta@gmail.com)](mailto:lucasluimotta@gmail.com)
