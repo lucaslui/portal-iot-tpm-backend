@@ -106,7 +106,7 @@ $ cd blog-backend
 $ npm install
 ```
 
-The project uses [MongoDB].
+The project uses [MongoDB](https://www.mongodb.com/).
 
 I recommend use [Docker](https://www.docker.com) to install and run the database above.
 
