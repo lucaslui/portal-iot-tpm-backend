@@ -1,8 +1,8 @@
 [//]: # (Título e Descrição)
-<h1 align="center"> API Genérica para Criação de Blogs </h1>
+<h1 align="center"> API Genérica para Blogs </h1>
 
 [//]: # (Nome do Projeto)
-<p align="center"> API criada para gerenciar blogs em geral, sendo a idéia do projeto originada do desenvolvimento do meu blog "Espaço de conhecimento em IoT"</p>
+<p align="center"> Criado para gerenciar blogs em geral, sendo a idéia originada do desenvolvimento do meu blog "Espaço de conhecimento em IoT"</p>
 
 [//]: # (Badges)
 <p align="center">
@@ -46,7 +46,7 @@
 
 <h2 id="overview"> 💻 Overview </h2>
 
-O objetivo da API é armazenar e servir as entidades de **artigos** e **categorias** do blog, permitindo também permite a criação de contas de usuários autores e administradores.
+A API armazena e disponibiliza **artigos** e **categorias** do blog, permitindo a criação de contas de **autores** e **administradores**.
 
 <h1 align="center">
     <img alt="general-vision" title="#general-vision" src="./docs/architecture/general-vision.png" />
