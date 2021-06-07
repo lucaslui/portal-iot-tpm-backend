@@ -116,9 +116,7 @@ This project is [GPL 3.0](./license) licensed. See the [LICENSE](./license) for 
 
 <a href="https://github.com/lucaslui">
 <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/10131629?s=400&u=d8e06eb899dd25a7509a969dc4641e1de62762ed&v=4" width="100px;" alt=""/> <br/>
-<sub><b>Lucas Lui</b></sub></a>
-
-👋🏽 Entre em contato!
+<sub><b>Lucas Lui</b></sub></a> 👋🏽 Entre em contato!
 
 [![Linkedin Badge](https://img.shields.io/badge/-Lucas-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-lui-motta/)](https://www.linkedin.com/in/lucas-lui-motta/) 
-[![Gmail Badge](https://img.shields.io/badge/-tgmarinho@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:lucasluimotta@gmail.com)](mailto:lucasluimotta@gmail.com)
+[![Gmail Badge](https://img.shields.io/badge/-lucasluimotta@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:lucasluimotta@gmail.com)](mailto:lucasluimotta@gmail.com)
