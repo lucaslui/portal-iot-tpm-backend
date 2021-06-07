@@ -39,7 +39,7 @@
  <a href="#author">Author</a>
 </p>
 
-<h4 align="center"> 🚧  Project Status: Under construction...  🚧 </h4>
+<h4 align="center"> 🚧  Project Status: In progress...  🚧 </h4>
 
 <h2 id="overview"> 💻 Overview </h2>
 
