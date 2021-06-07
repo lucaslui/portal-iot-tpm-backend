@@ -43,7 +43,7 @@
  <a href="#author">Author</a>
 </p>
 
-<h4 align="center"> 🚧  Status do Projto: Em construção...  🚧 </h4>
+<h4 align="center"> 🚧  Status do Projeto: Em construção...  🚧 </h4>
 
 <h2 id="overview"> 💻 Overview </h2>
 
@@ -56,8 +56,9 @@ O objetivo da API é armazenar e servir as entidades de **artigos** e **categori
 [//]: # (Listar as Funcionalidades da Aplicação.)
 ## 📑 Lista de Features
 
-- [x] Cadastro de usuário
-- [ ] Cadastro de produtos
+- [x] Cadastro de usuários
+- [x] Acesso de usuários
+- [ ] Adicionar artigos
 
 <h2 id="demo"> 🧪 Demo </h2>
 
