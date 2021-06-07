@@ -1,8 +1,8 @@
 [//]: # (Título e Descrição)
-<h1 align="center"> General API for Blogs </h1>
+<h1 align="center"> General API for Blog Applications </h1>
 
 [//]: # (Nome do Projeto)
-<p align="center"> Criado para gerenciar blogs em geral, sendo a idéia originada do desenvolvimento do meu blog "Espaço de conhecimento em IoT"</p>
+<p align="center"> Created to manage blogs in general, the idea originated from the development of my blog "Espaço de conhecimento em IoT"</p>
 
 [//]: # (Badges)
 <p align="center">
@@ -43,11 +43,11 @@
  <a href="#author">Author</a>
 </p>
 
-<h4 align="center"> 🚧  Status do Projeto: Em construção...  🚧 </h4>
+<h4 align="center"> 🚧  Project Status: Under construction...  🚧 </h4>
 
 <h2 id="overview"> 💻 Overview </h2>
 
-A API armazena e disponibiliza **artigos** e **categorias** do blog, permitindo a criação de contas de **autores** e **administradores**.
+The API stores and makes available **articles** and **categories** of the blog, allowing the creation of **authors** and **administrators** accounts.
 
 <h1 align="center">
     <img alt="general-vision" title="#general-vision" src="./docs/architecture/general-vision.png" />
@@ -56,23 +56,23 @@ A API armazena e disponibiliza **artigos** e **categorias** do blog, permitindo 
 [//]: # (Listar as Funcionalidades da Aplicação.)
 ## 📑 Lista de Features
 
-- [x] Cadastro de usuários
-- [x] Acesso de usuários
-- [x] Adicionar artigos
-- [x] Editar artigo
-- [x] Listar artigos
-- [x] Deletar artigos
-- [x] Criar categoria
-- [x] Editar categoria
-- [x] Listar sub-categorias em forma de árvore
-- [x] Lista todas as categorias
-- [x] Deleta categoria
+- [x] User registration
+- [x] User access
+- [x] Add articles
+- [x] Edit article
+- [x] List articles
+- [x] Delete articles
+- [x] Create category
+- [x] Edit category
+- [x] List sub-categories in tree form
+- [x] List all categories
+- [x] Delete category
 
 <h2 id="demo"> 🧪 Demo </h2>
 
-  - [**Link para o blog**](https://lucaslui.github.io/blog/)
+  - [**Blog Frontend hosted in Github Pages**](https://lucaslui.github.io/blog/)
 
-  - [**Link para a documentação da API no Swagger**](https://dashboard.heroku.com/apps/espaco-de-conhecimento-backend)
+  - [**Swagger of the Blog API hosted in Heroky**](https://dashboard.heroku.com/apps/espaco-de-conhecimento-backend)
 
 <h2 id="technologies"> 🧰 Technologies </h2>
 
