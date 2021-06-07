@@ -1,10 +1,7 @@
-[//]: # (Título e Descrição)
 <h1 align="center"> General API for Blog Applications </h1>
 
-[//]: # (Nome do Projeto)
 <p align="center"> Created to manage blogs in general, the idea originated from the development of my blog "Espaço de conhecimento em IoT"</p>
 
-[//]: # (Badges)
 <p align="center">
 
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lucaslui/blog-backend">
@@ -30,7 +27,6 @@
   </a>
 </p>
 
-[//]: # (Tabela de Conteúdos)
 <p align="center">
  <a href="#overview">Overview</a> •
  <a href="#demo">Demo</a> • 
@@ -53,7 +49,6 @@ The API stores and makes available **articles** and **categories** of the blog, 
     <img alt="general-vision" title="#general-vision" src="./docs/architecture/general-vision.png" />
 </h1>
 
-[//]: # (Listar as Funcionalidades da Aplicação.)
 ## 📑 Lista de Features
 
 - [x] User registration
@@ -131,7 +126,7 @@ All kinds of contributions are very welcome and appreciated!
 -   📥 Submit PRs to help solve issues or add features
 -   ✋ Influence the future of API with feature requests
 
-And make sure to read the [Contributing Guide](/CONTRIBUTION.md) before making a pull request.
+And make sure to read the [Contributing Guide](./contributing.md) before making a pull request.
 
 <h2 id="license"> 📝 License </h2>
 
