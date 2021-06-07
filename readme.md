@@ -39,8 +39,7 @@
  <a href="#install">Install</a> • 
  <a href="#usage">Usage</a> • 
  <a href="#contributing">Contributing</a> • 
- <a href="#licence">Licence</a> • 
- <a href="#author">Author</a>
+ <a href="#licence">Licence</a>
 </p>
 
 <h4 align="center"> 🚧  Status do Projeto: Em construção...  🚧 </h4>
@@ -58,7 +57,15 @@ O objetivo da API é armazenar e servir as entidades de **artigos** e **categori
 
 - [x] Cadastro de usuários
 - [x] Acesso de usuários
-- [ ] Adicionar artigos
+- [x] Adicionar artigos
+- [x] Editar artigo
+- [x] Listar artigos
+- [x] Deletar artigos
+- [x] Criar categoria
+- [x] Editar categoria
+- [x] Listar sub-categorias em forma de árvore
+- [x] Lista todas as categorias
+- [x] Deleta categoria
 
 <h2 id="demo"> 🧪 Demo </h2>
 
