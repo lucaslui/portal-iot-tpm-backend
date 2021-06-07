@@ -75,12 +75,15 @@ A API armazena e disponibiliza **artigos** e **categorias** do blog, permitindo 
 
 <h2 id="technologies"> 🧰 Technologies </h2>
 
-  - node.js
-  - express
-  - mongodb
-  - swagger
+- [Node.js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Express](https://expressjs.com/pt-br/)
+- [Mongodb](https://www.mongodb.com/)
+- [Swagger](https://swagger.io/)
 
 <h2 id="prerequisites"> 🛠 Prerequisites </h2>
+
+Before starting, you will need to have the following tools installed on your machine:
 
   - npm >= 5.5.0
   - node >= 12.0
@@ -107,3 +110,14 @@ Please make sure to update tests as appropriate.
 
 Copyright © 2020 [Lucas Lui](https://github.com/lucaslui).<br />
 This project is [GPL 3.0](./license) licensed. See the [LICENSE](./license) for more information.
+
+<h2 id="contributing"> 🤝 Author </h2>
+
+<a href="https://github.com/lucaslui">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/10131629?s=400&u=d8e06eb899dd25a7509a969dc4641e1de62762ed&v=4" width="100px;" alt=""/> <br />
+<sub><b>Lucas Lui</b></sub></a> <a href="https://blog.rocketseat.com.br/author/thiago//" title="Rocketseat">🚀</a>
+
+👋🏽 Entre em contato!
+
+[![Linkedin Badge](https://img.shields.io/badge/-Lucas-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-lui-motta/)](https://www.linkedin.com/in/lucas-lui-motta/) 
+[![Gmail Badge](https://img.shields.io/badge/-tgmarinho@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:lucasluimotta@gmail.com)](mailto:lucasluimotta@gmail.com)
