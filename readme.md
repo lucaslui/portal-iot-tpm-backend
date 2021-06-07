@@ -106,8 +106,6 @@ $ cd blog-backend
 $ npm install
 ```
 
-<h2 id="setting-database"> 🚀 Setting up Database </h2>
-
 The project uses [MongoDB].
 
 I recommend use [Docker](https://www.docker.com) to install and run the database above.
