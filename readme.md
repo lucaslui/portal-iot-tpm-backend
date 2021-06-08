@@ -1,6 +1,6 @@
 <h1 align="center"> General API for Blog Applications </h1>
 
-<p align="center"> Created to manage blogs in general, the idea originated from the development of my blog "Espaço de conhecimento em IoT"</p>
+<p align="center"> Created to manage blogs in general, with idea originated from the development of my blog </p>
 
 <p align="center">
 
