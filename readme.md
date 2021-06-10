@@ -1,4 +1,4 @@
-<h1 align="center"> General API for Blog Applications </h1>
+<h1 align="center"> API for Blog Applications </h1>
 
 <p align="center"> Created to manage blogs in general, with idea originated from the development of my blog </p>
 
