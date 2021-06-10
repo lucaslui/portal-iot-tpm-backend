@@ -67,7 +67,7 @@ The API stores and makes available **articles** and **categories** of the blog, 
 
   - [**API Swagger Documemtation (hosted with Heroku)**](https://espaco-de-conhecimento-backend.herokuapp.com/docs/)
 
-  - [**Frontend example (hosted with Vercel)**](https://blog-lucaslui.vercel.app/main/home)
+  - [**Frontend example (hosted with Vercel)**](https://blog-lucaslui.vercel.app/)
 
 <h2 id="technologies"> 🧰 Technologies </h2>
 
