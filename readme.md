@@ -126,11 +126,11 @@ All kinds of contributions are very welcome and appreciated!
 -   📥 Submit PRs to help solve issues or add features
 -   ✋ Influence the future of API with feature requests
 
-And make sure to read the [CONTRIBUTING](./contributing.md) guide before making a pull request.
+And make sure to read the [contributing guide](./contributing.md) before making a pull request.
 
 <h2 id="license"> 📝 License </h2>
 
-This project is [GPL 3.0](https://www.gnu.org/licenses/) licensed. See the [LICENSE](./license) for more information.
+This project is [GPL 3.0](https://www.gnu.org/licenses/) licensed. See the [license](./license) for more information.
 
 <h2 id="author"> 👤 Author </h2>
 
