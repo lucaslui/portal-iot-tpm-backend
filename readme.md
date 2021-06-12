@@ -1,6 +1,6 @@
-<h1 align="center"> General API for Blog Applications </h1>
+<h1 align="center"> API for Blog Applications </h1>
 
-<p align="center"> Created to manage blogs in general, the idea originated from the development of my blog "Espaço de conhecimento em IoT"</p>
+<p align="center"> Created to manage blogs in general, with idea originated from the development of my blog </p>
 
 <p align="center">
 
@@ -39,7 +39,7 @@
  <a href="#author">Author</a>
 </p>
 
-<h4 align="center"> 🚧  Project Status: Under construction...  🚧 </h4>
+<h4 align="center"> 🚧  Project Status: In progress...  🚧 </h4>
 
 <h2 id="overview"> 💻 Overview </h2>
 
@@ -65,9 +65,9 @@ The API stores and makes available **articles** and **categories** of the blog, 
 
 <h2 id="demo"> 🧪 Demo </h2>
 
-  - [**Blog Frontend hosted in Github Pages**](https://lucaslui.github.io/blog/)
+  - [**API Swagger Documentation (hosted with Heroku)**](https://espaco-de-conhecimento-backend.herokuapp.com/docs/)
 
-  - [**Swagger of the Blog API hosted in Heroky**](https://dashboard.heroku.com/apps/espaco-de-conhecimento-backend)
+  - [**Frontend example (hosted with Vercel)**](https://blog-lucaslui.vercel.app/)
 
 <h2 id="technologies"> 🧰 Technologies </h2>
 
@@ -126,15 +126,12 @@ All kinds of contributions are very welcome and appreciated!
 -   📥 Submit PRs to help solve issues or add features
 -   ✋ Influence the future of API with feature requests
 
-And make sure to read the [Contributing Guide](./contributing.md) before making a pull request.
+And make sure to read the [contributing guide](./contributing.md) before making a pull request.
 
 <h2 id="license"> 📝 License </h2>
 
-This project is [GPL 3.0](./license) licensed. See the [LICENSE](./license) for more information.
+This project is [GPL 3.0](https://www.gnu.org/licenses/) licensed. See the [license](./license) for more information.
 
 <h2 id="author"> 👤 Author </h2>
 
-Created by [Lucas Lui](https://github.com/lucaslui) 👋🏽 Please feel free to contact me!
-
-[![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-lui-motta/)](https://www.linkedin.com/in/lucas-lui-motta/) 
-[![Gmail Badge](https://img.shields.io/badge/-Email-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:lucasluimotta@gmail.com)](mailto:lucasluimotta@gmail.com)
+Created by [Lucas Lui](https://www.linkedin.com/in/lucas-lui-motta/) 👋🏽 Please feel free to contact me!
