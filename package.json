@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc ",
-    "dev": "nodemon src/main/server.ts",
-    "debug": "nodemon --inspect=5858 src/main/server.ts"
+    "dev": "nodemon",
+    "debug": "nodemon --inspect=5858"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
