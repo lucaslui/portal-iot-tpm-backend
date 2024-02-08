@@ -17,9 +17,12 @@ export const addArticleSchema = {
       type: 'string',
       description: 'A URL de uma imagem utilizada como capa do artigo'
     },
-    categoryId: {
-      type: 'string',
-      description: 'A indentificação única da categoria onde o artigo será adicionado'
+    categoryIds: {
+      type: 'array',
+      description: 'Uma lista de categorias onde o artigo será adicionado',
+      items: {
+        type: 'string'
+      }
     }
   },
   example: {
@@ -27,7 +30,7 @@ export const addArticleSchema = {
     description: 'Uma breve introdução sobre o significado de internet das coisas',
     content: 'O contéudo do arquivo gerado por um editor WYSIWYG HTML',
     imageUrl: 'https://inforchannel.com.br/wp-content/uploads/2019/05/Iot.jpg',
-    categoryId: '899f191e356c20729de564ea'
+    categoryIds: ['899f191e356c20729de564ea']
   },
   required: ['title', 'description', 'content', 'categoryId']
 }

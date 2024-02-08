@@ -7,5 +7,5 @@ export interface EditArticleModel {
   description: string
   content: BinaryType
   imageUrl?: string
-  categoryId: string
+  categoryIds: string[]
 }

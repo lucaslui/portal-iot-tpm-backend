@@ -29,9 +29,12 @@ export const articleSchema = {
       type: 'string',
       description: 'A indentificação única do usuário autor do artigo'
     },
-    categoryId: {
-      type: 'string',
-      description: 'A indentificação única da categoria onde o artigo será adicionado'
+    categoryIds: {
+      type: 'array',
+      description: 'A indentificação única da categoria onde o artigo será adicionado',
+      items: {
+        type: 'string'
+      }
     }
   },
   example: {
@@ -42,6 +45,6 @@ export const articleSchema = {
     imageUrl: 'https://inforchannel.com.br/wp-content/uploads/2019/05/Iot.jpg',
     createdAt: '2020-01-01T18:03:23Z',
     userId: '284f191e356c20729de860ea',
-    categoryId: '899f191e356c20729de564ea'
+    categoryIds: ['899f191e356c20729de564ea']
   }
 }

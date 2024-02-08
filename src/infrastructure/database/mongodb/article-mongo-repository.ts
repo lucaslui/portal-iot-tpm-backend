@@ -16,8 +16,16 @@ EditArticleRepository,
 LoadArticlesRepository {
   async add (article: AddArticleModel): Promise<ArticleModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
-    const { userId, categoryId, ...rest } = article
-    const result = await articleCollection.insertOne({ ...rest, userId: MongoHelper.toObjectId(userId), categoryId: MongoHelper.toObjectId(categoryId) })
+    const result = await articleCollection.insertOne({
+      title: article.title,
+      description: article.description,
+      content: article.content,
+      imageUrl: article.imageUrl,
+      userId: MongoHelper.toObjectId(article.userId),
+      categoryIds: article.categoryIds.map(c => MongoHelper.toObjectId(c)),
+      updatedAt: new Date(),
+      createdAt: new Date()
+    })
     const articleAdded = result.ops[0]
     return MongoHelper.map(articleAdded)
   }
@@ -35,7 +43,7 @@ LoadArticlesRepository {
         description: newArticle.description,
         content: newArticle.content,
         imageUrl: newArticle.imageUrl,
-        categoryId: newArticle.categoryId
+        categoryIds: newArticle.categoryIds
       }
     })
   }
@@ -46,12 +54,12 @@ LoadArticlesRepository {
 
     if (query.articleId) {
       pipeline.push({ $match: { _id: MongoHelper.toObjectId(query.articleId) } })
-    } else if (query.userId || query.categoryId) {
+    } else if (query.userId || query.categoryIds) {
       if (query.userId) {
         pipeline.push({ $match: { userId: MongoHelper.toObjectId(query.userId) } })
       }
-      if (query.categoryId) {
-        pipeline.push({ $match: { categoryId: MongoHelper.toObjectId(query.categoryId) } })
+      if (query.categoryIds) {
+        pipeline.push({ $match: { categoryIds: MongoHelper.toObjectId(query.categoryIds) } })
       }
     }
 
@@ -88,7 +96,8 @@ LoadArticlesRepository {
         content: '$content',
         imageUrl: '$imageUrl',
         userId: '$userId',
-        categoryId: '$categoryId',
+        categoryIds: '$categoryIds',
+        updatedAt: '$updatedAt',
         createdAt: '$createdAt'
       }
     })

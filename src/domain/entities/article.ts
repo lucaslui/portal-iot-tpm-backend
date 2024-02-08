@@ -5,6 +5,7 @@ export interface ArticleModel {
   content: BinaryType
   imageUrl?: string
   userId: string
-  categoryId: string
+  categoryIds: string
+  updatedAt: Date
   createdAt: Date
 }

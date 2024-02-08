@@ -10,6 +10,5 @@ export interface AddArticleModel {
   content: BinaryType
   imageUrl?: string
   userId: string
-  categoryId: string
-  createdAt: Date
+  categoryIds: string[]
 }

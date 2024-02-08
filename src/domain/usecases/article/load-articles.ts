@@ -8,7 +8,7 @@ export type LoadArticlesQueryModel = {
   page?: number
   articleId?: string
   userId?: string
-  categoryId?: string
+  categoryIds?: string[]
   month?: number
   year?: number
 }

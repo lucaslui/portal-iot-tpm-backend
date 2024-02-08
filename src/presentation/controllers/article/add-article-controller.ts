@@ -17,15 +17,14 @@ export class AddArticleController implements Controller {
         return badRequest(error)
       }
       const userId = httpRequest.userId
-      const { title, description, content, imageUrl, categoryId } = httpRequest.body
+      const { title, description, content, imageUrl, categoryIds } = httpRequest.body
       const article = await this.addArticle.add({
         title,
         description,
         content,
         imageUrl,
         userId,
-        categoryId,
-        createdAt: new Date()
+        categoryIds
       })
       return ok(article)
     } catch (error) {

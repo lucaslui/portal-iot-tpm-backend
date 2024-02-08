@@ -5,7 +5,7 @@ import { RequiredFieldsValidation } from '@/validation/validators/required-field
 export const makeAddArticleValidation = (): ValidationComposite => {
   const validations: Validation[] = []
 
-  for (const field of ['title', 'description', 'content', 'categoryId']) {
+  for (const field of ['title', 'description', 'content', 'categoryIds']) {
     validations.push(new RequiredFieldsValidation(field))
   }
 
