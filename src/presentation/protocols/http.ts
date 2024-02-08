@@ -4,6 +4,7 @@ export interface HttpRequest {
   params?: any
   query?: any
   userId?: string
+  file?: any
 }
 
 export interface HttpResponse {

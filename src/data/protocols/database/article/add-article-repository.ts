@@ -1,6 +1,14 @@
 import { ArticleModel } from '@/domain/entities/article'
-import { AddArticleModel } from '@/domain/usecases/article/add-article'
+
+export type AddArticleRepositoryModel = {
+  title: string
+  description: string
+  content: BinaryType
+  imageUrl?: string
+  userId: string
+  categoryIds: string[]
+}
 
 export interface AddArticleRepository {
-  add (article: AddArticleModel): Promise<ArticleModel>
+  add (article: AddArticleRepositoryModel): Promise<ArticleModel>
 }

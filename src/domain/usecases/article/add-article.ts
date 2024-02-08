@@ -8,7 +8,14 @@ export interface AddArticleModel {
   title: string
   description: string
   content: BinaryType
-  imageUrl?: string
+  imageBinary?: {
+    fieldname: string
+    originalname: string
+    encoding: string
+    mimetype: string
+    buffer: Buffer
+    size: number
+  }
   userId: string
   categoryIds: string[]
 }

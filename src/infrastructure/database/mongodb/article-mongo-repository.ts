@@ -1,11 +1,10 @@
 import { ArticleModel } from '@/domain/entities/article'
 
 import { MongoHelper } from './mongo-helper'
-import { AddArticleRepository } from '@/data/protocols/database/article/add-article-repository'
+import { AddArticleRepository, AddArticleRepositoryModel } from '@/data/protocols/database/article/add-article-repository'
 import { DeleteArticleRepository } from '@/data/protocols/database/article/delete-article-repository'
 import { EditArticleRepository } from '@/data/protocols/database/article/edit-article-repository'
 import { LoadArticlesRepository } from '@/data/protocols/database/article/load-articles-repository'
-import { AddArticleModel } from '@/domain/usecases/article/add-article'
 import { EditArticleModel } from '@/domain/usecases/article/edit-article'
 import { LoadArticlesQueryModel } from '@/domain/usecases/article/load-articles'
 
@@ -14,7 +13,7 @@ AddArticleRepository,
 DeleteArticleRepository,
 EditArticleRepository,
 LoadArticlesRepository {
-  async add (article: AddArticleModel): Promise<ArticleModel> {
+  async add (article: AddArticleRepositoryModel): Promise<ArticleModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const result = await articleCollection.insertOne({
       title: article.title,

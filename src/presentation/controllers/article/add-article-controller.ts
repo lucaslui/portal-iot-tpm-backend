@@ -16,13 +16,15 @@ export class AddArticleController implements Controller {
       if (error) {
         return badRequest(error)
       }
+      const imageBinary = httpRequest.file
       const userId = httpRequest.userId
-      const { title, description, content, imageUrl, categoryIds } = httpRequest.body
+      const categoryIds = JSON.parse(httpRequest.body.categoryIds)
+      const { title, description, content } = httpRequest.body
       const article = await this.addArticle.add({
         title,
         description,
         content,
-        imageUrl,
+        imageBinary,
         userId,
         categoryIds
       })

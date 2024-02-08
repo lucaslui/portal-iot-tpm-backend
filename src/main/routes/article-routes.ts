@@ -8,10 +8,11 @@ import { makeEditArticleController } from '../factories/controllers/article/edit
 import { makeLoadArticlesController } from '../factories/controllers/article/load-articles-controller-factory'
 
 import { Router } from 'express'
+import { upload } from '@/main/middlewares/multer'
 
 const router = Router()
 
-router.post('/', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeAddArticleController()))
+router.post('/', upload.single('imageBinary'), adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeAddArticleController()))
 router.get('/', adaptRoute(makeLoadArticlesController()))
 router.put('/:articleId', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeEditArticleController()))
 router.delete('/:articleId', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeDeleteArticleController()))
