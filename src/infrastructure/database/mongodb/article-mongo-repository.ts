@@ -6,7 +6,8 @@ import { DeleteArticleRepository } from '@/data/protocols/database/article/delet
 import { EditArticleRepository } from '@/data/protocols/database/article/edit-article-repository'
 import { LoadArticlesRepository } from '@/data/protocols/database/article/load-articles-repository'
 import { EditArticleModel } from '@/domain/usecases/article/edit-article'
-import { LoadArticlesQueryModel } from '@/domain/usecases/article/load-articles'
+import { LoadArticlesQueryModel, LoadArticlesResponseModel } from '@/domain/usecases/article/load-articles'
+import { FilterQuery } from 'mongodb'
 
 export class ArticleMongoRepository implements
 AddArticleRepository,
@@ -47,20 +48,45 @@ LoadArticlesRepository {
     })
   }
 
-  async load (query?: LoadArticlesQueryModel): Promise<ArticleModel[]> {
+  async load (query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const pipeline: object[] = []
 
-    if (query.articleId) {
-      pipeline.push({ $match: { _id: MongoHelper.toObjectId(query.articleId) } })
-    } else if (query.userId || query.categoryIds) {
+    const queryMatch: FilterQuery<any> = {}
+
+    if (query) {
       if (query.userId) {
-        pipeline.push({ $match: { userId: MongoHelper.toObjectId(query.userId) } })
+        queryMatch.userId = MongoHelper.toObjectId(query.userId)
       }
+
       if (query.categoryIds) {
-        pipeline.push({ $match: { categoryIds: MongoHelper.toObjectId(query.categoryIds) } })
+        queryMatch.categoryIds = MongoHelper.toObjectId(query.categoryIds)
+      }
+
+      if (query.type) {
+        queryMatch.type = query.type
       }
     }
+
+    pipeline.push({ $match: queryMatch })
+
+    pipeline.push({
+      $lookup: {
+        from: 'categories',
+        localField: 'categoryIds',
+        foreignField: '_id',
+        as: 'categories'
+      }
+    })
+
+    pipeline.push({
+      $lookup: {
+        from: 'users',
+        localField: 'userId',
+        foreignField: '_id',
+        as: 'user'
+      }
+    })
 
     if (query.month) {
       pipeline.push({
@@ -92,10 +118,13 @@ LoadArticlesRepository {
         id: '$_id',
         title: '$title',
         description: '$description',
+        type: '$type',
         content: '$content',
         imageUrl: '$imageUrl',
-        userId: '$userId',
-        categoryIds: '$categoryIds',
+        user: {
+          $arrayElemAt: ['$user', 0]
+        },
+        categories: '$categories',
         updatedAt: '$updatedAt',
         createdAt: '$createdAt'
       }
@@ -103,8 +132,15 @@ LoadArticlesRepository {
 
     pipeline.push({ $skip: query.page ? (query.page * 10 - 10) : 0 }, { $limit: 10 })
 
+    const count = await articleCollection.countDocuments(queryMatch)
     const articles = await articleCollection.aggregate(pipeline).toArray()
 
-    return articles
+    return {
+      articles,
+      count,
+      page: query.page,
+      totalPages: Math.ceil(count / 10),
+      totalItems: count
+    }
   }
 }
