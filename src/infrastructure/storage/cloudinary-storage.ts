@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary'
 
-import { ImageStorage } from '@/data/protocols/storage/image-storage'
+import { ImageStorage } from '@/usecases/boundaries/outputs/storage/image-storage'
 
 export class CloudinaryImageStorage implements ImageStorage {
   constructor (

@@ -1,4 +1,4 @@
-import { LogErrorRepository } from '@/data/protocols/database/system/log-error-repository'
+import { LogErrorRepository } from '@/usecases/boundaries/outputs/database/system/log-error-repository'
 import { MongoHelper } from './mongo-helper'
 
 export class LogMongoRepository implements LogErrorRepository {

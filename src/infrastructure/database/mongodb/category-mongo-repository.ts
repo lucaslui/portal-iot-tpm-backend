@@ -1,12 +1,12 @@
 import { CategoryModel } from '@/domain/entities/category'
 import { MongoHelper } from './mongo-helper'
-import { AddCategoryModel } from '@/domain/usecases/category/add-category'
-import { EditCategoryModel } from '@/domain/usecases/category/edit-category'
-import { AddCategoryRepository } from '@/data/protocols/database/category/add-category-repository'
-import { DeleteCategoryRepository } from '@/data/protocols/database/category/delete-category-repository'
-import { EditCategoryRepository } from '@/data/protocols/database/category/edit-category-repository'
-import { LoadCategoriesRepository } from '@/data/protocols/database/category/load-categories-repository'
-import { LoadCategoriesQueryModel } from '@/domain/usecases/category/load-categories'
+import { AddCategoryModel } from '@/usecases/boundaries/inputs/category/add-category'
+import { EditCategoryModel } from '@/usecases/boundaries/inputs/category/edit-category'
+import { AddCategoryRepository } from '@/usecases/boundaries/outputs/database/category/add-category-repository'
+import { DeleteCategoryRepository } from '@/usecases/boundaries/outputs/database/category/delete-category-repository'
+import { EditCategoryRepository } from '@/usecases/boundaries/outputs/database/category/edit-category-repository'
+import { LoadCategoriesRepository } from '@/usecases/boundaries/outputs/database/category/load-categories-repository'
+import { LoadCategoriesQueryModel } from '@/usecases/boundaries/inputs/category/load-categories'
 
 export class CategoryMongoRepository implements
 AddCategoryRepository,

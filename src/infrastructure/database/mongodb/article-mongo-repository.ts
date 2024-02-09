@@ -1,15 +1,15 @@
 import { ArticleModel } from '@/domain/entities/article'
 
 import { MongoHelper } from './mongo-helper'
-import { AddArticleRepository, AddArticleRepositoryModel } from '@/data/protocols/database/article/add-article-repository'
-import { DeleteArticleRepository } from '@/data/protocols/database/article/delete-article-repository'
-import { EditArticleRepository } from '@/data/protocols/database/article/edit-article-repository'
-import { LoadArticlesRepository } from '@/data/protocols/database/article/load-articles-repository'
-import { EditArticleModel } from '@/domain/usecases/article/edit-article'
-import { LoadArticlesQueryModel, LoadArticlesResponseModel } from '@/domain/usecases/article/load-articles'
+import { AddArticleRepository, AddArticleRepositoryModel } from '@/usecases/boundaries/outputs/database/article/add-article-repository'
+import { DeleteArticleRepository } from '@/usecases/boundaries/outputs/database/article/delete-article-repository'
+import { EditArticleRepository } from '@/usecases/boundaries/outputs/database/article/edit-article-repository'
+import { LoadArticlesRepository } from '@/usecases/boundaries/outputs/database/article/load-articles-repository'
+import { EditArticleModel } from '@/usecases/boundaries/inputs/article/edit-article'
+import { LoadArticlesQueryModel, LoadArticlesResponseModel } from '@/usecases/boundaries/inputs/article/load-articles'
 import { FilterQuery } from 'mongodb'
-import { LoadArticleByIdRepository } from '@/data/protocols/database/article/load-article-by-id-repository'
-import { LoadArticleByIdParams, ArticleViewModel } from '@/domain/usecases/article/load-article-by-id'
+import { LoadArticleByIdRepository } from '@/usecases/boundaries/outputs/database/article/load-article-by-id-repository'
+import { LoadArticleByIdParams, ArticleViewModel } from '@/usecases/boundaries/inputs/article/load-article-by-id'
 
 export class ArticleMongoRepository implements
 AddArticleRepository,

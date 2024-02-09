@@ -1,5 +1,5 @@
-import { Hasher } from '@/data/protocols/cryptograph/hasher'
-import { HashComparer } from '@/data/protocols/cryptograph/hash-comparer'
+import { Hasher } from '@/usecases/boundaries/outputs/cryptograph/hasher'
+import { HashComparer } from '@/usecases/boundaries/outputs/cryptograph/hash-comparer'
 
 import bcrypt from 'bcrypt'
 

@@ -1,5 +1,5 @@
-import { Decrypter } from '@/data/protocols/cryptograph/decrypter'
-import { Encrypter } from '@/data/protocols/cryptograph/encrypter'
+import { Decrypter } from '@/usecases/boundaries/outputs/cryptograph/decrypter'
+import { Encrypter } from '@/usecases/boundaries/outputs/cryptograph/encrypter'
 
 import jwt from 'jsonwebtoken'
 
