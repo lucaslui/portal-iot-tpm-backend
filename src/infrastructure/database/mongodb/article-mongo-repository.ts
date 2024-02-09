@@ -57,37 +57,36 @@ LoadArticleByIdRepository {
 
     const queryMatch: FilterQuery<any> = {}
 
-    if (query) {
-      if (query.userId) {
-        queryMatch.userId = MongoHelper.toObjectId(query.userId)
-      }
+    if (query?.type) {
+      queryMatch.type = query.type
+    }
 
-      if (query.categoryIds) {
-        queryMatch.categoryIds = MongoHelper.toObjectId(query.categoryIds)
-      }
+    if (query?.userId) {
+      queryMatch.userId = MongoHelper.toObjectId(query.userId)
+    }
 
-      if (query.type) {
-        queryMatch.type = query.type
-      }
+    if (query?.categoryIds) {
+      queryMatch.categoryIds = MongoHelper.mapToObjectId(query.categoryIds)
     }
 
     pipeline.push({ $match: queryMatch })
 
     pipeline.push({
       $lookup: {
-        from: 'categories',
-        localField: 'categoryIds',
-        foreignField: '_id',
-        as: 'categories'
-      }
-    })
-
-    pipeline.push({
-      $lookup: {
         from: 'users',
         localField: 'userId',
         foreignField: '_id',
-        as: 'user'
+        as: 'user',
+        pipeline: [
+          {
+            $project: {
+              _id: false,
+              id: '$_id',
+              name: '$name',
+              email: '$email'
+            }
+          }
+        ]
       }
     })
 
@@ -122,18 +121,19 @@ LoadArticleByIdRepository {
         title: '$title',
         description: '$description',
         type: '$type',
-        content: '$content',
         imageUrl: '$imageUrl',
         user: {
           $arrayElemAt: ['$user', 0]
         },
-        categories: '$categories',
+        categoryIds: '$categoryIds',
         updatedAt: '$updatedAt',
         createdAt: '$createdAt'
       }
     })
 
-    pipeline.push({ $skip: query.page ? (query.page * 10 - 10) : 0 }, { $limit: 10 })
+    if (query.limit) {
+      pipeline.push({ $skip: query.page ? (query.page * 10 - 10) : 0 }, { $limit: 10 })
+    }
 
     const count = await articleCollection.countDocuments(queryMatch)
     const articles = await articleCollection.aggregate(pipeline).toArray()

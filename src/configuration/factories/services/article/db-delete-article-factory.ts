@@ -4,5 +4,5 @@ import { ArticleMongoRepository } from '@/infrastructure/database/mongodb/articl
 
 export const makeDbDeleteArticle = (): DeleteArticle => {
   const articleMongoRepository = new ArticleMongoRepository()
-  return new DbDeleteArticle(articleMongoRepository, articleMongoRepository)
+  return new DbDeleteArticle(articleMongoRepository)
 }

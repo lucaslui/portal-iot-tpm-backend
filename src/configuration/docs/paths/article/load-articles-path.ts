@@ -1,7 +1,7 @@
 export const loadArticlesPath = {
   tags: ['Artigos'],
-  summary: 'Carrega uma lista de artigos (como valores de cabeçalho, i.e. sem conteúdo)',
-  description: 'Carrega uma lista de artigos (como valores de cabeçalho, i.e. sem conteúdo). Aceita um parâmetro de paginação que é opcional, caso seja enviado a lista de artigos é dividida em páginas com 10 artigos por página.  Essa rota pode ser executada por **qualquer usuário**.',
+  summary: 'Carrega uma lista de artigos (como valores de cabeçalho, ou seja, sem conteúdo)',
+  description: 'Carrega uma lista de artigos (como valores de cabeçalho, ou seja, sem conteúdo). Aceita parâmetros de paginação que são opcionais. Essa rota pode ser executada por **qualquer usuário**.',
   parameters: [{
     name: 'page',
     in: 'query',
@@ -10,9 +10,16 @@ export const loadArticlesPath = {
       type: 'integer'
     }
   },{
-    name: 'articleId',
+    name: 'limit',
     in: 'query',
-    description: 'O identificador único do artigo',
+    description: 'A quantidade de artigos por página',
+    schema: {
+      type: 'integer'
+    }
+  }, {
+    name: 'type',
+    in: 'query',
+    description: 'O tipo do artigo (notícia, tutorial, etc)',
     schema: {
       type: 'string'
     }
@@ -24,11 +31,14 @@ export const loadArticlesPath = {
       type: 'string'
     }
   }, {
-    name: 'categoryId',
+    name: 'categoryIds',
     in: 'query',
-    description: 'O identificador único da categoria',
+    description: 'Os identificadores únicos das categorias',
     schema: {
-      type: 'string'
+      type: 'array',
+      items: {
+        type: 'string'
+      }
     }
   }, {
     name: 'month',

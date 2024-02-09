@@ -1,9 +1,9 @@
 export type LoadArticlesQueryModel = {
   page?: number
-  articleId?: string
+  limit?: number
+  type?: string
   userId?: string
   categoryIds?: string[]
-  type?: string
   month?: number
   year?: number
 }

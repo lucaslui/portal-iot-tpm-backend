@@ -4,5 +4,5 @@ import { ArticleMongoRepository } from '@/infrastructure/database/mongodb/articl
 
 export const makeDbEditArticle = (): EditArticle => {
   const articleMongoRepository = new ArticleMongoRepository()
-  return new DbEditArticle(articleMongoRepository, articleMongoRepository)
+  return new DbEditArticle(articleMongoRepository)
 }
