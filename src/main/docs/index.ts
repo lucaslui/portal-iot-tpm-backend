@@ -1,9 +1,9 @@
 import { loginPath, signupPath } from './paths/auth'
 import { editUserProfilePath, loadUserProfilePath, loadUsersPath } from './paths/user'
-import { addArticlePath, deleteArticlePath, editArticlePath, loadArticlesPath } from './paths/article'
+import { addArticlePath, deleteArticlePath, editArticlePath, loadArticleByIdPath, loadArticlesPath } from './paths/article'
 import { addCategoryPath, deleteCategoryPath, editCategoryPath, loadCategoriesPath } from './paths/category'
 import { accessTokenSchema, apiKeyAuthSchema, loginParamsSchema, signupParamsSchema } from './schemas/auth'
-import { addArticleSchema, articleHeaderSchema, articleSchema } from './schemas/article'
+import { addArticleSchema, articleHeaderSchema, articleLookupSchema, articleSchema } from './schemas/article'
 import { addCategorySchema, categorySchema, categoriesTreeSchema } from './schemas/category'
 import { notFoundComponent , badRequestComponent , serverErrorComponent , unauthorizedComponent, forbiddenComponent, noContentComponent } from './components'
 import { userProfileSchema, userSchema } from './schemas/user'
@@ -65,6 +65,7 @@ export default {
       get: loadArticlesPath
     },
     '/articles/{articleId}': {
+      get: loadArticleByIdPath,
       put: editArticlePath,
       delete: deleteArticlePath
     },
@@ -87,6 +88,7 @@ export default {
     user: userSchema,
     profile: userProfileSchema,
     article: articleSchema,
+    articleLookup: articleLookupSchema,
     articleHeader: articleHeaderSchema,
     addArticle: addArticleSchema,
     category: categorySchema,

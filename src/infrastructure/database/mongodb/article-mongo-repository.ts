@@ -8,12 +8,15 @@ import { LoadArticlesRepository } from '@/data/protocols/database/article/load-a
 import { EditArticleModel } from '@/domain/usecases/article/edit-article'
 import { LoadArticlesQueryModel, LoadArticlesResponseModel } from '@/domain/usecases/article/load-articles'
 import { FilterQuery } from 'mongodb'
+import { LoadArticleByIdRepository } from '@/data/protocols/database/article/load-article-by-id-repository'
+import { LoadArticleByIdParams, ArticleViewModel } from '@/domain/usecases/article/load-article-by-id'
 
 export class ArticleMongoRepository implements
 AddArticleRepository,
 DeleteArticleRepository,
 EditArticleRepository,
-LoadArticlesRepository {
+LoadArticlesRepository,
+LoadArticleByIdRepository {
   async add (article: AddArticleRepositoryModel): Promise<ArticleModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const result = await articleCollection.insertOne({
@@ -142,5 +145,62 @@ LoadArticlesRepository {
       totalPages: Math.ceil(count / 10),
       totalItems: count
     }
+  }
+
+  async loadById (params: LoadArticleByIdParams): Promise<ArticleViewModel> {
+    const articleCollection = await MongoHelper.getCollection('articles')
+    const pipeline: object[] = []
+
+    pipeline.push({ $match: { _id: MongoHelper.toObjectId(params.articleId) } })
+
+    pipeline.push({
+      $lookup: {
+        from: 'categories',
+        localField: 'categoryIds',
+        foreignField: '_id',
+        as: 'categories',
+        pipeline: [
+          {
+            $project: {
+              _id: false,
+              id: '$_id',
+              name: '$name',
+              description: '$description'
+            }
+          }
+        ]
+      }
+    })
+
+    pipeline.push({
+      $lookup: {
+        from: 'users',
+        localField: 'userId',
+        foreignField: '_id',
+        as: 'user'
+      }
+    })
+
+    pipeline.push({
+      $project: {
+        _id: false,
+        id: '$_id',
+        title: '$title',
+        description: '$description',
+        type: '$type',
+        content: '$content',
+        imageUrl: '$imageUrl',
+        user: {
+          $arrayElemAt: ['$user', 0]
+        },
+        categories: '$categories',
+        updatedAt: '$updatedAt',
+        createdAt: '$createdAt'
+      }
+    })
+
+    const article = await articleCollection.aggregate(pipeline).toArray()
+
+    return article[0]
   }
 }
