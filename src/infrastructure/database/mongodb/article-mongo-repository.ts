@@ -90,6 +90,25 @@ LoadArticleByIdRepository {
       }
     })
 
+    pipeline.push({
+      $lookup: {
+        from: 'categories',
+        localField: 'categoryIds',
+        foreignField: '_id',
+        as: 'categories',
+        pipeline: [
+          {
+            $project: {
+              _id: false,
+              id: '$_id',
+              name: '$name',
+              description: '$description'
+            }
+          }
+        ]
+      }
+    })
+
     if (query.month) {
       pipeline.push({
         $redact: {
@@ -125,7 +144,7 @@ LoadArticleByIdRepository {
         user: {
           $arrayElemAt: ['$user', 0]
         },
-        categoryIds: '$categoryIds',
+        categories: '$categories',
         updatedAt: '$updatedAt',
         createdAt: '$createdAt'
       }
@@ -177,7 +196,17 @@ LoadArticleByIdRepository {
         from: 'users',
         localField: 'userId',
         foreignField: '_id',
-        as: 'user'
+        as: 'user',
+        pipeline: [
+          {
+            $project: {
+              _id: false,
+              id: '$_id',
+              name: '$name',
+              email: '$email'
+            }
+          }
+        ]
       }
     })
 

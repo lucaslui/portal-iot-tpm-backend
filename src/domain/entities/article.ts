@@ -1,8 +1,10 @@
+export type ArticleType = 'articles' | 'news' | 'tutorials' | 'projects'
+
 export interface ArticleModel {
   id: string
   title: string
   description: string
-  type: 'article' | 'new' | 'tutorial' | 'project'
+  type: ArticleType
   content: BinaryType
   imageUrl?: string
   userId: string
