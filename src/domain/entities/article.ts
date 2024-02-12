@@ -1,4 +1,4 @@
-export type ArticleType = 'articles' | 'news' | 'tutorials' | 'projects'
+export type ArticleType = 'concepts' | 'news' | 'tutorials' | 'projects'
 
 export interface ArticleModel {
   id: string
