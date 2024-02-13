@@ -3,6 +3,11 @@ export interface AuthenticationModel {
   password: string
 }
 
+export type AuthenticationViewModel = {
+  accessToken: string
+  userId: string
+}
+
 export interface Authentication {
-  auth: (authentication: AuthenticationModel) => Promise<string>
+  auth: (authentication: AuthenticationModel) => Promise<AuthenticationViewModel>
 }
