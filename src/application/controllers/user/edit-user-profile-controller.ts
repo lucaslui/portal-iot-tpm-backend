@@ -18,7 +18,18 @@ export class EditUserProfileController implements Controller {
       }
       const userId = httpRequest.userId
       const userProfile = httpRequest.body
-      await this.editUserProfile.editProfile(userId, userProfile)
+      const imageBinary = httpRequest.file
+      await this.editUserProfile.editProfile({
+        id: userId,
+        name: userProfile.name,
+        email: userProfile.email,
+        profile: {
+          occupation: userProfile.occupation,
+          interests: userProfile.interests,
+          about: userProfile.about
+        },
+        imageBinary
+      })
       return noContent()
     } catch (error) {
       return serverError(error)

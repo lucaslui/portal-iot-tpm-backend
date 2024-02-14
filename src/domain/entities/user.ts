@@ -2,17 +2,15 @@ export interface UserModel {
   id: string
   name: string
   email: string
-  profile?: ProfileModel
+  profile?: UserProfileModel
   password?: string
+  updatedAt: Date
   createdAt: Date
 }
 
-export interface ProfileModel {
-  nickname?: string
+export interface UserProfileModel {
   occupation?: string
-  region?: string
-  about?: string
   interests?: string
-  contact?: string
-  website?: string
+  about?: string
+  imageUrl?: string
 }

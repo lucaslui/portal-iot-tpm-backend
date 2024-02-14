@@ -1,17 +1,19 @@
-import { LoadUserProfileRepository } from '@/usecases/boundaries/outputs/database/user/load-user-profile-repository'
-import { ProfileModel } from '@/domain/entities/user'
-import { LoadUserProfile } from '@/usecases/boundaries/inputs/user/load-user-profile'
+import { LoadUserProfile, UserProfileViewModel } from '@/usecases/boundaries/inputs/user/load-user-profile'
+import { LoadUserByIdRepository } from '@/usecases/boundaries/outputs/database/auth/load-user-by-id-repository'
 
 export class DbLoadUserProfile implements LoadUserProfile {
   constructor (
-    private readonly loadUserProfileRepository: LoadUserProfileRepository
+    private readonly userRepository: LoadUserByIdRepository
   ) {}
 
-  async loadProfile (userId: string): Promise<ProfileModel> {
-    const userProfile = await this.loadUserProfileRepository.loadProfile(userId)
-    if (userProfile) {
-      return userProfile
+  async loadProfile (userId: string): Promise<UserProfileViewModel> {
+    const user = await this.userRepository.loadById(userId)
+    return {
+      name: user.name,
+      email: user.email,
+      profile: user.profile,
+      updatedAt: user.updatedAt,
+      createdAt: user.createdAt
     }
-    return null
   }
 }

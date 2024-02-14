@@ -1,5 +1,5 @@
-import { CreateUserParamsModel } from '@/usecases/boundaries/inputs/auth/create-user'
+import { AddUserParamsModel } from '@/usecases/boundaries/inputs/auth/create-user'
 
-export interface CreateUserRepository {
-  create (createUserParams: CreateUserParamsModel): Promise<boolean>
+export interface AddUserRepository {
+  add (createUserParams: AddUserParamsModel): Promise<boolean>
 }

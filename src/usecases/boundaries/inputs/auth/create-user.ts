@@ -1,13 +1,12 @@
-import { ProfileModel } from '@/domain/entities/user'
+import { UserProfileModel } from '@/domain/entities/user'
 
-export type CreateUserParamsModel = {
+export type AddUserParamsModel = {
   name: string
   email: string
-  profile: ProfileModel
+  profile: UserProfileModel
   password: string
-  createdAt: Date
 }
 
 export interface CreateUser {
-  create (createUserParams: CreateUserParamsModel): Promise<boolean>
+  create (params: AddUserParamsModel): Promise<boolean>
 }

@@ -22,6 +22,7 @@ LoadArticleByIdRepository {
     const result = await articleCollection.insertOne({
       title: article.title,
       description: article.description,
+      type: article.type,
       content: article.content,
       imageUrl: article.imageUrl,
       userId: MongoHelper.toObjectId(article.userId),

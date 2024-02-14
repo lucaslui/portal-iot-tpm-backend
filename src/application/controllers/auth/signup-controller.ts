@@ -24,8 +24,11 @@ export class SignUpController implements Controller {
         name,
         email,
         password,
-        profile: {},
-        createdAt: new Date()
+        profile: {
+          occupation: '',
+          interests: '',
+          about: ''
+        }
       })
       if (!account) {
         return forbidden(new EmailInUseError())

@@ -1,4 +1,4 @@
-import { ArticleModel } from '@/domain/entities/article'
+import { ArticleModel, ArticleType } from '@/domain/entities/article'
 
 export interface AddArticle {
   add: (article: AddArticleModel) => Promise<ArticleModel>
@@ -7,6 +7,7 @@ export interface AddArticle {
 export interface AddArticleModel {
   title: string
   description: string
+  type: ArticleType
   content: BinaryType
   imageBinary?: {
     fieldname: string
