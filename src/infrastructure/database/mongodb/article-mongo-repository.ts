@@ -84,7 +84,11 @@ LoadArticleByIdRepository {
               _id: false,
               id: '$_id',
               name: '$name',
-              email: '$email'
+              email: '$email',
+              occupation: '$occupation',
+              interests: '$interests',
+              about: '$about',
+              imageUrl: '$imageUrl'
             }
           }
         ]
@@ -204,7 +208,11 @@ LoadArticleByIdRepository {
               _id: false,
               id: '$_id',
               name: '$name',
-              email: '$email'
+              email: '$email',
+              occupation: '$occupation',
+              interests: '$interests',
+              about: '$about',
+              imageUrl: '$imageUrl'
             }
           }
         ]

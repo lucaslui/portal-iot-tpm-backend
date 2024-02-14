@@ -12,6 +12,10 @@ export type ArticleViewModel = {
     id: string
     name: string
     email: string
+    occupation: string
+    interests: string
+    about: string
+    imageUrl: string
   }
   categories: {
     id: string
