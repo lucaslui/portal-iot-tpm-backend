@@ -1,12 +1,12 @@
-import { UserProfileModel } from '@/domain/entities/user'
-
-export type UpdateUserRepositoryParams = {
-  id: string
+export type UpdateUserRepositoryData = {
   name: string
   email: string
-  profile: UserProfileModel
+  occupation?: string
+  interests?: string
+  about?: string
+  imageUrl?: string
 }
 
 export interface UpdateUserRepository {
-  update: (params: UpdateUserRepositoryParams) => Promise<void>
+  update: (userId: string, params: UpdateUserRepositoryData) => Promise<void>
 }

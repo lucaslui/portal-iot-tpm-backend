@@ -5,7 +5,7 @@ import { RequiredFieldsValidation } from '@/application/validation/validators/re
 export const makeEditUserProfileValidation = (): ValidationComposite => {
   const validations: Validation[] = []
 
-  for (const field of ['nickname', 'occupation', 'region', 'about', 'interests', 'contact', 'website']) {
+  for (const field of ['name', 'email']) {
     validations.push(new RequiredFieldsValidation(field))
   }
 

@@ -1,9 +1,9 @@
 import { DbCreateUser } from '@/usecases/interactors/auth/db-create-user'
-import { CreateUser } from '@/usecases/boundaries/inputs/auth/create-user'
+import { AddUser } from '@/usecases/boundaries/inputs/auth/add-user'
 import { BcryptAdapter } from '@/infrastructure/criptography/bcrypt-adapter'
 import { UserMongoRepository } from '@/infrastructure/database/mongodb/user-mongo-repository'
 
-export const makeDbCreateUser = (): CreateUser => {
+export const makeDbCreateUser = (): AddUser => {
   const salt = 12
   const bcryptAdapter = new BcryptAdapter(salt)
   const userMongoRepository = new UserMongoRepository()

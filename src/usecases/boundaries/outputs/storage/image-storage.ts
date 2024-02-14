@@ -1,3 +1,3 @@
 export interface ImageStorage {
-  upload: (file: any) => Promise<string>
+  upload: (file: any, folder: string) => Promise<string>
 }

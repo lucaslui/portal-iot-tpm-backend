@@ -1,12 +1,11 @@
-import { UserProfileModel } from '@/domain/entities/user'
-
-export type EditUserProfileParams = {
-  id: string
+export type EditUserProfileData = {
   name: string
   email: string
-  profile: UserProfileModel
+  occupation?: string
+  interests?: string
+  about?: string
   imageBinary?: Buffer
 }
 export interface EditUserProfile {
-  editProfile: (params: EditUserProfileParams) => Promise<void>
+  edit: (userId: string, data: EditUserProfileData) => Promise<void>
 }

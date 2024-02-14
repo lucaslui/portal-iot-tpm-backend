@@ -11,7 +11,10 @@ export class DbLoadUserProfile implements LoadUserProfile {
     return {
       name: user.name,
       email: user.email,
-      profile: user.profile,
+      occupation: user.occupation,
+      interests: user.interests,
+      about: user.about,
+      imageUrl: user.imageUrl,
       updatedAt: user.updatedAt,
       createdAt: user.createdAt
     }

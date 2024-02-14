@@ -12,7 +12,7 @@ export class DbAddArticle implements AddArticle {
   async add (article: AddArticleModel): Promise<ArticleModel> {
     let imageUrl = ''
     if (article.imageBinary) {
-      imageUrl = await this.imageRepository.upload(article.imageBinary)
+      imageUrl = await this.imageRepository.upload(article.imageBinary, 'thumbnails')
     }
     const articleCreated = await this.articleRepository.add({
       ...article,

@@ -1,5 +1,5 @@
 import { Authentication } from '@/usecases/boundaries/inputs/auth/authentication'
-import { CreateUser } from '@/usecases/boundaries/inputs/auth/create-user'
+import { AddUser } from '@/usecases/boundaries/inputs/auth/add-user'
 import { EmailInUseError } from '@/application/errors/email-in-use-error'
 import { badRequest, forbidden, ok, serverError } from '@/application/helpers/http-helper'
 import { Controller } from '@/application/protocols/controller'
@@ -8,7 +8,7 @@ import { Validation } from '@/application/protocols/validation'
 
 export class SignUpController implements Controller {
   constructor (
-    private readonly createUser: CreateUser,
+    private readonly createUser: AddUser,
     private readonly validation: Validation,
     private readonly authentication: Authentication
   ) {}
@@ -20,15 +20,10 @@ export class SignUpController implements Controller {
         return badRequest(error)
       }
       const { name, email, password } = httpRequest.body
-      const account = await this.createUser.create({
+      const account = await this.createUser.add({
         name,
         email,
-        password,
-        profile: {
-          occupation: '',
-          interests: '',
-          about: ''
-        }
+        password
       })
       if (!account) {
         return forbidden(new EmailInUseError())

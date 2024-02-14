@@ -1,6 +1,6 @@
 import { LoadUserByIdRepository } from '@/usecases/boundaries/outputs/database/auth/load-user-by-id-repository'
 import { UpdateUserRepository } from '@/usecases/boundaries/outputs/database/user/edit-user-profile-respository'
-import { EditUserProfile, EditUserProfileParams } from '@/usecases/boundaries/inputs/user/edit-user-profile'
+import { EditUserProfile, EditUserProfileData } from '@/usecases/boundaries/inputs/user/edit-user-profile'
 import { ImageStorage } from '@/usecases/boundaries/outputs/storage/image-storage'
 
 export class DbEditUserProfile implements EditUserProfile {
@@ -9,14 +9,15 @@ export class DbEditUserProfile implements EditUserProfile {
     private readonly imageStorage: ImageStorage
   ) {}
 
-  async editProfile (params: EditUserProfileParams): Promise<void> {
-    const user = await this.userRepository.loadById(params.id)
+  async edit (userId: string, data: EditUserProfileData): Promise<void> {
+    const user = await this.userRepository.loadById(userId)
     if (user) {
       let imageUrl = ''
-      if (params.imageBinary) {
-        imageUrl = await this.imageStorage.upload(params.imageBinary)
+      if (data.imageBinary) {
+        imageUrl = await this.imageStorage.upload(data.imageBinary, 'profiles')
       }
-      await this.userRepository.update({ ...params, profile: { ...params.profile, imageUrl } })
+      const { imageBinary, ...user } = { ...data, imageUrl }
+      await this.userRepository.update(userId, user)
     }
   }
 }

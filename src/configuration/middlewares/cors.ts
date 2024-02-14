@@ -1,8 +1,18 @@
-import { Request, Response, NextFunction } from 'express'
+import cors from 'cors'
 
-export const cors = (req: Request,res: Response, next: NextFunction): void => {
-  res.set('access-control-allow-origin', '*')
-  res.set('access-control-allow-headers', '*')
-  res.set('access-control-allow-method', '*')
-  next()
+const corsOptions = {
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  optionsSuccessStatus: 200,
+  credentials: true,
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'x-access-token',
+    'Access-Control-Allow-Origin',
+    'Origin',
+    'Accept'
+  ]
 }
+
+export const corsMiddleware = cors(corsOptions)
