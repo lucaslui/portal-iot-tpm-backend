@@ -15,9 +15,9 @@ import { upload } from '@/configuration/middlewares/multer'
 const router = Router()
 
 router.post('/', upload.single('imageBinary'), adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeAddArticleController()))
+router.put('/:articleId', upload.single('imageBinary'), adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeEditArticleController()))
 router.get('/', adaptRoute(makeLoadArticlesController()))
 router.get('/:articleId', adaptRoute(makeLoadArticleByIdController()))
-router.put('/:articleId', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeEditArticleController()))
 router.delete('/:articleId', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeDeleteArticleController()))
 
 export { router as articleRouter }

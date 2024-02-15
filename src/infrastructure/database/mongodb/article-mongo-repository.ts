@@ -45,9 +45,10 @@ LoadArticleByIdRepository {
       $set: {
         title: newArticle.title,
         description: newArticle.description,
+        type: newArticle.type,
         content: newArticle.content,
         imageUrl: newArticle.imageUrl,
-        categoryIds: newArticle.categoryIds
+        categoryIds: newArticle.categoryIds.map(c => MongoHelper.toObjectId(c))
       }
     })
   }

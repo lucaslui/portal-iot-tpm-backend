@@ -17,13 +17,16 @@ export class EditArticleController implements Controller {
         return badRequest(error)
       }
       const { articleId } = httpRequest.params
-      const { title, description, content, imageUrl, categoryIds } = httpRequest.body
+      const imageBinary = httpRequest.file
+      const categoryIds = JSON.parse(httpRequest.body.categoryIds)
+      const { title, description, type, content } = httpRequest.body
       const isSuccessful = await this.editArticle.edit(httpRequest.userId, articleId, {
         title,
         description,
+        type,
         content,
-        imageUrl,
-        categoryIds
+        categoryIds,
+        imageBinary
       })
       if (!isSuccessful) {
         return unauthorized()

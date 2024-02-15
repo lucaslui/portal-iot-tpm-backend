@@ -9,6 +9,8 @@ export interface AddArticleModel {
   description: string
   type: ArticleType
   content: BinaryType
+  userId: string
+  categoryIds: string[]
   imageBinary?: {
     fieldname: string
     originalname: string
@@ -17,6 +19,4 @@ export interface AddArticleModel {
     buffer: Buffer
     size: number
   }
-  userId: string
-  categoryIds: string[]
 }
