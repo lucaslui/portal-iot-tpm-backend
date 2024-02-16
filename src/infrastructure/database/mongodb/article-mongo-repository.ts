@@ -41,16 +41,23 @@ LoadArticleByIdRepository {
 
   async edit (articleId: string, newArticle: EditArticleModel): Promise<void> {
     const articleCollection = await MongoHelper.getCollection('articles')
-    await articleCollection.updateOne({ _id: MongoHelper.toObjectId(articleId) }, {
-      $set: {
-        title: newArticle.title,
-        description: newArticle.description,
-        type: newArticle.type,
-        content: newArticle.content,
-        imageUrl: newArticle.imageUrl,
-        categoryIds: newArticle.categoryIds.map(c => MongoHelper.toObjectId(c))
+    const newArticleWithAllowedFields = {
+      title: newArticle.title,
+      description: newArticle.description,
+      type: newArticle.type,
+      content: newArticle.content,
+      imageUrl: newArticle.imageUrl,
+      categoryIds: newArticle.categoryIds.map(c => MongoHelper.toObjectId(c)),
+      updatedAt: new Date()
+    }
+    const newArticleWithoutNullOrUndefinedValues = Object.keys(newArticleWithAllowedFields).reduce((acc, key) => {
+      if (newArticleWithAllowedFields[key] !== null && newArticleWithAllowedFields[key] !== undefined) {
+        acc[key] = newArticleWithAllowedFields[key]
       }
-    })
+      return acc
+    }, {})
+
+    await articleCollection.updateOne({ _id: MongoHelper.toObjectId(articleId) }, { $set: { ...newArticleWithoutNullOrUndefinedValues } })
   }
 
   async load (query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
