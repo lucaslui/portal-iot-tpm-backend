@@ -1,8 +1,9 @@
 import { v2 as cloudinary } from 'cloudinary'
 
-import { ImageStorage } from '@/usecases/boundaries/outputs/storage/image-storage'
+import { UploadImageStorage } from '@/usecases/boundaries/outputs/storage/upload-image-storage'
+import { DeleteImageStorage } from '@/usecases/boundaries/outputs/storage/delete-image-storage'
 
-export class CloudinaryImageStorage implements ImageStorage {
+export class CloudinaryImageStorage implements UploadImageStorage, DeleteImageStorage {
   constructor (
     private readonly cloudName: string,
     private readonly apiKey: string,

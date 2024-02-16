@@ -1,23 +1,28 @@
 import { EditArticleRepository } from '@/usecases/boundaries/outputs/database/article/edit-article-repository'
 import { EditArticle, EditArticleModel } from '@/usecases/boundaries/inputs/article/edit-article'
 import { LoadArticleByIdRepository } from '@/usecases/boundaries/outputs/database/article/load-article-by-id-repository'
-import { ImageStorage } from '@/usecases/boundaries/outputs/storage/image-storage'
+import { UploadImageStorage } from '@/usecases/boundaries/outputs/storage/upload-image-storage'
+import { DeleteImageStorage } from '@/usecases/boundaries/outputs/storage/delete-image-storage'
 
 export class DbEditArticle implements EditArticle {
   constructor (
     private readonly articleRepository: LoadArticleByIdRepository & EditArticleRepository,
-    private readonly imageRepository: ImageStorage
+    private readonly imageRepository: UploadImageStorage & DeleteImageStorage
   ) { }
 
   async edit (userId: string, articleId: string, newArticle: EditArticleModel): Promise<boolean> {
-    const article = await this.articleRepository.loadById({ articleId })
-    if (article.user.id.toString() === userId.toString()) {
-      let imageUrl = ''
+    const oldArticle = await this.articleRepository.loadById({ articleId })
+    if (oldArticle.user.id.toString() === userId.toString()) {
       if (newArticle.imageBinary) {
-        imageUrl = await this.imageRepository.upload(newArticle.imageBinary, 'thumbnails')
+        const imageUrl = await this.imageRepository.upload(newArticle.imageBinary, 'thumbnails')
+        if (oldArticle.imageUrl) {
+          const fileId = oldArticle.imageUrl.split('/').pop()
+          await this.imageRepository.delete(fileId)
+        }
+        newArticle = { ...newArticle, imageUrl }
+        delete newArticle.imageBinary
       }
-      const { imageBinary, ...newArticleWithoutImageBinary } = { ...newArticle, imageUrl }
-      await this.articleRepository.edit(articleId, newArticleWithoutImageBinary)
+      await this.articleRepository.edit(articleId, newArticle)
       return true
     }
     return false
