@@ -163,8 +163,10 @@ LoadArticleByIdRepository {
       }
     })
 
-    if (query.limit) {
-      pipeline.push({ $skip: query.page ? (query.page * 10 - 10) : 0 }, { $limit: 10 })
+    if (query.page && query.limit) {
+      const limitAsNumber = Number(query.limit)
+      const pageAsNumber = Number(query.page)
+      pipeline.push({ $skip: pageAsNumber ? (pageAsNumber * limitAsNumber - limitAsNumber) : 0 }, { $limit: limitAsNumber })
     }
 
     const count = await articleCollection.countDocuments(queryMatch)
