@@ -59,7 +59,9 @@ LoadCategoriesRepository {
       }
     })
 
-    pipeline.push({ $skip: query?.page ? (query.page * 10 - 10) : 0 }, { $limit: 10 })
+    if (query?.page) {
+      pipeline.push({ $skip: query?.page ? (query.page * 10 - 10) : 0 }, { $limit: 10 })
+    }
 
     const categories = await categoryCollection.aggregate(pipeline).toArray()
     return categories
