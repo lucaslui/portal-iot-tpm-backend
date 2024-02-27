@@ -174,6 +174,8 @@ LoadArticleByIdRepository {
       pipeline.push({ $skip: pageAsNumber ? (pageAsNumber * limitAsNumber - limitAsNumber) : 0 }, { $limit: limitAsNumber })
     }
 
+    pipeline.push({ $sort: { createdAt: -1 } })
+
     const count = await articleCollection.countDocuments(queryMatch)
     const articles = await articleCollection.aggregate(pipeline).toArray()
 
