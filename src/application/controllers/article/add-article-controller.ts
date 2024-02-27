@@ -19,11 +19,13 @@ export class AddArticleController implements Controller {
       const imageBinary = httpRequest.file
       const userId = httpRequest.userId
       const categoryIds = JSON.parse(httpRequest.body.categoryIds)
-      const { title, description, type, content } = httpRequest.body
+      const { title, description, type, state, readTime, content } = httpRequest.body
       const article = await this.addArticle.add({
         title,
         description,
         type,
+        state,
+        readTime,
         content,
         imageBinary,
         userId,

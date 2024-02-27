@@ -1,3 +1,5 @@
+import { ArticleViewModel } from '@/usecases/boundaries/inputs/article/load-article-by-id'
+
 export type LoadArticlesQueryModel = {
   page?: number
   limit?: number
@@ -8,33 +10,8 @@ export type LoadArticlesQueryModel = {
   year?: number
 }
 
-export type ArticleViewModel = {
-  id: string
-  title: string
-  description: string
-  content: string
-  imageUrl: string
-  user: {
-    id: string
-    name: string
-    email: string
-    occupation: string
-    interests: string
-    about: string
-    imageUrl: string
-  }
-  categories: {
-    id: string
-    name: string
-    description: string
-  }
-  type: string
-  createdAt: Date
-  updatedAt: Date
-}
-
 export type LoadArticlesResponseModel = {
-  articles: ArticleViewModel[]
+  articles: Array<Omit<ArticleViewModel, 'content'>>
   count: number
   page: number
   totalPages: number

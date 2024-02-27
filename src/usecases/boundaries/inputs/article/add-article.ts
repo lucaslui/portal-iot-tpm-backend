@@ -1,16 +1,6 @@
-import { ArticleModel, ArticleType } from '@/domain/entities/article'
+import { ArticleModel } from '@/domain/entities/article'
 
-export interface AddArticle {
-  add: (article: AddArticleModel) => Promise<ArticleModel>
-}
-
-export interface AddArticleModel {
-  title: string
-  description: string
-  type: ArticleType
-  content: BinaryType
-  userId: string
-  categoryIds: string[]
+export type AddArticleModel = Omit<ArticleModel, 'id' | 'imageUrl' | 'updatedAt' | 'createdAt'> & {
   imageBinary?: {
     fieldname: string
     originalname: string
@@ -19,4 +9,8 @@ export interface AddArticleModel {
     buffer: Buffer
     size: number
   }
+}
+
+export interface AddArticle {
+  add: (article: AddArticleModel) => Promise<ArticleModel>
 }

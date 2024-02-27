@@ -8,6 +8,9 @@ export type ArticleViewModel = {
   description: string
   content: string
   imageUrl: string
+  type: string
+  state: string
+  readTime: number
   user: {
     id: string
     name: string
@@ -22,7 +25,6 @@ export type ArticleViewModel = {
     name: string
     description: string
   }
-  type: string
   createdAt: Date
   updatedAt: Date
 }

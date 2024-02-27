@@ -19,15 +19,17 @@ export class EditArticleController implements Controller {
       const { articleId } = httpRequest.params
       const imageBinary = httpRequest.file
       const categoryIds = JSON.parse(httpRequest.body.categoryIds)
-      const { title, description, type, content } = httpRequest.body
-      const isSuccessful = await this.editArticle.edit(httpRequest.userId, articleId, {
+      const { title, description, type, state, readTime, content } = httpRequest.body
+      const isSuccessful = await this.editArticle.edit(articleId, {
         title,
         description,
         type,
+        state,
+        readTime,
         content,
         categoryIds,
         imageBinary
-      })
+      }, httpRequest.userId)
       if (!isSuccessful) {
         return unauthorized()
       }

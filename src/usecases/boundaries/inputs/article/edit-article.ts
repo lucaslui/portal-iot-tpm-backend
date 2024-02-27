@@ -1,10 +1,6 @@
-export type EditArticleModel = {
-  title: string
-  description: string
-  type: string
-  content: BinaryType
-  imageUrl?: string
-  categoryIds: string[]
+import { ArticleModel } from '@/domain/entities/article'
+
+export type EditArticleModel = Omit<ArticleModel, 'id' | 'userId' | 'imageUrl' | 'updatedAt' | 'createdAt'> & {
   imageBinary?: {
     fieldname: string
     originalname: string
@@ -16,5 +12,5 @@ export type EditArticleModel = {
 }
 
 export interface EditArticle {
-  edit: (userId: string, articleId: string, newArticle: EditArticleModel) => Promise<boolean>
+  edit: (articleId: string, newArticle: EditArticleModel, userId: string) => Promise<boolean>
 }

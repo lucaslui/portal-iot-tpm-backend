@@ -1,5 +1,7 @@
-import { EditArticleModel } from '@/usecases/boundaries/inputs/article/edit-article'
+import { ArticleModel } from '@/domain/entities/article'
+
+export type EditArticleRepositoryModel = Omit<ArticleModel, 'id' | 'userId' | 'updatedAt' | 'createdAt' >
 
 export interface EditArticleRepository {
-  edit: (articleId: string, newArticle: EditArticleModel) => Promise<void>
+  edit: (articleId: string, newArticle: EditArticleRepositoryModel) => Promise<void>
 }

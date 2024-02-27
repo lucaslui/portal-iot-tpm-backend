@@ -3,9 +3,8 @@ import { ArticleModel } from '@/domain/entities/article'
 import { MongoHelper } from './mongo-helper'
 import { AddArticleRepository, AddArticleRepositoryModel } from '@/usecases/boundaries/outputs/database/article/add-article-repository'
 import { DeleteArticleRepository } from '@/usecases/boundaries/outputs/database/article/delete-article-repository'
-import { EditArticleRepository } from '@/usecases/boundaries/outputs/database/article/edit-article-repository'
+import { EditArticleRepository, EditArticleRepositoryModel } from '@/usecases/boundaries/outputs/database/article/edit-article-repository'
 import { LoadArticlesRepository } from '@/usecases/boundaries/outputs/database/article/load-articles-repository'
-import { EditArticleModel } from '@/usecases/boundaries/inputs/article/edit-article'
 import { LoadArticlesQueryModel, LoadArticlesResponseModel } from '@/usecases/boundaries/inputs/article/load-articles'
 import { FilterQuery } from 'mongodb'
 import { LoadArticleByIdRepository } from '@/usecases/boundaries/outputs/database/article/load-article-by-id-repository'
@@ -13,8 +12,8 @@ import { LoadArticleByIdParams, ArticleViewModel } from '@/usecases/boundaries/i
 
 export class ArticleMongoRepository implements
 AddArticleRepository,
-DeleteArticleRepository,
 EditArticleRepository,
+DeleteArticleRepository,
 LoadArticlesRepository,
 LoadArticleByIdRepository {
   async add (article: AddArticleRepositoryModel): Promise<ArticleModel> {
@@ -23,10 +22,12 @@ LoadArticleByIdRepository {
       title: article.title,
       description: article.description,
       type: article.type,
+      state: article.state,
+      readTime: article.readTime,
       content: article.content,
       imageUrl: article.imageUrl,
       userId: MongoHelper.toObjectId(article.userId),
-      categoryIds: article.categoryIds.map(c => MongoHelper.toObjectId(c)),
+      categoryIds: MongoHelper.mapToObjectId(article.categoryIds),
       updatedAt: new Date(),
       createdAt: new Date()
     })
@@ -34,20 +35,17 @@ LoadArticleByIdRepository {
     return MongoHelper.map(articleAdded)
   }
 
-  async delete (articleId: string): Promise<void> {
-    const articleCollection = await MongoHelper.getCollection('articles')
-    await articleCollection.deleteOne({ _id: MongoHelper.toObjectId(articleId) })
-  }
-
-  async edit (articleId: string, newArticle: EditArticleModel): Promise<void> {
+  async edit (articleId: string, newArticle: EditArticleRepositoryModel): Promise<void> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const newArticleWithAllowedFields = {
       title: newArticle.title,
       description: newArticle.description,
       type: newArticle.type,
+      state: newArticle.state,
+      readTime: newArticle.readTime,
       content: newArticle.content,
       imageUrl: newArticle.imageUrl,
-      categoryIds: newArticle.categoryIds.map(c => MongoHelper.toObjectId(c)),
+      categoryIds: MongoHelper.mapToObjectId(newArticle.categoryIds),
       updatedAt: new Date()
     }
     const newArticleWithoutNullOrUndefinedValues = Object.keys(newArticleWithAllowedFields).reduce((acc, key) => {
@@ -58,6 +56,11 @@ LoadArticleByIdRepository {
     }, {})
 
     await articleCollection.updateOne({ _id: MongoHelper.toObjectId(articleId) }, { $set: { ...newArticleWithoutNullOrUndefinedValues } })
+  }
+
+  async delete (articleId: string): Promise<void> {
+    const articleCollection = await MongoHelper.getCollection('articles')
+    await articleCollection.deleteOne({ _id: MongoHelper.toObjectId(articleId) })
   }
 
   async load (query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
@@ -153,6 +156,8 @@ LoadArticleByIdRepository {
         title: '$title',
         description: '$description',
         type: '$type',
+        state: '$state',
+        readTime: '$readTime',
         imageUrl: '$imageUrl',
         user: {
           $arrayElemAt: ['$user', 0]
@@ -236,6 +241,8 @@ LoadArticleByIdRepository {
         title: '$title',
         description: '$description',
         type: '$type',
+        state: '$state',
+        readTime: '$readTime',
         content: '$content',
         imageUrl: '$imageUrl',
         user: {

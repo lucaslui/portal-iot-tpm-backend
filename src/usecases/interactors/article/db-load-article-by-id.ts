@@ -1,6 +1,5 @@
 import { LoadArticleByIdRepository } from '@/usecases/boundaries/outputs/database/article/load-article-by-id-repository'
-import { LoadArticleById, LoadArticleByIdParams } from '@/usecases/boundaries/inputs/article/load-article-by-id'
-import { ArticleViewModel } from '@/usecases/boundaries/inputs/article/load-articles'
+import { ArticleViewModel, LoadArticleById, LoadArticleByIdParams } from '@/usecases/boundaries/inputs/article/load-article-by-id'
 
 export class DbLoadArticleById implements LoadArticleById {
   constructor (

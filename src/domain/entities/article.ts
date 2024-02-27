@@ -1,14 +1,18 @@
 export type ArticleType = 'concepts' | 'news' | 'tutorials' | 'projects'
 
-export interface ArticleModel {
+export type ArticleState = 'draft' | 'published' | 'deleted'
+
+export type ArticleModel = {
   id: string
   title: string
   description: string
   type: ArticleType
-  content: BinaryType
+  state: ArticleState
+  readTime: number
+  content: string
   imageUrl?: string
   userId: string
-  categoryIds: string
+  categoryIds: string[]
   updatedAt: Date
   createdAt: Date
 }
