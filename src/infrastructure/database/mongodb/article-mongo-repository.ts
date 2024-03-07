@@ -124,7 +124,15 @@ LoadArticleByIdRepository {
             }
           },
           { $sort: { sort: 1 } },
-          { $addFields: { sort: '$$REMOVE' } }
+          { $addFields: { sort: '$$REMOVE' } },
+          {
+            $project: {
+              _id: false,
+              id: '$_id',
+              name: '$name',
+              description: '$description'
+            }
+          }
         ],
         as: 'categories'
       }
@@ -230,7 +238,15 @@ LoadArticleByIdRepository {
             }
           },
           { $sort: { sort: 1 } },
-          { $addFields: { sort: '$$REMOVE' } }
+          { $addFields: { sort: '$$REMOVE' } },
+          {
+            $project: {
+              _id: false,
+              id: '$_id',
+              name: '$name',
+              description: '$description'
+            }
+          }
         ],
         as: 'categories'
       }
