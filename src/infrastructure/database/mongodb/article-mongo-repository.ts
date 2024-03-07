@@ -197,19 +197,37 @@ LoadArticleByIdRepository {
     pipeline.push({
       $lookup: {
         from: 'categories',
-        localField: 'categoryIds',
-        foreignField: '_id',
-        as: 'categories',
+        // localField: 'categoryIds',
+        // foreignField: '_id',
+        // as: 'categories',
+        // pipeline: [
+        //   {
+        //     $project: {
+        //       _id: false,
+        //       id: '$_id',
+        //       name: '$name',
+        //       description: '$description'
+        //     }
+        //   }
+        // ]
+        let: { categoryIds: '$categoryIds' },
         pipeline: [
           {
-            $project: {
-              _id: false,
-              id: '$_id',
-              name: '$name',
-              description: '$description'
+            $match: {
+              $expr: { $in: ['$_id', '$$categoryIds'] }
             }
-          }
-        ]
+          },
+          {
+            $addFields: {
+              sort: {
+                $indexOfArray: ['$$categoryIds', '$_id']
+              }
+            }
+          },
+          { $sort: { sort: 1 } },
+          { $addFields: { sort: '$$REMOVE' } }
+        ],
+        as: 'categories'
       }
     })
 
