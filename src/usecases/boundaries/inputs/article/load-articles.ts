@@ -5,6 +5,7 @@ export type LoadArticlesQueryModel = {
   limit?: number
   type?: string
   userId?: string
+  search?: string
   categoryIds?: string[]
   month?: number
   year?: number

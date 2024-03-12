@@ -83,6 +83,13 @@ LoadArticleByIdRepository {
 
     pipeline.push({ $match: queryMatch })
 
+    if (query.search) {
+      queryMatch.$or = [
+        { title: { $regex: query.search, $options: 'i' } },
+        { description: { $regex: query.search, $options: 'i' } }
+      ]
+    }
+
     pipeline.push({
       $lookup: {
         from: 'users',
@@ -181,22 +188,22 @@ LoadArticleByIdRepository {
       }
     })
 
+    pipeline.push({ $sort: { createdAt: -1 } })
+
     if (query.page && query.limit) {
       const limitAsNumber = Number(query.limit)
       const pageAsNumber = Number(query.page)
       pipeline.push({ $skip: pageAsNumber ? (pageAsNumber * limitAsNumber - limitAsNumber) : 0 }, { $limit: limitAsNumber })
     }
 
-    pipeline.push({ $sort: { createdAt: -1 } })
-
     const count = await articleCollection.countDocuments(queryMatch)
     const articles = await articleCollection.aggregate(pipeline).toArray()
 
     return {
       articles,
-      count,
+      count: articles.length,
       page: query.page,
-      totalPages: Math.ceil(count / 10),
+      totalPages: Math.ceil(count / (query.limit ?? 1)),
       totalItems: count
     }
   }
