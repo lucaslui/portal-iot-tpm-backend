@@ -73,6 +73,10 @@ LoadArticleByIdRepository {
       queryMatch.type = query.type
     }
 
+    if (query?.state) {
+      queryMatch.state = query.state
+    }
+
     if (query?.userId) {
       queryMatch.userId = MongoHelper.toObjectId(query.userId)
     }

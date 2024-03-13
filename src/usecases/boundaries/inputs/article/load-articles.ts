@@ -4,6 +4,7 @@ export type LoadArticlesQueryModel = {
   page?: number
   limit?: number
   type?: string
+  state?: string
   userId?: string
   search?: string
   categoryIds?: string[]

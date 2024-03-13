@@ -10,11 +10,12 @@ export class LoadArticlesController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const { page, limit, type, search, userId, categoryIds, month, year } = httpRequest.query
+      const { page, limit, type, search, state, userId, categoryIds, month, year } = httpRequest.query
       const articles = await this.loadArticles.load({
         page,
         limit,
         search,
+        state,
         type,
         userId,
         categoryIds,
