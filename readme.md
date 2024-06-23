@@ -1,6 +1,6 @@
-<h1 align="center"> API for Blog Applications </h1>
+<h1 align="center"> Portal IoT-TPM Backend API </h1>
 
-<p align="center"> Created to manage blogs in general, with idea originated from the development of my blog </p>
+<p align="center"> This project is a REST API that stores and makes available articles and categories of a blog, allowing the creation of authors and administrators accounts. </p>
 
 <p align="center">
 
@@ -29,7 +29,7 @@
 
 <p align="center">
  <a href="#overview">Overview</a> •
- <a href="#demo">Demo</a> • 
+ <a href="#production">Production</a> • 
  <a href="#technologies">Technologies</a> • 
  <a href="#prerequisites">Prerequisites</a> • 
  <a href="#install">Install</a> • 
@@ -43,7 +43,7 @@
 
 <h2 id="overview"> 💻 Overview </h2>
 
-The API stores and makes available **articles** and **categories** of the blog, allowing the creation of **authors** and **administrators** accounts.
+The API stores and makes available **articles** and **categories** of the portal, allowing the creation of **authors** and **administrators** accounts.
 
 <h1 align="center">
     <img alt="general-vision" title="#general-vision" src="./docs/architecture/general-vision.png" />
@@ -63,11 +63,13 @@ The API stores and makes available **articles** and **categories** of the blog, 
 - [x] List all categories
 - [x] Delete category
 
-<h2 id="demo"> 🧪 Demo </h2>
+<h2 id="production"> 🧪 Production </h2>
 
-  - [**API Swagger Documentation (hosted with Heroku)**](https://espaco-de-conhecimento-backend.herokuapp.com/docs/)
+  - [**Portal API Documentation (hosted with Render)**](https://my-blog-backend-5gm7.onrender.com/docs)
 
-  - [**Frontend example (hosted with Vercel)**](https://blog-lucaslui.vercel.app/)
+  - [**Portal Frontend (hosted with Vercel)**](https://tpm-library.vercel.app/)
+
+  - [**Portal Frontend CMS (hosted with Vercel)**](https://tpm-library.vercel.app/)
 
 <h2 id="technologies"> 🧰 Technologies </h2>
 
@@ -92,10 +94,10 @@ From your command line:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/lucaslui/blog-backend
+$ git clone https://https://github.com/lucaslui/portal-iot-tpm-backend
 
 # Go into the repository
-$ cd blog-backend
+$ cd portal-iot-tpm-backend
 
 # Install dependencies
 $ npm install
