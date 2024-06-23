@@ -1,7 +1,7 @@
 export const loadUsersPath = {
   tags: ['Usuários'],
   summary: 'Carrega uma lista com todos os usuários',
-  description: 'Carrega uma lista com todos os usuários cadastrados no blog. Aceita um parâmetro de paginação que é opcional, caso seja enviado a lista de usuários é dividida em páginas com 10 usuários por página.  Essa rota só pode ser executada por um **administrador**.',
+  description: 'Carrega uma lista com todos os usuários cadastrados no portal. Aceita um parâmetro de paginação que é opcional, caso seja enviado a lista de usuários é dividida em páginas com 10 usuários por página.  Essa rota só pode ser executada por um **administrador**.',
   security: [{
     apiKeyAuth: []
   }],

@@ -2,7 +2,7 @@ export const signupPath = {
   post: {
     tags: ['Autenticação'],
     summary: 'Criar conta de usuário',
-    description: 'Criar conta de usuário para permitir acesso a alguns recursos do blog (como publicar artigos). Essa rota pode ser executada por **qualquer usuário**',
+    description: 'Criar conta de usuário para permitir acesso a alguns recursos do portal (como publicar artigos). Essa rota pode ser executada por **qualquer usuário**',
     requestBody: {
       required: true,
       description: 'Parâmetro de cadastro do usuário',

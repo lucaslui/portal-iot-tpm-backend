@@ -2,7 +2,7 @@ export const loginPath = {
   post: {
     tags: ['Autenticação'],
     summary: 'Autenticar usuário',
-    description: 'Autenticar usuário para permitir acesso a alguns recursos do blog (como publicar artigos). Essa rota pode ser executada por **qualquer usuário**',
+    description: 'Autenticar usuário para permitir acesso a alguns recursos do portal (como publicar artigos). Essa rota pode ser executada por **qualquer usuário**',
     requestBody: {
       required: true,
       description: 'Informações necessárias para efetuar a autenticação',

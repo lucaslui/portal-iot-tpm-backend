@@ -1,7 +1,7 @@
 export const deleteArticlePath = {
   tags: ['Artigos'],
-  summary: 'Deleta um artigo no blog',
-  description: 'Deleta um artigo no blog. O identicador do artigo é obrigatório. Essa rota só pode ser executada por **usuários autenticados**',
+  summary: 'Deleta um artigo no portal',
+  description: 'Deleta um artigo no portal. O identicador do artigo é obrigatório. Essa rota só pode ser executada por **usuários autenticados**',
   security: [{
     apiKeyAuth: []
   }],

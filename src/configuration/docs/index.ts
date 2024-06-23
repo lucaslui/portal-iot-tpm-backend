@@ -13,11 +13,9 @@ import { loadCategoriesTreePath } from './paths/category/load-categories-tree-pa
 export default {
   openapi: '3.0.0',
   info: {
-    title: 'Backend do Blog',
+    title: 'Backend do Portal IoT-TPM',
     description:
-      'Documentação da API que trata de armazenar e servir as entidades de **artigos** e **categorias** do blog.' +
-      'A API também permite a criação de contas de usuários autores e administradores.\n\n' +
-      '<a href="https://lucaslui.github.io/blog/home"> Link para o Blog </a>',
+      'Documentação da API que trata de armazenar e servir o Portal IoT-TPM.',
     version: '1.0.0',
     contact: {
       name: 'Lucas Lui Motta',
@@ -34,16 +32,16 @@ export default {
   }],
   tags: [{
     name: 'Autenticação',
-    description: 'Operações relacionadas com o acesso do usuário no blog.'
+    description: 'Operações relacionadas com o acesso do usuário no portal.'
   },{
     name: 'Usuários',
-    description: 'Operações relacionadas com os usuários do blog.'
+    description: 'Operações relacionadas com os usuários do portal.'
   },{
     name: 'Artigos',
-    description: 'Operações relacionadas com os artigos do blog.'
+    description: 'Operações relacionadas com os artigos do portal.'
   },{
     name: 'Categorias',
-    description: 'Operações relacionadas com as categorias do blog.'
+    description: 'Operações relacionadas com as categorias do portal.'
   }],
   paths: {
     '/login': loginPath,

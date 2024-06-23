@@ -1,17 +1,17 @@
 <h1 align="center"> Portal IoT-TPM Backend API </h1>
 
-<p align="center"> This project is a REST API that stores and makes available articles and categories of a blog, allowing the creation of authors and administrators accounts. </p>
+<p align="center"> This project is a REST API that stores and makes available articles and categories of a Portal. </p>
 
 <p align="center">
 
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lucaslui/blog-backend">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lucaslui/portal-iot-tpm-backend">
 
   <a href="http://standardjs.com">
     <img alt="Code Style" src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg">
   </a>
 
   <a href="https://github.com/tgmarinho/nlw1/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lucaslui/blog-backend">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lucaslui/portal-iot-tpm-backend">
   </a>
 
   <a href="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
@@ -19,11 +19,11 @@
   </a>
 
   <a href="https://github.com/lukemorales/rocketshoes-react-native/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/lucaslui/blog-backend.svg">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/lucaslui/portal-iot-tpm-backend.svg">
   </a>
 
    <a href="https://github.com/tgmarinho/nlw1/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/lucaslui/blog-backend?style=social">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/lucaslui/portal-iot-tpm-backend?style=social">
   </a>
 </p>
 
