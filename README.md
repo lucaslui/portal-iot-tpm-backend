@@ -132,7 +132,7 @@ And make sure to read the [contributing guide](./contributing.md) before making 
 
 <h2 id="license"> 📝 License </h2>
 
-This project is [GPL 3.0](https://www.gnu.org/licenses/) licensed. See the [license](./license) for more information.
+This project is [MIT](./license) licensed.
 
 <h2 id="author"> 👤 Author </h2>
 
