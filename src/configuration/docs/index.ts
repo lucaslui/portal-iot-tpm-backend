@@ -9,6 +9,8 @@ import { notFoundComponent , badRequestComponent , serverErrorComponent , unauth
 import { userProfileSchema, userSchema } from './schemas/user'
 import { changeUserPasswordPath } from './paths/user/change-user-password-path'
 import { loadCategoriesTreePath } from './paths/category/load-categories-tree-path'
+import { addCoursePath, loadCoursesPath, loadCourseByIdPath, editCoursePath, deleteCoursePath } from '@/configuration/docs/paths/course'
+import { addCourseSchema, courseHeaderSchema, courseLookupSchema, courseSchema } from '@/configuration/docs/schemas/course'
 
 export default {
   openapi: '3.0.0',
@@ -40,6 +42,9 @@ export default {
     name: 'Artigos',
     description: 'Operações relacionadas com os artigos do portal.'
   },{
+    name: 'Cursos',
+    description: 'Operações relacionadas com os cursos em oferecimento no portal.'
+  },{
     name: 'Categorias',
     description: 'Operações relacionadas com as categorias do portal.'
   }],
@@ -67,6 +72,15 @@ export default {
       put: editArticlePath,
       delete: deleteArticlePath
     },
+    '/courses': {
+      post: addCoursePath,
+      get: loadCoursesPath
+    },
+    '/courses/{courseId}': {
+      get: loadCourseByIdPath,
+      put: editCoursePath,
+      delete: deleteCoursePath
+    },
     '/categories': {
       post: addCategoryPath,
       get: loadCategoriesPath
@@ -89,6 +103,10 @@ export default {
     articleLookup: articleLookupSchema,
     articleHeader: articleHeaderSchema,
     addArticle: addArticleSchema,
+    course: courseSchema,
+    courseLookup: courseLookupSchema,
+    courseHeader: courseHeaderSchema,
+    addCourse: addCourseSchema,
     category: categorySchema,
     addCategory: addCategorySchema,
     categoriesTree: categoriesTreeSchema
@@ -106,6 +124,7 @@ export default {
     schemas: {
       Usuário: userSchema,
       Artigo: articleSchema,
+      Curso: courseSchema,
       Categoria: categorySchema
     }
   }

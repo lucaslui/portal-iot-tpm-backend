@@ -1,0 +1,5 @@
+export * from './add-course-path'
+export * from './delete-course-path'
+export * from './edit-course-path'
+export * from './load-courses-path'
+export * from './load-course-by-id-path'
