@@ -1,13 +1,16 @@
 import { MongoHelper } from '@/infrastructure/database/mongodb/mongo-helper'
+import { LoadArticleByIdParams, ArticleViewModel } from '@/usecases/boundaries/inputs/article/load-article-by-id'
 import { LoadArticlesQueryModel, LoadArticlesResponseModel } from '@/usecases/boundaries/inputs/article/load-articles'
 import { LoadCoursesQueryModel, LoadCoursesResponseModel } from '@/usecases/boundaries/inputs/course/load-courses'
+import { LoadPortalArticleByIdRepository } from '@/usecases/boundaries/outputs/database/portal/load-portal-article-by-id-repository'
 import { LoadPortalArticlesRepository } from '@/usecases/boundaries/outputs/database/portal/load-portal-articles-repository'
 import { LoadPortalCoursesRepository } from '@/usecases/boundaries/outputs/database/portal/load-portal-courses-repository'
 import { FilterQuery } from 'mongodb'
 
 export class PortalMongoRepository implements
 LoadPortalCoursesRepository,
-LoadPortalArticlesRepository {
+LoadPortalArticlesRepository,
+LoadPortalArticleByIdRepository {
   async loadCourses (query?: LoadCoursesQueryModel): Promise<LoadCoursesResponseModel> {
     const courseCollection = await MongoHelper.getCollection('courses')
     const pipeline: object[] = []
@@ -303,5 +306,104 @@ LoadPortalArticlesRepository {
       totalPages: Math.ceil(count / (query.limit ?? 1)),
       totalItems: count
     }
+  }
+
+  async loadArticlesById (params: LoadArticleByIdParams): Promise<ArticleViewModel> {
+    const articleCollection = await MongoHelper.getCollection('articles')
+    const pipeline: object[] = []
+
+    pipeline.push({ $match: { _id: MongoHelper.toObjectId(params.articleId) } })
+
+    pipeline.push({
+      $lookup: {
+        from: 'categories',
+        // localField: 'categoryIds',
+        // foreignField: '_id',
+        // as: 'categories',
+        // pipeline: [
+        //   {
+        //     $project: {
+        //       _id: false,
+        //       id: '$_id',
+        //       name: '$name',
+        //       description: '$description'
+        //     }
+        //   }
+        // ]
+        let: { categoryIds: '$categoryIds' },
+        pipeline: [
+          {
+            $match: {
+              $expr: { $in: ['$_id', '$$categoryIds'] }
+            }
+          },
+          {
+            $addFields: {
+              sort: {
+                $indexOfArray: ['$$categoryIds', '$_id']
+              }
+            }
+          },
+          { $sort: { sort: 1 } },
+          { $addFields: { sort: '$$REMOVE' } },
+          {
+            $project: {
+              _id: false,
+              id: '$_id',
+              name: '$name',
+              description: '$description'
+            }
+          }
+        ],
+        as: 'categories'
+      }
+    })
+
+    pipeline.push({
+      $lookup: {
+        from: 'users',
+        localField: 'userId',
+        foreignField: '_id',
+        as: 'user',
+        pipeline: [
+          {
+            $project: {
+              _id: false,
+              id: '$_id',
+              name: '$name',
+              email: '$email',
+              occupation: '$occupation',
+              interests: '$interests',
+              about: '$about',
+              imageUrl: '$imageUrl'
+            }
+          }
+        ]
+      }
+    })
+
+    pipeline.push({
+      $project: {
+        _id: false,
+        id: '$_id',
+        title: '$title',
+        description: '$description',
+        type: '$type',
+        state: '$state',
+        readTime: '$readTime',
+        content: '$content',
+        imageUrl: '$imageUrl',
+        user: {
+          $arrayElemAt: ['$user', 0]
+        },
+        categories: '$categories',
+        updatedAt: '$updatedAt',
+        createdAt: '$createdAt'
+      }
+    })
+
+    const article = await articleCollection.aggregate(pipeline).toArray()
+
+    return article[0]
   }
 }
