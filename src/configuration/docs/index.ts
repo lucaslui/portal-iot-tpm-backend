@@ -11,7 +11,7 @@ import { changeUserPasswordPath } from './paths/user/change-user-password-path'
 import { loadCategoriesTreePath } from './paths/category/load-categories-tree-path'
 import { addCoursePath, loadCoursesPath, loadCourseByIdPath, editCoursePath, deleteCoursePath } from '@/configuration/docs/paths/course'
 import { addCourseSchema, courseHeaderSchema, courseLookupSchema, courseSchema } from '@/configuration/docs/schemas/course'
-import { loadPortalCoursesPath } from '@/configuration/docs/paths/portal'
+import { loadPortalArticlesPath, loadPortalCoursesPath } from '@/configuration/docs/paths/portal'
 
 export default {
   openapi: '3.0.0',
@@ -55,6 +55,9 @@ export default {
   paths: {
     '/login': loginPath,
     '/signup': signupPath,
+    '/portal/artiles': {
+      get: loadPortalArticlesPath
+    },
     '/portal/courses': {
       get: loadPortalCoursesPath
     },
