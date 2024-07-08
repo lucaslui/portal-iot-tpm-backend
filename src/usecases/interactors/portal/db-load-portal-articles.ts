@@ -8,7 +8,8 @@ export class DbLoadPortalArticles implements LoadPortalArticles {
   ) { }
 
   async load (query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
-    const articles = await this.loadPortalArticlesRepository.loadArticles(query)
+    const queryWithState = { ...query, state: 'published' }
+    const articles = await this.loadPortalArticlesRepository.loadArticles(queryWithState)
     return articles
   }
 }
