@@ -204,7 +204,7 @@ LoadArticleByIdRepository {
     const articles = await articleCollection.aggregate(pipeline).toArray()
 
     return {
-      articles,
+      data: articles,
       count: articles.length,
       page: query.page,
       totalPages: Math.ceil(count / (query.limit ?? 1)),

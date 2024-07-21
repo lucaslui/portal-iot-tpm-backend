@@ -11,7 +11,7 @@ export class LoadCoursesController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { page, limit, type, search, userId, categoryIds, month, year } = httpRequest.query
-      const articles = await this.loadCourses.load({
+      const courses = await this.loadCourses.load({
         page,
         limit,
         search,
@@ -21,7 +21,7 @@ export class LoadCoursesController implements Controller {
         month,
         year
       })
-      return ok(articles)
+      return ok(courses)
     } catch (error) {
       return serverError(error)
     }

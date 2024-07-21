@@ -12,7 +12,7 @@ export type LoadArticlesQueryModel = {
   year?: number
 }
 
-export type LoadArticlesResponseModel = {
+export type LoadPortalArticlesResponseModel = {
   articles: Array<Omit<ArticleViewModel, 'content'>>
   count: number
   page: number
@@ -21,5 +21,5 @@ export type LoadArticlesResponseModel = {
 }
 
 export interface LoadPortalArticles {
-  load: (query?: LoadArticlesQueryModel) => Promise<LoadArticlesResponseModel>
+  load: (query?: LoadArticlesQueryModel) => Promise<LoadPortalArticlesResponseModel>
 }

@@ -1,5 +1,5 @@
-import { LoadArticlesQueryModel, LoadArticlesResponseModel } from '@/usecases/boundaries/inputs/article/load-articles'
-import { LoadPortalArticles } from '@/usecases/boundaries/inputs/portal/load-portal-articles'
+import { LoadArticlesQueryModel } from '@/usecases/boundaries/inputs/article/load-articles'
+import { LoadPortalArticles, LoadPortalArticlesResponseModel } from '@/usecases/boundaries/inputs/portal/load-portal-articles'
 import { LoadPortalArticlesRepository } from '@/usecases/boundaries/outputs/database/portal/load-portal-articles-repository'
 
 export class DbLoadPortalArticles implements LoadPortalArticles {
@@ -7,7 +7,7 @@ export class DbLoadPortalArticles implements LoadPortalArticles {
     private readonly loadPortalArticlesRepository: LoadPortalArticlesRepository
   ) { }
 
-  async load (query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
+  async load (query?: LoadArticlesQueryModel): Promise<LoadPortalArticlesResponseModel> {
     const queryWithState = { ...query, state: 'published' }
     const articles = await this.loadPortalArticlesRepository.loadArticles(queryWithState)
     return articles

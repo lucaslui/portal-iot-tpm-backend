@@ -1,7 +1,8 @@
 import { MongoHelper } from '@/infrastructure/database/mongodb/mongo-helper'
 import { LoadArticleByIdParams, ArticleViewModel } from '@/usecases/boundaries/inputs/article/load-article-by-id'
-import { LoadArticlesQueryModel, LoadArticlesResponseModel } from '@/usecases/boundaries/inputs/article/load-articles'
+import { LoadArticlesQueryModel } from '@/usecases/boundaries/inputs/article/load-articles'
 import { LoadCoursesQueryModel, LoadCoursesResponseModel } from '@/usecases/boundaries/inputs/course/load-courses'
+import { LoadPortalArticlesResponseModel } from '@/usecases/boundaries/inputs/portal/load-portal-articles'
 import { LoadPortalArticleByIdRepository } from '@/usecases/boundaries/outputs/database/portal/load-portal-article-by-id-repository'
 import { LoadPortalArticlesRepository } from '@/usecases/boundaries/outputs/database/portal/load-portal-articles-repository'
 import { LoadPortalCoursesRepository } from '@/usecases/boundaries/outputs/database/portal/load-portal-courses-repository'
@@ -159,7 +160,7 @@ LoadPortalArticleByIdRepository {
     }
   }
 
-  async loadArticles (query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
+  async loadArticles (query?: LoadArticlesQueryModel): Promise<LoadPortalArticlesResponseModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const pipeline: object[] = []
 

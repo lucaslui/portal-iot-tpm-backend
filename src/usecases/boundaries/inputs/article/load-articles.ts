@@ -1,4 +1,5 @@
 import { ArticleViewModel } from '@/usecases/boundaries/inputs/article/load-article-by-id'
+import { PaginationModel } from '@/usecases/shared/pagination'
 
 export type LoadArticlesQueryModel = {
   page?: number
@@ -12,13 +13,7 @@ export type LoadArticlesQueryModel = {
   year?: number
 }
 
-export type LoadArticlesResponseModel = {
-  articles: Array<Omit<ArticleViewModel, 'content'>>
-  count: number
-  page: number
-  totalPages: number
-  totalItems: number
-}
+export type LoadArticlesResponseModel = PaginationModel<Omit<ArticleViewModel, 'content'>>
 
 export interface LoadArticles {
   load: (query?: LoadArticlesQueryModel) => Promise<LoadArticlesResponseModel>
