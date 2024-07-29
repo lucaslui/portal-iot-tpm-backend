@@ -290,6 +290,8 @@ LoadCourseByIdRepository {
         description: '$description',
         type: '$type',
         observation: '$observation',
+        price: '$price',
+        contact: '$contact',
         imageUrl: '$imageUrl',
         landingPageUrl: '$landingPageUrl',
         registrationPeriod: '$registrationPeriod',

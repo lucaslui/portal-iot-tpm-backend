@@ -8,6 +8,15 @@ export type CourseViewModel = {
   description: string
   content: string
   imageUrl: string
+  price: {
+    normal: string
+    discount: string
+    until: Date
+  }
+  contact: {
+    phone: string
+    email: string
+  }
   type: string
   state: string
   readTime: number
