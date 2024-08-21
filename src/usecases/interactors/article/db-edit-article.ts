@@ -11,8 +11,10 @@ export class DbEditArticle implements EditArticle {
   ) { }
 
   async edit (articleId: string, newArticle: EditArticleModel, userId: string): Promise<boolean> {
-    const oldArticle = await this.articleRepository.loadById({ articleId })
     let newArticleRepositoryModel: EditArticleRepositoryModel = { ...newArticle }
+
+    const oldArticle = await this.articleRepository.loadById({ articleId })
+
     if (oldArticle.user.id.toString() === userId.toString()) {
       if (newArticle.imageBinary) {
         const imageUrl = await this.imageRepository.upload(newArticle.imageBinary, 'thumbnails')
@@ -75,12 +77,16 @@ export class DbEditArticle implements EditArticle {
   }
 
   private async replaceBinaryToUrlImages (content: string, binaryImages: string[]): Promise<string> {
-    let newContent
-
-    await Promise.all(binaryImages.map(async image => {
-      const imageUrl = await this.imageRepository.upload(`${image}`, 'contents')
-      newContent = content.replace(`src="${image}"`, `src="${imageUrl}"`)
+    const urlImages = await Promise.all(binaryImages.map(async imageBinary => {
+      const imageUrl = await this.imageRepository.upload(imageBinary, 'contents')
+      return imageUrl
     }))
+
+    let newContent = content
+
+    binaryImages.forEach((imageBinary, index) => {
+      newContent = newContent.replace(`src="${imageBinary}"`, `src="${urlImages[index]}"`)
+    })
 
     return newContent
   }
