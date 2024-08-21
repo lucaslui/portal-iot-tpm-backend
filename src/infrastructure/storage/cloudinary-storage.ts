@@ -16,10 +16,16 @@ export class CloudinaryImageStorage implements UploadImageStorage, DeleteImageSt
     })
   }
 
-  async upload (file: Express.Multer.File, folder: string): Promise<string> {
-    const b64 = file.buffer.toString('base64')
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    const dataURI = `data:${file.mimetype};base64,${b64}`
+  async upload (file: Express.Multer.File | string, folder: string): Promise<string> {
+    let dataURI = ''
+
+    if (typeof file === 'string') {
+      dataURI = file
+    } else {
+      const b64 = file.buffer.toString('base64')
+      dataURI = `data:${file.mimetype};base64,${b64}`
+    }
+
     const response = await cloudinary.uploader.upload(dataURI, { folder })
     return response.secure_url
   }

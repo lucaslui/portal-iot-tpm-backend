@@ -17,14 +17,71 @@ export class DbEditArticle implements EditArticle {
       if (newArticle.imageBinary) {
         const imageUrl = await this.imageRepository.upload(newArticle.imageBinary, 'thumbnails')
         if (oldArticle.imageUrl) {
-          const fileId = oldArticle.imageUrl.split('/').pop()
-          await this.imageRepository.delete(fileId)
+          const fileId = oldArticle.imageUrl.split('/').pop().split('.')[0]
+          await this.imageRepository.delete(`thumbnails/${fileId}`)
         }
         newArticleRepositoryModel = { ...newArticleRepositoryModel, imageUrl }
       }
+
+      const newImages = this.getAllImagesFromContent(newArticle.content)
+      const oldImages = this.getAllImagesFromContent(oldArticle.content)
+
+      const newUrlImages = this.getUrlImagesFromAllImages(newImages)
+      const oldUrlImages = this.getUrlImagesFromAllImages(oldImages)
+
+      const urlImagesToDelete = oldUrlImages.filter(oldImage => !newUrlImages.includes(oldImage))
+
+      if (urlImagesToDelete.length > 0) {
+        await Promise.all(urlImagesToDelete.map(async imageUrl => {
+          const fileId = imageUrl.split('/').pop().split('.')[0]
+          await this.imageRepository.delete(`contents/${fileId}`)
+        }))
+      }
+
+      const binaryImages = this.getBinaryImagesFromAllImages(newImages)
+
+      if (binaryImages.length > 0) {
+        const newContent = await this.replaceBinaryToUrlImages(newArticle.content, binaryImages)
+        newArticleRepositoryModel = { ...newArticleRepositoryModel, content: newContent }
+      }
+
       await this.articleRepository.edit(articleId, newArticleRepositoryModel)
+
       return true
     }
     return false
+  }
+
+  private getAllImagesFromContent (content: string): string[] {
+    const regex = /<img[^>]+src="([^">]+)"/g
+
+    const images: string[] = []
+
+    let match
+
+    while ((match = regex.exec(content))) {
+      images.push(match[1])
+    }
+
+    return images
+  }
+
+  private getBinaryImagesFromAllImages (images: string[]): string[] {
+    return images.filter(image => image.startsWith('data:'))
+  }
+
+  private getUrlImagesFromAllImages (images: string[]): string[] {
+    return images.filter(image => image.startsWith('https://'))
+  }
+
+  private async replaceBinaryToUrlImages (content: string, binaryImages: string[]): Promise<string> {
+    let newContent
+
+    await Promise.all(binaryImages.map(async image => {
+      const imageUrl = await this.imageRepository.upload(`${image}`, 'contents')
+      newContent = content.replace(`src="${image}"`, `src="${imageUrl}"`)
+    }))
+
+    return newContent
   }
 }
