@@ -9,13 +9,8 @@ import { LoadCourseByIdRepository } from '@/usecases/boundaries/outputs/database
 import { LoadCoursesRepository } from '@/usecases/boundaries/outputs/database/course/load-courses-repository'
 import { FilterQuery } from 'mongodb'
 
-export class CourseMongoRepository implements
-AddCourseRepository,
-EditCourseRepository,
-DeleteCourseRepository,
-LoadCoursesRepository,
-LoadCourseByIdRepository {
-  async add (course: AddCourseRepositoryModel): Promise<CourseModel> {
+export class CourseMongoRepository implements AddCourseRepository, EditCourseRepository, DeleteCourseRepository, LoadCoursesRepository, LoadCourseByIdRepository {
+  async add(course: AddCourseRepositoryModel): Promise<CourseModel> {
     const courseCollection = await MongoHelper.getCollection('courses')
     const result = await courseCollection.insertOne({
       title: course.title,
@@ -33,7 +28,7 @@ LoadCourseByIdRepository {
     return MongoHelper.map(courseAdded)
   }
 
-  async edit (courseId: string, newCourse: EditCourseRepositoryModel): Promise<void> {
+  async edit(courseId: string, newCourse: EditCourseRepositoryModel): Promise<void> {
     const courseCollection = await MongoHelper.getCollection('courses')
     const newCourseWithAllowedFields = {
       title: newCourse.title,
@@ -55,12 +50,12 @@ LoadCourseByIdRepository {
     await courseCollection.updateOne({ _id: MongoHelper.toObjectId(courseId) }, { $set: { ...newCourseWithoutNullOrUndefinedValues } })
   }
 
-  async delete (courseId: string): Promise<void> {
+  async delete(courseId: string): Promise<void> {
     const courseCollection = await MongoHelper.getCollection('courses')
     await courseCollection.deleteOne({ _id: MongoHelper.toObjectId(courseId) })
   }
 
-  async load (query?: LoadCoursesQueryModel): Promise<LoadCoursesResponseModel> {
+  async load(query?: LoadCoursesQueryModel): Promise<LoadCoursesResponseModel> {
     const courseCollection = await MongoHelper.getCollection('courses')
     const pipeline: object[] = []
 
@@ -81,10 +76,7 @@ LoadCourseByIdRepository {
     pipeline.push({ $match: queryMatch })
 
     if (query.search) {
-      queryMatch.$or = [
-        { title: { $regex: query.search, $options: 'i' } },
-        { description: { $regex: query.search, $options: 'i' } }
-      ]
+      queryMatch.$or = [{ title: { $regex: query.search, $options: 'i' } }, { description: { $regex: query.search, $options: 'i' } }]
     }
 
     pipeline.push({
@@ -193,7 +185,12 @@ LoadCourseByIdRepository {
     if (query.page && query.limit) {
       const limitAsNumber = Number(query.limit)
       const pageAsNumber = Number(query.page)
-      pipeline.push({ $skip: pageAsNumber ? (pageAsNumber * limitAsNumber - limitAsNumber) : 0 }, { $limit: limitAsNumber })
+      pipeline.push(
+        {
+          $skip: pageAsNumber ? pageAsNumber * limitAsNumber - limitAsNumber : 0
+        },
+        { $limit: limitAsNumber }
+      )
     }
 
     const count = await courseCollection.countDocuments(queryMatch)
@@ -208,7 +205,7 @@ LoadCourseByIdRepository {
     }
   }
 
-  async loadById (params: LoadCourseByIdParams): Promise<CourseViewModel> {
+  async loadById(params: LoadCourseByIdParams): Promise<CourseViewModel> {
     const courseCollection = await MongoHelper.getCollection('courses')
     const pipeline: object[] = []
 

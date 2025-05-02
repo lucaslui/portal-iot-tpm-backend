@@ -2,11 +2,9 @@ import { LoadUserProfile, UserProfileViewModel } from '@/usecases/boundaries/inp
 import { LoadUserByIdRepository } from '@/usecases/boundaries/outputs/database/auth/load-user-by-id-repository'
 
 export class DbLoadUserProfile implements LoadUserProfile {
-  constructor (
-    private readonly userRepository: LoadUserByIdRepository
-  ) {}
+  constructor(private readonly userRepository: LoadUserByIdRepository) {}
 
-  async loadProfile (userId: string): Promise<UserProfileViewModel> {
+  async loadProfile(userId: string): Promise<UserProfileViewModel> {
     const user = await this.userRepository.loadById(userId)
     return {
       name: user.name,

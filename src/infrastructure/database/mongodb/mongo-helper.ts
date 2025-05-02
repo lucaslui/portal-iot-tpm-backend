@@ -4,7 +4,7 @@ export const MongoHelper = {
   client: null as MongoClient,
   uri: null as string,
 
-  async connect (uri: string): Promise<void> {
+  async connect(uri: string): Promise<void> {
     this.uri = uri
     this.client = await MongoClient.connect(uri, {
       useNewUrlParser: true,
@@ -12,12 +12,12 @@ export const MongoHelper = {
     })
   },
 
-  async disconnect (): Promise<void> {
+  async disconnect(): Promise<void> {
     await this.client.close()
     this.client = null
   },
 
-  async getCollection (name: string): Promise<Collection> {
+  async getCollection(name: string): Promise<Collection> {
     if (!this.client?.isConnected()) {
       await this.connect(this.uri)
     }
@@ -29,7 +29,7 @@ export const MongoHelper = {
   },
 
   mapToObjectId: (data: string[]): any => {
-    return data.map(d => MongoHelper.toObjectId(d))
+    return data.map((d) => MongoHelper.toObjectId(d))
   },
 
   map: (data: any): any => {
@@ -38,6 +38,6 @@ export const MongoHelper = {
   },
 
   mapCollection: (collection: any[]): any[] => {
-    return collection.map(c => MongoHelper.map(c))
+    return collection.map((c) => MongoHelper.map(c))
   }
 }

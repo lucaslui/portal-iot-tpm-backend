@@ -4,11 +4,9 @@ import { Controller } from '@/application/protocols/controller'
 import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 
 export class LoadUsersController implements Controller {
-  constructor (
-    private readonly loadUsers: LoadUsers
-  ) { }
+  constructor(private readonly loadUsers: LoadUsers) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { page } = httpRequest.query
       const users = await this.loadUsers.loadUsers(page)

@@ -2,18 +2,22 @@ export const deleteCategoryPath = {
   tags: ['Categorias'],
   summary: 'Deleta uma categoria no portal',
   description: 'Deleta uma categoria no portal. O identicador da categoria é obrigatório. Essa rota só pode ser executada por **administradores**',
-  security: [{
-    apiKeyAuth: []
-  }],
-  parameters: [{
-    name: 'categoryId',
-    in: 'path',
-    description: 'O identificador único da categoria',
-    required: true,
-    schema: {
-      type: 'string'
+  security: [
+    {
+      apiKeyAuth: []
     }
-  }],
+  ],
+  parameters: [
+    {
+      name: 'categoryId',
+      in: 'path',
+      description: 'O identificador único da categoria',
+      required: true,
+      schema: {
+        type: 'string'
+      }
+    }
+  ],
   responses: {
     204: {
       $ref: '#/components/noContent'

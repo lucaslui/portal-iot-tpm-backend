@@ -8,11 +8,8 @@ import { LoadPortalArticlesRepository } from '@/usecases/boundaries/outputs/data
 import { LoadPortalCoursesRepository } from '@/usecases/boundaries/outputs/database/portal/load-portal-courses-repository'
 import { FilterQuery } from 'mongodb'
 
-export class PortalMongoRepository implements
-LoadPortalCoursesRepository,
-LoadPortalArticlesRepository,
-LoadPortalArticleByIdRepository {
-  async loadCourses (query?: LoadCoursesQueryModel): Promise<LoadCoursesResponseModel> {
+export class PortalMongoRepository implements LoadPortalCoursesRepository, LoadPortalArticlesRepository, LoadPortalArticleByIdRepository {
+  async loadCourses(query?: LoadCoursesQueryModel): Promise<LoadCoursesResponseModel> {
     const courseCollection = await MongoHelper.getCollection('courses')
     const pipeline: object[] = []
 
@@ -33,10 +30,7 @@ LoadPortalArticleByIdRepository {
     pipeline.push({ $match: queryMatch })
 
     if (query.search) {
-      queryMatch.$or = [
-        { title: { $regex: query.search, $options: 'i' } },
-        { description: { $regex: query.search, $options: 'i' } }
-      ]
+      queryMatch.$or = [{ title: { $regex: query.search, $options: 'i' } }, { description: { $regex: query.search, $options: 'i' } }]
     }
 
     pipeline.push({
@@ -145,7 +139,12 @@ LoadPortalArticleByIdRepository {
     if (query.page && query.limit) {
       const limitAsNumber = Number(query.limit)
       const pageAsNumber = Number(query.page)
-      pipeline.push({ $skip: pageAsNumber ? (pageAsNumber * limitAsNumber - limitAsNumber) : 0 }, { $limit: limitAsNumber })
+      pipeline.push(
+        {
+          $skip: pageAsNumber ? pageAsNumber * limitAsNumber - limitAsNumber : 0
+        },
+        { $limit: limitAsNumber }
+      )
     }
 
     const count = await courseCollection.countDocuments(queryMatch)
@@ -160,7 +159,7 @@ LoadPortalArticleByIdRepository {
     }
   }
 
-  async loadArticles (query?: LoadArticlesQueryModel): Promise<LoadPortalArticlesResponseModel> {
+  async loadArticles(query?: LoadArticlesQueryModel): Promise<LoadPortalArticlesResponseModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const pipeline: object[] = []
 
@@ -185,10 +184,7 @@ LoadPortalArticleByIdRepository {
     pipeline.push({ $match: queryMatch })
 
     if (query.search) {
-      queryMatch.$or = [
-        { title: { $regex: query.search, $options: 'i' } },
-        { description: { $regex: query.search, $options: 'i' } }
-      ]
+      queryMatch.$or = [{ title: { $regex: query.search, $options: 'i' } }, { description: { $regex: query.search, $options: 'i' } }]
     }
 
     pipeline.push({
@@ -294,7 +290,12 @@ LoadPortalArticleByIdRepository {
     if (query.page && query.limit) {
       const limitAsNumber = Number(query.limit)
       const pageAsNumber = Number(query.page)
-      pipeline.push({ $skip: pageAsNumber ? (pageAsNumber * limitAsNumber - limitAsNumber) : 0 }, { $limit: limitAsNumber })
+      pipeline.push(
+        {
+          $skip: pageAsNumber ? pageAsNumber * limitAsNumber - limitAsNumber : 0
+        },
+        { $limit: limitAsNumber }
+      )
     }
 
     const count = await articleCollection.countDocuments(queryMatch)
@@ -309,11 +310,13 @@ LoadPortalArticleByIdRepository {
     }
   }
 
-  async loadArticlesById (params: LoadArticleByIdParams): Promise<ArticleViewModel> {
+  async loadArticlesById(params: LoadArticleByIdParams): Promise<ArticleViewModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const pipeline: object[] = []
 
-    pipeline.push({ $match: { _id: MongoHelper.toObjectId(params.articleId) } })
+    pipeline.push({
+      $match: { _id: MongoHelper.toObjectId(params.articleId) }
+    })
 
     pipeline.push({
       $lookup: {

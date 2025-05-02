@@ -5,14 +5,14 @@ import { UpdateAccessTokenRepository } from '@/usecases/boundaries/outputs/datab
 import { Authentication, AuthenticationModel, AuthenticationViewModel } from '@/usecases/boundaries/inputs/auth/authentication'
 
 export class DbAuthentication implements Authentication {
-  constructor (
+  constructor(
     private readonly loadUserByEmailRepository: LoadUserByEmailRepository,
     private readonly hashComparer: HashComparer,
     private readonly encrypter: Encrypter,
     private readonly updateAccessTokenRepository: UpdateAccessTokenRepository
   ) {}
 
-  async auth (authentication: AuthenticationModel): Promise<AuthenticationViewModel> {
+  async auth(authentication: AuthenticationModel): Promise<AuthenticationViewModel> {
     const user = await this.loadUserByEmailRepository.loadByEmail(authentication.email)
     if (user) {
       const isAuthorized = await this.hashComparer.compare(authentication.password, user.password)

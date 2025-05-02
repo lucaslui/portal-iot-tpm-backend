@@ -10,13 +10,8 @@ import { FilterQuery } from 'mongodb'
 import { LoadArticleByIdRepository } from '@/usecases/boundaries/outputs/database/article/load-article-by-id-repository'
 import { LoadArticleByIdParams, ArticleViewModel } from '@/usecases/boundaries/inputs/article/load-article-by-id'
 
-export class ArticleMongoRepository implements
-AddArticleRepository,
-EditArticleRepository,
-DeleteArticleRepository,
-LoadArticlesRepository,
-LoadArticleByIdRepository {
-  async add (article: AddArticleRepositoryModel): Promise<ArticleModel> {
+export class ArticleMongoRepository implements AddArticleRepository, EditArticleRepository, DeleteArticleRepository, LoadArticlesRepository, LoadArticleByIdRepository {
+  async add(article: AddArticleRepositoryModel): Promise<ArticleModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const result = await articleCollection.insertOne({
       title: article.title,
@@ -35,7 +30,7 @@ LoadArticleByIdRepository {
     return MongoHelper.map(articleAdded)
   }
 
-  async edit (articleId: string, newArticle: EditArticleRepositoryModel): Promise<void> {
+  async edit(articleId: string, newArticle: EditArticleRepositoryModel): Promise<void> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const newArticleWithAllowedFields = {
       title: newArticle.title,
@@ -58,12 +53,14 @@ LoadArticleByIdRepository {
     await articleCollection.updateOne({ _id: MongoHelper.toObjectId(articleId) }, { $set: { ...newArticleWithoutNullOrUndefinedValues } })
   }
 
-  async delete (articleId: string): Promise<void> {
+  async delete(articleId: string): Promise<void> {
     const articleCollection = await MongoHelper.getCollection('articles')
-    await articleCollection.deleteOne({ _id: MongoHelper.toObjectId(articleId) })
+    await articleCollection.deleteOne({
+      _id: MongoHelper.toObjectId(articleId)
+    })
   }
 
-  async load (query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
+  async load(query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const pipeline: object[] = []
 
@@ -88,10 +85,7 @@ LoadArticleByIdRepository {
     pipeline.push({ $match: queryMatch })
 
     if (query.search) {
-      queryMatch.$or = [
-        { title: { $regex: query.search, $options: 'i' } },
-        { description: { $regex: query.search, $options: 'i' } }
-      ]
+      queryMatch.$or = [{ title: { $regex: query.search, $options: 'i' } }, { description: { $regex: query.search, $options: 'i' } }]
     }
 
     pipeline.push({
@@ -197,7 +191,12 @@ LoadArticleByIdRepository {
     if (query.page && query.limit) {
       const limitAsNumber = Number(query.limit)
       const pageAsNumber = Number(query.page)
-      pipeline.push({ $skip: pageAsNumber ? (pageAsNumber * limitAsNumber - limitAsNumber) : 0 }, { $limit: limitAsNumber })
+      pipeline.push(
+        {
+          $skip: pageAsNumber ? pageAsNumber * limitAsNumber - limitAsNumber : 0
+        },
+        { $limit: limitAsNumber }
+      )
     }
 
     const count = await articleCollection.countDocuments(queryMatch)
@@ -212,11 +211,13 @@ LoadArticleByIdRepository {
     }
   }
 
-  async loadById (params: LoadArticleByIdParams): Promise<ArticleViewModel> {
+  async loadById(params: LoadArticleByIdParams): Promise<ArticleViewModel> {
     const articleCollection = await MongoHelper.getCollection('articles')
     const pipeline: object[] = []
 
-    pipeline.push({ $match: { _id: MongoHelper.toObjectId(params.articleId) } })
+    pipeline.push({
+      $match: { _id: MongoHelper.toObjectId(params.articleId) }
+    })
 
     pipeline.push({
       $lookup: {

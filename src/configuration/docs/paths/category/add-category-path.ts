@@ -2,9 +2,11 @@ export const addCategoryPath = {
   tags: ['Categorias'],
   summary: 'Adicionar uma nova categoria ao portal',
   description: 'Adicionar uma nova categoria ao portal. Nome, descrição e identificador da categoria pai são obrigatórios. Essa rota só pode ser executada por **administradores**',
-  security: [{
-    apiKeyAuth: []
-  }],
+  security: [
+    {
+      apiKeyAuth: []
+    }
+  ],
   requestBody: {
     required: true,
     description: 'Dados da categoria',

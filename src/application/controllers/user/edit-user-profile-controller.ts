@@ -5,12 +5,12 @@ import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 import { Validation } from '@/application/protocols/validation'
 
 export class EditUserProfileController implements Controller {
-  constructor (
+  constructor(
     private readonly editUserProfile: EditUserProfile,
     private readonly validation: Validation
-  ) { }
+  ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.body)
       if (error) {

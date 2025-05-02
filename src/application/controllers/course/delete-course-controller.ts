@@ -4,11 +4,9 @@ import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 import { DeleteCourse } from '@/usecases/boundaries/inputs/course/delete-course'
 
 export class DeleteCourseController implements Controller {
-  constructor (
-    private readonly deleteCourse: DeleteCourse
-  ) {}
+  constructor(private readonly deleteCourse: DeleteCourse) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { articleId } = httpRequest.params
       const isSuccessful = await this.deleteCourse.delete(httpRequest.userId, articleId)

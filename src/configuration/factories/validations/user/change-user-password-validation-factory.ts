@@ -10,7 +10,7 @@ export const makeChangeUserPasswordValidation = (): ValidationComposite => {
     validations.push(new RequiredFieldsValidation(field))
   }
 
-  validations.push(new CompareFieldsValidation('newPassword','newPasswordConfirmation'))
+  validations.push(new CompareFieldsValidation('newPassword', 'newPasswordConfirmation'))
 
   return new ValidationComposite(validations)
 }

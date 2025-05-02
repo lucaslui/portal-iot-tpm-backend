@@ -1,4 +1,3 @@
-
 import { LogControllerDecorator } from '../../decorators/log-controller-decorator'
 import { LogMongoRepository } from '../../../infrastructure/database/mongodb/log-mongo-repository'
 import { Controller } from '@/application/protocols/controller'

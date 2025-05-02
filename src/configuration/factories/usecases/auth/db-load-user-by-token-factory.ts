@@ -1,4 +1,3 @@
-
 import { DbLoadUserByToken } from '@/usecases/interactors/auth/db-load-user-by-token'
 import { LoadUserByToken } from '@/usecases/boundaries/inputs/auth/load-user-by-token'
 import { JwtAdapter } from '@/infrastructure/criptography/jwt-adapter'

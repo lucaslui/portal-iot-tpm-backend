@@ -5,12 +5,12 @@ import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 import { Validation } from '@/application/protocols/validation'
 
 export class AddCategoryController implements Controller {
-  constructor (
+  constructor(
     private readonly addCategory: AddCategory,
     private readonly validation: Validation
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.body)
       if (error) {

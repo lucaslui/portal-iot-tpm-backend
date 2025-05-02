@@ -96,7 +96,8 @@ export const addCourseSchema = {
   },
   example: {
     title: 'Internet das Coisas e Blockchain para Suporte a Contratos Inteligentes',
-    description: 'O objetivo do curso é preparar profissionais para a criação e acompanhamento do desenvolvimento de soluções IoT integradas com blockchain e com suporte a contratos inteligentes. Será disponibilizado ao aluno um ambiente de simulação para o desenvolvimento do conteúdo abordado no curso e para a criação de projetos de IoT integrados ao blockchain',
+    description:
+      'O objetivo do curso é preparar profissionais para a criação e acompanhamento do desenvolvimento de soluções IoT integradas com blockchain e com suporte a contratos inteligentes. Será disponibilizado ao aluno um ambiente de simulação para o desenvolvimento do conteúdo abordado no curso e para a criação de projetos de IoT integrados ao blockchain',
     type: 'Curso de Extensão da Unicamp',
     observation: 'Aulas teóricas, simulações e apresentação de casos.',
     imageUrl: '',
@@ -110,11 +111,13 @@ export const addCourseSchema = {
       endDate: '2024-12-31',
       dates: ['2024-01-01', '2024-01-08', '2024-01-15']
     },
-    classSchedules: [{
-      weekDay: 'Segunda-feira',
-      startTime: '19:00',
-      endTime: '21:00'
-    }],
+    classSchedules: [
+      {
+        weekDay: 'Segunda-feira',
+        startTime: '19:00',
+        endTime: '21:00'
+      }
+    ],
     categoryIds: ['899f191e356c20729de564ea']
   },
   required: ['title', 'description', 'type', 'imageUrl', 'landingPageUrl', 'registrationPeriod', 'classPeriod', 'classSchedules', 'categoryIds']

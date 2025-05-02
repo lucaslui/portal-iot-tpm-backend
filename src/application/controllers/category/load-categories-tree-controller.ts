@@ -4,11 +4,9 @@ import { Controller } from '@/application/protocols/controller'
 import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 
 export class LoadCategoriesTreeController implements Controller {
-  constructor (
-    private readonly loadCategoriesTree: LoadCategoriesTree
-  ) {}
+  constructor(private readonly loadCategoriesTree: LoadCategoriesTree) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { categoryId } = httpRequest.query
       const categoriesTree = await this.loadCategoriesTree.load({

@@ -2,11 +2,9 @@ import { CourseViewModel, LoadCourseById, LoadCourseByIdParams } from '@/usecase
 import { LoadCourseByIdRepository } from '@/usecases/boundaries/outputs/database/course/load-course-by-id-repository'
 
 export class DbLoadCourseById implements LoadCourseById {
-  constructor (
-    private readonly loadCourseByIdRepository: LoadCourseByIdRepository
-  ) {}
+  constructor(private readonly loadCourseByIdRepository: LoadCourseByIdRepository) {}
 
-  async loadById (params: LoadCourseByIdParams): Promise<CourseViewModel> {
+  async loadById(params: LoadCourseByIdParams): Promise<CourseViewModel> {
     const article = await this.loadCourseByIdRepository.loadById(params)
     return article
   }

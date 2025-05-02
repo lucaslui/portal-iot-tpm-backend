@@ -4,14 +4,14 @@ import { Encrypter } from '@/usecases/boundaries/outputs/cryptograph/encrypter'
 import jwt from 'jsonwebtoken'
 
 export class JwtAdapter implements Encrypter, Decrypter {
-  constructor (private readonly secret: string) {}
+  constructor(private readonly secret: string) {}
 
-  async encrypt (value: string): Promise<string> {
+  async encrypt(value: string): Promise<string> {
     const accessToken = await jwt.sign({ id: value }, this.secret)
     return accessToken
   }
 
-  async decrypt (token: string): Promise<string | object> {
+  async decrypt(token: string): Promise<string | object> {
     const decodedToken = await jwt.verify(token, this.secret)
     return decodedToken
   }

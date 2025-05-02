@@ -5,12 +5,12 @@ import { HttpRequest, HttpResponse } from '../protocols/http'
 import { Middleware } from '../protocols/middleware'
 
 export class AuthMiddleware implements Middleware {
-  constructor (
+  constructor(
     private readonly loadUserByToken: LoadUserByToken,
     private readonly role?: string
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const accessToken = httpRequest.headers?.['x-access-token']
       if (accessToken) {

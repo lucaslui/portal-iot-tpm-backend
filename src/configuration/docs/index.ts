@@ -5,7 +5,7 @@ import { addCategoryPath, deleteCategoryPath, editCategoryPath, loadCategoriesPa
 import { accessTokenSchema, apiKeyAuthSchema, loginParamsSchema, signupParamsSchema } from './schemas/auth'
 import { addArticleSchema, articleHeaderSchema, articleLookupSchema, articleSchema } from './schemas/article'
 import { addCategorySchema, categorySchema, categoriesTreeSchema } from './schemas/category'
-import { notFoundComponent , badRequestComponent , serverErrorComponent , unauthorizedComponent, forbiddenComponent, noContentComponent } from './components'
+import { notFoundComponent, badRequestComponent, serverErrorComponent, unauthorizedComponent, forbiddenComponent, noContentComponent } from './components'
 import { userProfileSchema, userSchema } from './schemas/user'
 import { changeUserPasswordPath } from './paths/user/change-user-password-path'
 import { loadCategoriesTreePath } from './paths/category/load-categories-tree-path'
@@ -17,8 +17,7 @@ export default {
   openapi: '3.0.0',
   info: {
     title: 'Backend do Portal IoT-TPM',
-    description:
-      'Documentação da API que trata de armazenar e servir o Portal IoT-TPM.',
+    description: 'Documentação da API que trata de armazenar e servir o Portal IoT-TPM.',
     version: '1.0.0',
     contact: {
       name: 'Lucas Lui Motta',
@@ -29,29 +28,38 @@ export default {
       url: 'https://www.gnu.org/licenses/gpl-3.0.en.html'
     }
   },
-  servers: [{
-    url: '/api',
-    description: 'servidor principal'
-  }],
-  tags: [{
-    name: 'Autenticação',
-    description: 'Operações relacionadas com o acesso do usuário no portal.'
-  },{
-    name: 'Portal',
-    description: 'Operações relacionadas com o acesso do frontend aos recursos do portal.'
-  },{
-    name: 'Usuários',
-    description: 'Operações relacionadas com os usuários do portal.'
-  },{
-    name: 'Artigos',
-    description: 'Operações relacionadas com os artigos do portal.'
-  },{
-    name: 'Cursos',
-    description: 'Operações relacionadas com os cursos em oferecimento no portal.'
-  },{
-    name: 'Categorias',
-    description: 'Operações relacionadas com as categorias do portal.'
-  }],
+  servers: [
+    {
+      url: '/api',
+      description: 'servidor principal'
+    }
+  ],
+  tags: [
+    {
+      name: 'Autenticação',
+      description: 'Operações relacionadas com o acesso do usuário no portal.'
+    },
+    {
+      name: 'Portal',
+      description: 'Operações relacionadas com o acesso do frontend aos recursos do portal.'
+    },
+    {
+      name: 'Usuários',
+      description: 'Operações relacionadas com os usuários do portal.'
+    },
+    {
+      name: 'Artigos',
+      description: 'Operações relacionadas com os artigos do portal.'
+    },
+    {
+      name: 'Cursos',
+      description: 'Operações relacionadas com os cursos em oferecimento no portal.'
+    },
+    {
+      name: 'Categorias',
+      description: 'Operações relacionadas com as categorias do portal.'
+    }
+  ],
   paths: {
     '/login': loginPath,
     '/signup': signupPath,

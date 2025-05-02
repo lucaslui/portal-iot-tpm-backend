@@ -4,12 +4,12 @@ import { AddCourseRepository } from '@/usecases/boundaries/outputs/database/cour
 import { UploadImageStorage } from '@/usecases/boundaries/outputs/storage/upload-image-storage'
 
 export class DbAddCourse implements AddCourse {
-  constructor (
+  constructor(
     private readonly articleRepository: AddCourseRepository,
     private readonly imageRepository: UploadImageStorage
-  ) { }
+  ) {}
 
-  async add (article: AddCourseModel): Promise<CourseModel> {
+  async add(article: AddCourseModel): Promise<CourseModel> {
     let imageUrl = ''
     if (article.imageBinary) {
       imageUrl = await this.imageRepository.upload(article.imageBinary, 'thumbnails')

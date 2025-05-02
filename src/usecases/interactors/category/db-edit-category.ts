@@ -3,12 +3,12 @@ import { LoadCategoriesRepository } from '@/usecases/boundaries/outputs/database
 import { EditCategory, EditCategoryModel } from '@/usecases/boundaries/inputs/category/edit-category'
 
 export class DbEditCategory implements EditCategory {
-  constructor (
+  constructor(
     private readonly loadCategoriesRepository: LoadCategoriesRepository,
     private readonly editCategoryRepository: EditCategoryRepository
-  ) { }
+  ) {}
 
-  async edit (categoryId: string, newCategory: EditCategoryModel): Promise<boolean> {
+  async edit(categoryId: string, newCategory: EditCategoryModel): Promise<boolean> {
     const category = await this.loadCategoriesRepository.load({ categoryId })
     if (category) {
       await this.editCategoryRepository.edit(categoryId, newCategory)

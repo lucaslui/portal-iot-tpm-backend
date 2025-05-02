@@ -2,11 +2,9 @@ import { LoadCourses, LoadCoursesQueryModel, LoadCoursesResponseModel } from '@/
 import { LoadCoursesRepository } from '@/usecases/boundaries/outputs/database/course/load-courses-repository'
 
 export class DbLoadCourses implements LoadCourses {
-  constructor (
-    private readonly loadCoursesRepository: LoadCoursesRepository
-  ) { }
+  constructor(private readonly loadCoursesRepository: LoadCoursesRepository) {}
 
-  async load (query?: LoadCoursesQueryModel): Promise<LoadCoursesResponseModel> {
+  async load(query?: LoadCoursesQueryModel): Promise<LoadCoursesResponseModel> {
     const articles = await this.loadCoursesRepository.load(query)
     return articles
   }

@@ -3,11 +3,9 @@ import { DeleteCourseRepository } from '@/usecases/boundaries/outputs/database/c
 import { LoadCourseByIdRepository } from '@/usecases/boundaries/outputs/database/course/load-course-by-id-repository'
 
 export class DbDeleteCourse implements DeleteCourse {
-  constructor (
-    private readonly articleRepository: LoadCourseByIdRepository & DeleteCourseRepository
-  ) { }
+  constructor(private readonly articleRepository: LoadCourseByIdRepository & DeleteCourseRepository) {}
 
-  async delete (userId: string, courseId: string): Promise<boolean> {
+  async delete(userId: string, courseId: string): Promise<boolean> {
     const article = await this.articleRepository.loadById({ courseId })
     if (article[0]?.userId.toString() === userId) {
       await this.articleRepository.delete(courseId)

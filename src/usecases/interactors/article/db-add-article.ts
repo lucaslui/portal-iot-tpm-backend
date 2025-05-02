@@ -4,12 +4,12 @@ import { ArticleModel } from '@/domain/entities/article'
 import { AddArticle, AddArticleModel } from '@/usecases/boundaries/inputs/article/add-article'
 
 export class DbAddArticle implements AddArticle {
-  constructor (
+  constructor(
     private readonly articleRepository: AddArticleRepository,
     private readonly imageRepository: UploadImageStorage
-  ) { }
+  ) {}
 
-  async add (article: AddArticleModel): Promise<ArticleModel> {
+  async add(article: AddArticleModel): Promise<ArticleModel> {
     let articleToAdd: AddArticleRepositoryModel = { ...article }
 
     if (article.imageBinary) {
@@ -30,7 +30,7 @@ export class DbAddArticle implements AddArticle {
     return articleCreated
   }
 
-  private getAllImagesFromContent (content: string): string[] {
+  private getAllImagesFromContent(content: string): string[] {
     const regex = /<img[^>]+src="([^">]+)"/g
 
     const images: string[] = []
@@ -44,15 +44,17 @@ export class DbAddArticle implements AddArticle {
     return images
   }
 
-  private getBinaryImagesFromAllImages (images: string[]): string[] {
-    return images.filter(image => image.startsWith('data:'))
+  private getBinaryImagesFromAllImages(images: string[]): string[] {
+    return images.filter((image) => image.startsWith('data:'))
   }
 
-  private async replaceBinaryToUrlImages (content: string, binaryImages: string[]): Promise<string> {
-    const urlImages = await Promise.all(binaryImages.map(async imageBinary => {
-      const imageUrl = await this.imageRepository.upload(imageBinary, 'contents')
-      return imageUrl
-    }))
+  private async replaceBinaryToUrlImages(content: string, binaryImages: string[]): Promise<string> {
+    const urlImages = await Promise.all(
+      binaryImages.map(async (imageBinary) => {
+        const imageUrl = await this.imageRepository.upload(imageBinary, 'contents')
+        return imageUrl
+      })
+    )
 
     let newContent = content
 

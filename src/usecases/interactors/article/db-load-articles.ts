@@ -2,11 +2,9 @@ import { LoadArticlesRepository } from '@/usecases/boundaries/outputs/database/a
 import { LoadArticles, LoadArticlesQueryModel, LoadArticlesResponseModel } from '@/usecases/boundaries/inputs/article/load-articles'
 
 export class DbLoadArticles implements LoadArticles {
-  constructor (
-    private readonly loadArticlesRepository: LoadArticlesRepository
-  ) { }
+  constructor(private readonly loadArticlesRepository: LoadArticlesRepository) {}
 
-  async load (query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
+  async load(query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
     const articles = await this.loadArticlesRepository.load(query)
     return articles
   }

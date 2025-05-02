@@ -2,9 +2,11 @@ export const addCoursePath = {
   tags: ['Cursos'],
   summary: 'Adiciona um novo oferencimento de curso no portal',
   description: 'Adiciona um novo oferencimento de curso ao portal. Essa rota só pode ser executada por **usuários autenticados**',
-  security: [{
-    apiKeyAuth: []
-  }],
+  security: [
+    {
+      apiKeyAuth: []
+    }
+  ],
   requestBody: {
     required: true,
     description: 'Dados do curso oferecido',

@@ -3,11 +3,9 @@ import { CategoryModel } from '@/domain/entities/category'
 import { CategoriesTreeModel, LoadCategoriesTree, LoadCategoriesTreeQueryModel } from '@/usecases/boundaries/inputs/category/load-categories-tree'
 
 export class DbLoadCategoriesTree implements LoadCategoriesTree {
-  constructor (
-    private readonly loadCategoriesRepository: LoadCategoriesRepository
-  ) { }
+  constructor(private readonly loadCategoriesRepository: LoadCategoriesRepository) {}
 
-  async load (query?: LoadCategoriesTreeQueryModel): Promise<CategoriesTreeModel[]> {
+  async load(query?: LoadCategoriesTreeQueryModel): Promise<CategoriesTreeModel[]> {
     const categories = await this.loadCategoriesRepository.load()
     if (categories) {
       let tree = this.toTree(categories)
@@ -20,12 +18,12 @@ export class DbLoadCategoriesTree implements LoadCategoriesTree {
     return null
   }
 
-  toTree (categories: CategoryModel[], tree?: CategoriesTreeModel[]): CategoriesTreeModel[] {
+  toTree(categories: CategoryModel[], tree?: CategoriesTreeModel[]): CategoriesTreeModel[] {
     if (!tree) {
       const notParentId = (category): Boolean => !category.categoryParentId
       tree = categories.filter(notParentId)
     }
-    tree = tree.map(parentNode => {
+    tree = tree.map((parentNode) => {
       const isChild = (node): Boolean => node.categoryParentId?.toString() === parentNode.id.toString()
       parentNode.children = this.toTree(categories, categories.filter(isChild))
       return parentNode

@@ -4,11 +4,9 @@ import { Controller } from '@/application/protocols/controller'
 import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 
 export class DeleteCategoryController implements Controller {
-  constructor (
-    private readonly deleteCategory: DeleteCategory
-  ) {}
+  constructor(private readonly deleteCategory: DeleteCategory) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { categoryId } = httpRequest.params
       const isSuccessful = await this.deleteCategory.delete(categoryId)

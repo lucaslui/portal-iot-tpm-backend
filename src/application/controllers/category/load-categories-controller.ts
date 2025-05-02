@@ -4,11 +4,9 @@ import { Controller } from '@/application/protocols/controller'
 import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 
 export class LoadCategoriesController implements Controller {
-  constructor (
-    private readonly loadCategories: LoadCategories
-  ) {}
+  constructor(private readonly loadCategories: LoadCategories) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { page, categoryId, categoryParentId } = httpRequest.query
       const articles = await this.loadCategories.load({

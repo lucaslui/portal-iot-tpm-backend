@@ -1,4 +1,3 @@
-
 import { Controller } from '@/application/protocols/controller'
 import { makeLogControllerDecorator } from '../../decorators/log-controller-decorator-factory'
 import { EditUserProfileController } from '@/application/controllers/user/edit-user-profile-controller'

@@ -1,4 +1,3 @@
-
 import { SignUpController } from '@/application/controllers/auth/signup-controller'
 import { Controller } from '@/application/protocols/controller'
 import { makeLogControllerDecorator } from '../../decorators/log-controller-decorator-factory'

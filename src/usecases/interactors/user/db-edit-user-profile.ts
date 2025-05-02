@@ -4,12 +4,12 @@ import { EditUserProfile, EditUserProfileData } from '@/usecases/boundaries/inpu
 import { UploadImageStorage } from '@/usecases/boundaries/outputs/storage/upload-image-storage'
 
 export class DbEditUserProfile implements EditUserProfile {
-  constructor (
+  constructor(
     private readonly userRepository: LoadUserByIdRepository & UpdateUserRepository,
     private readonly imageStorage: UploadImageStorage
   ) {}
 
-  async edit (userId: string, data: EditUserProfileData): Promise<void> {
+  async edit(userId: string, data: EditUserProfileData): Promise<void> {
     const user = await this.userRepository.loadById(userId)
     if (user) {
       let imageUrl = ''

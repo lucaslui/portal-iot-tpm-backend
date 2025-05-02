@@ -5,14 +5,14 @@ import { ChangeUserPasswordRepository } from '@/usecases/boundaries/outputs/data
 import { ChangeUserPassword } from '@/usecases/boundaries/inputs/user/change-user-password'
 
 export class DbChangeUserPassword implements ChangeUserPassword {
-  constructor (
+  constructor(
     private readonly changeUserPasswordRepository: ChangeUserPasswordRepository,
     private readonly loadUserByIdRepository: LoadUserByIdRepository,
     private readonly hashComparer: HashComparer,
     private readonly hasher: Hasher
   ) {}
 
-  async changePassword (userId: string, oldPassword: string, newPassword: string): Promise<boolean> {
+  async changePassword(userId: string, oldPassword: string, newPassword: string): Promise<boolean> {
     const user = await this.loadUserByIdRepository.loadById(userId)
     if (user) {
       const isAuthorized = await this.hashComparer.compare(oldPassword, user.password)

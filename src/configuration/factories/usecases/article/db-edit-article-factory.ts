@@ -6,11 +6,7 @@ import { CloudinaryImageStorage } from '@/infrastructure/storage/cloudinary-stor
 import env from '@/configuration/config/env'
 
 export const makeDbEditArticle = (): EditArticle => {
-  const cloudinaryImageStorage = new CloudinaryImageStorage(
-    env.cloudinaryCloudName,
-    env.cloudinaryApiKey,
-    env.cloudinaryApiSecret
-  )
+  const cloudinaryImageStorage = new CloudinaryImageStorage(env.cloudinaryCloudName, env.cloudinaryApiKey, env.cloudinaryApiSecret)
   const articleMongoRepository = new ArticleMongoRepository()
   return new DbEditArticle(articleMongoRepository, cloudinaryImageStorage)
 }

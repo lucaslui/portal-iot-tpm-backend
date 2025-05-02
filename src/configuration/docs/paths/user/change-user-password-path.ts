@@ -2,9 +2,11 @@ export const changeUserPasswordPath = {
   tags: ['Usuários'],
   summary: 'Trocar a senha da conta do usuário',
   description: 'O usuário pode trocar a senha da sua conta. Todos os campos são obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
-  security: [{
-    apiKeyAuth: []
-  }],
+  security: [
+    {
+      apiKeyAuth: []
+    }
+  ],
   requestBody: {
     required: true,
     description: 'Campos de senha antiga, senha nova e confirmação de senha',

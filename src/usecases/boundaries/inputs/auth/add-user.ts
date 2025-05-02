@@ -5,5 +5,5 @@ export type AddUserParamsModel = {
 }
 
 export interface AddUser {
-  add (params: AddUserParamsModel): Promise<boolean>
+  add(params: AddUserParamsModel): Promise<boolean>
 }

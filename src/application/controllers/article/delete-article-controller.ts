@@ -4,11 +4,9 @@ import { Controller } from '@/application/protocols/controller'
 import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 
 export class DeleteArticleController implements Controller {
-  constructor (
-    private readonly deleteArticle: DeleteArticle
-  ) {}
+  constructor(private readonly deleteArticle: DeleteArticle) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { articleId } = httpRequest.params
       const isSuccessful = await this.deleteArticle.delete(httpRequest.userId, articleId)

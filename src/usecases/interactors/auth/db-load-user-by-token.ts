@@ -4,12 +4,12 @@ import { UserModel } from '@/domain/entities/user'
 import { LoadUserByToken } from '@/usecases/boundaries/inputs/auth/load-user-by-token'
 
 export class DbLoadUserByToken implements LoadUserByToken {
-  constructor (
+  constructor(
     private readonly decrypter: Decrypter,
     private readonly loadUserByTokenRepository: LoadUserByTokenRepository
   ) {}
 
-  async load (accessToken: string, role?: string): Promise<UserModel> {
+  async load(accessToken: string, role?: string): Promise<UserModel> {
     const decodedToken = await this.decrypter.decrypt(accessToken)
     if (decodedToken) {
       const user = await this.loadUserByTokenRepository.loadByToken(accessToken, role)

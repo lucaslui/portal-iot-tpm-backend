@@ -5,12 +5,12 @@ import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 import { Validation } from '@/application/protocols/validation'
 
 export class EditArticleController implements Controller {
-  constructor (
+  constructor(
     private readonly editArticle: EditArticle,
     private readonly validation: Validation
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.body)
       if (error) {
@@ -20,16 +20,20 @@ export class EditArticleController implements Controller {
       const imageBinary = httpRequest.file
       const categoryIds = JSON.parse(httpRequest.body.categoryIds)
       const { title, description, type, state, readTime, content } = httpRequest.body
-      const isSuccessful = await this.editArticle.edit(articleId, {
-        title,
-        description,
-        type,
-        state,
-        readTime,
-        content,
-        categoryIds,
-        imageBinary
-      }, httpRequest.userId)
+      const isSuccessful = await this.editArticle.edit(
+        articleId,
+        {
+          title,
+          description,
+          type,
+          state,
+          readTime,
+          content,
+          categoryIds,
+          imageBinary
+        },
+        httpRequest.userId
+      )
       if (!isSuccessful) {
         return unauthorized()
       }

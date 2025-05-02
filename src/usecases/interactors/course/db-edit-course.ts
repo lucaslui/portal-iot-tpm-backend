@@ -5,12 +5,12 @@ import { DeleteImageStorage } from '@/usecases/boundaries/outputs/storage/delete
 import { UploadImageStorage } from '@/usecases/boundaries/outputs/storage/upload-image-storage'
 
 export class DbEditCourse implements EditCourse {
-  constructor (
+  constructor(
     private readonly courseRepository: LoadCourseByIdRepository & EditCourseRepository,
     private readonly imageRepository: UploadImageStorage & DeleteImageStorage
-  ) { }
+  ) {}
 
-  async edit (courseId: string, newCourse: EditCourseModel, userId: string): Promise<boolean> {
+  async edit(courseId: string, newCourse: EditCourseModel, userId: string): Promise<boolean> {
     const oldCourse = await this.courseRepository.loadById({ courseId })
     let newCourseRepositoryModel: EditCourseRepositoryModel = { ...newCourse }
     if (oldCourse.user.id.toString() === userId.toString()) {

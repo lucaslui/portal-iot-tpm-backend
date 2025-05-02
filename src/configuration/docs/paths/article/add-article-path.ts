@@ -2,9 +2,11 @@ export const addArticlePath = {
   tags: ['Artigos'],
   summary: 'Adiciona um novo artigo ao portal',
   description: 'Adiciona um novo artigo ao portal. Título, descrição, conteúdo e categoria são campos obrigatórios. Essa rota só pode ser executada por **usuários autenticados**',
-  security: [{
-    apiKeyAuth: []
-  }],
+  security: [
+    {
+      apiKeyAuth: []
+    }
+  ],
   requestBody: {
     required: true,
     description: 'Dados do artigo',

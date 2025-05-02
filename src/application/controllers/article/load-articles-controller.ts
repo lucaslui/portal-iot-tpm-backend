@@ -4,11 +4,9 @@ import { Controller } from '@/application/protocols/controller'
 import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 
 export class LoadArticlesController implements Controller {
-  constructor (
-    private readonly loadArticles: LoadArticles
-  ) {}
+  constructor(private readonly loadArticles: LoadArticles) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { page, limit, type, search, state, userId, categoryIds, month, year } = httpRequest.query
       const articles = await this.loadArticles.load({

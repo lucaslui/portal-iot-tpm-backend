@@ -5,12 +5,12 @@ import { Validation } from '@/application/protocols/validation'
 import { AddCourse } from '@/usecases/boundaries/inputs/course/add-course'
 
 export class AddCourseController implements Controller {
-  constructor (
+  constructor(
     private readonly addCourse: AddCourse,
     private readonly validation: Validation
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.body)
       if (error) {

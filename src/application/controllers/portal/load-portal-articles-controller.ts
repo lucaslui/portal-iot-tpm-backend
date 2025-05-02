@@ -4,11 +4,9 @@ import { HttpRequest, HttpResponse } from '@/application/protocols/http'
 import { LoadPortalArticles } from '@/usecases/boundaries/inputs/portal/load-portal-articles'
 
 export class LoadPortalArticlesController implements Controller {
-  constructor (
-    private readonly loadPortalArticles: LoadPortalArticles
-  ) {}
+  constructor(private readonly loadPortalArticles: LoadPortalArticles) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { page, limit, type, search, state, userId, categoryIds, month, year } = httpRequest.query
       const articles = await this.loadPortalArticles.load({

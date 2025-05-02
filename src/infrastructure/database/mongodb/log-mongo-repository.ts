@@ -2,7 +2,7 @@ import { LogErrorRepository } from '@/usecases/boundaries/outputs/database/syste
 import { MongoHelper } from './mongo-helper'
 
 export class LogMongoRepository implements LogErrorRepository {
-  async logError (stack: string): Promise<void> {
+  async logError(stack: string): Promise<void> {
     const errorCollection = await MongoHelper.getCollection('errors')
     await errorCollection.insertOne({
       stack,

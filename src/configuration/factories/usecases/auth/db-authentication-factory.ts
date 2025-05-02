@@ -1,4 +1,3 @@
-
 import { DbAuthentication } from '@/usecases/interactors/auth/db-authentication'
 import { Authentication } from '@/usecases/boundaries/inputs/auth/authentication'
 import { BcryptAdapter } from '@/infrastructure/criptography/bcrypt-adapter'

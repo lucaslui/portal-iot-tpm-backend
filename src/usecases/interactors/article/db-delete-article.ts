@@ -3,11 +3,9 @@ import { DeleteArticle } from '@/usecases/boundaries/inputs/article/delete-artic
 import { LoadArticleByIdRepository } from '@/usecases/boundaries/outputs/database/article/load-article-by-id-repository'
 
 export class DbDeleteArticle implements DeleteArticle {
-  constructor (
-    private readonly articleRepository: LoadArticleByIdRepository & DeleteArticleRepository
-  ) { }
+  constructor(private readonly articleRepository: LoadArticleByIdRepository & DeleteArticleRepository) {}
 
-  async delete (userId: string, articleId: string): Promise<boolean> {
+  async delete(userId: string, articleId: string): Promise<boolean> {
     const article = await this.articleRepository.loadById({ articleId })
     if (article[0]?.userId.toString() === userId) {
       await this.articleRepository.delete(articleId)

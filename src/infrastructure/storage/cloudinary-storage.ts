@@ -4,7 +4,7 @@ import { UploadImageStorage } from '@/usecases/boundaries/outputs/storage/upload
 import { DeleteImageStorage } from '@/usecases/boundaries/outputs/storage/delete-image-storage'
 
 export class CloudinaryImageStorage implements UploadImageStorage, DeleteImageStorage {
-  constructor (
+  constructor(
     private readonly cloudName: string,
     private readonly apiKey: string,
     private readonly apiSecret: string
@@ -16,7 +16,7 @@ export class CloudinaryImageStorage implements UploadImageStorage, DeleteImageSt
     })
   }
 
-  async upload (file: Express.Multer.File | string, folder: string): Promise<string> {
+  async upload(file: Express.Multer.File | string, folder: string): Promise<string> {
     let dataURI = ''
 
     if (typeof file === 'string') {
@@ -30,7 +30,7 @@ export class CloudinaryImageStorage implements UploadImageStorage, DeleteImageSt
     return response.secure_url
   }
 
-  async delete (fileId: string): Promise<void> {
+  async delete(fileId: string): Promise<void> {
     await cloudinary.uploader.destroy(fileId)
   }
 }

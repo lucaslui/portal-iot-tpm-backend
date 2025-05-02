@@ -10,16 +10,18 @@ import { UserModel } from '@/domain/entities/user'
 import { AddUserParamsModel } from '@/usecases/boundaries/inputs/auth/add-user'
 import { MongoHelper } from './mongo-helper'
 
-export class UserMongoRepository implements
-AddUserRepository,
-UpdateUserRepository,
-LoadUserByIdRepository,
-LoadUserByEmailRepository,
-UpdateAccessTokenRepository,
-LoadUserByTokenRepository,
-LoadUsersRepository,
-ChangeUserPasswordRepository {
-  async add (createUserParams: AddUserParamsModel): Promise<boolean> {
+export class UserMongoRepository
+  implements
+    AddUserRepository,
+    UpdateUserRepository,
+    LoadUserByIdRepository,
+    LoadUserByEmailRepository,
+    UpdateAccessTokenRepository,
+    LoadUserByTokenRepository,
+    LoadUsersRepository,
+    ChangeUserPasswordRepository
+{
+  async add(createUserParams: AddUserParamsModel): Promise<boolean> {
     const userCollection = await MongoHelper.getCollection('users')
     const result = await userCollection.insertOne({
       ...createUserParams,
@@ -30,57 +32,65 @@ ChangeUserPasswordRepository {
     return user !== null
   }
 
-  async update (userId: string, data: UpdateUserRepositoryData): Promise<void> {
+  async update(userId: string, data: UpdateUserRepositoryData): Promise<void> {
     const userCollection = await MongoHelper.getCollection('users')
     await userCollection.updateOne({ _id: MongoHelper.toObjectId(userId) }, { $set: { ...data, updatedAt: new Date() } })
   }
 
-  async updateAccessToken (id: string, token: string): Promise<void> {
+  async updateAccessToken(id: string, token: string): Promise<void> {
     const userCollection = await MongoHelper.getCollection('users')
     await userCollection.updateOne({ _id: MongoHelper.toObjectId(id) }, { $set: { accessToken: token } })
   }
 
-  async changePassword (userId: string, hashedPassword: string): Promise<void> {
+  async changePassword(userId: string, hashedPassword: string): Promise<void> {
     const userCollection = await MongoHelper.getCollection('users')
     await userCollection.updateOne({ _id: MongoHelper.toObjectId(userId) }, { $set: { password: hashedPassword } })
   }
 
-  async loadById (userId: string): Promise<UserModel> {
+  async loadById(userId: string): Promise<UserModel> {
     const userCollection = await MongoHelper.getCollection('users')
-    const user = await userCollection.findOne({ _id: MongoHelper.toObjectId(userId) })
+    const user = await userCollection.findOne({
+      _id: MongoHelper.toObjectId(userId)
+    })
     return user && MongoHelper.map(user)
   }
 
-  async loadByEmail (email: string): Promise<UserModel> {
+  async loadByEmail(email: string): Promise<UserModel> {
     const userCollection = await MongoHelper.getCollection('users')
     const user = await userCollection.findOne({ email })
     return user && MongoHelper.map(user)
   }
 
-  async loadByToken (token: string, role?: string): Promise<UserModel> {
+  async loadByToken(token: string, role?: string): Promise<UserModel> {
     const userCollection = await MongoHelper.getCollection('users')
     const user = await userCollection.findOne({
       accessToken: token,
-      $or: [{
-        role
-      }, {
-        role: 'admin'
-      }]
-
+      $or: [
+        {
+          role
+        },
+        {
+          role: 'admin'
+        }
+      ]
     })
     return user && MongoHelper.map(user)
   }
 
-  async loadUsers (page?: number): Promise<UserModel[]> {
+  async loadUsers(page?: number): Promise<UserModel[]> {
     const userCollection = await MongoHelper.getCollection('users')
-    const users = await userCollection.aggregate([{
-      $project: {
-        name: '$name',
-        email: '$email',
-        nickname: '$profile.nickname',
-        createdAt: '$createdAt'
-      }
-    }]).toArray()
+    const users = await userCollection
+      .aggregate([
+        {
+          $project: {
+            name: '$name',
+            email: '$email',
+            nickname: '$profile.nickname',
+            createdAt: '$createdAt'
+          }
+        }
+      ])
+      .toArray()
     return users
   }
 }

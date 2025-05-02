@@ -5,13 +5,15 @@ import { UploadImageStorage } from '@/usecases/boundaries/outputs/storage/upload
 import { DeleteImageStorage } from '@/usecases/boundaries/outputs/storage/delete-image-storage'
 
 export class DbEditArticle implements EditArticle {
-  constructor (
+  constructor(
     private readonly articleRepository: LoadArticleByIdRepository & EditArticleRepository,
     private readonly imageRepository: UploadImageStorage & DeleteImageStorage
-  ) { }
+  ) {}
 
-  async edit (articleId: string, newArticle: EditArticleModel, userId: string): Promise<boolean> {
-    let newArticleRepositoryModel: EditArticleRepositoryModel = { ...newArticle }
+  async edit(articleId: string, newArticle: EditArticleModel, userId: string): Promise<boolean> {
+    let newArticleRepositoryModel: EditArticleRepositoryModel = {
+      ...newArticle
+    }
 
     const oldArticle = await this.articleRepository.loadById({ articleId })
 
@@ -31,20 +33,25 @@ export class DbEditArticle implements EditArticle {
       const newUrlImages = this.getUrlImagesFromAllImages(newImages)
       const oldUrlImages = this.getUrlImagesFromAllImages(oldImages)
 
-      const urlImagesToDelete = oldUrlImages.filter(oldImage => !newUrlImages.includes(oldImage))
+      const urlImagesToDelete = oldUrlImages.filter((oldImage) => !newUrlImages.includes(oldImage))
 
       if (urlImagesToDelete.length > 0) {
-        await Promise.all(urlImagesToDelete.map(async imageUrl => {
-          const fileId = imageUrl.split('/').pop().split('.')[0]
-          await this.imageRepository.delete(`contents/${fileId}`)
-        }))
+        await Promise.all(
+          urlImagesToDelete.map(async (imageUrl) => {
+            const fileId = imageUrl.split('/').pop().split('.')[0]
+            await this.imageRepository.delete(`contents/${fileId}`)
+          })
+        )
       }
 
       const binaryImages = this.getBinaryImagesFromAllImages(newImages)
 
       if (binaryImages.length > 0) {
         const newContent = await this.replaceBinaryToUrlImages(newArticle.content, binaryImages)
-        newArticleRepositoryModel = { ...newArticleRepositoryModel, content: newContent }
+        newArticleRepositoryModel = {
+          ...newArticleRepositoryModel,
+          content: newContent
+        }
       }
 
       await this.articleRepository.edit(articleId, newArticleRepositoryModel)
@@ -54,7 +61,7 @@ export class DbEditArticle implements EditArticle {
     return false
   }
 
-  private getAllImagesFromContent (content: string): string[] {
+  private getAllImagesFromContent(content: string): string[] {
     const regex = /<img[^>]+src="([^">]+)"/g
 
     const images: string[] = []
@@ -68,19 +75,21 @@ export class DbEditArticle implements EditArticle {
     return images
   }
 
-  private getBinaryImagesFromAllImages (images: string[]): string[] {
-    return images.filter(image => image.startsWith('data:'))
+  private getBinaryImagesFromAllImages(images: string[]): string[] {
+    return images.filter((image) => image.startsWith('data:'))
   }
 
-  private getUrlImagesFromAllImages (images: string[]): string[] {
-    return images.filter(image => image.startsWith('https://'))
+  private getUrlImagesFromAllImages(images: string[]): string[] {
+    return images.filter((image) => image.startsWith('https://'))
   }
 
-  private async replaceBinaryToUrlImages (content: string, binaryImages: string[]): Promise<string> {
-    const urlImages = await Promise.all(binaryImages.map(async imageBinary => {
-      const imageUrl = await this.imageRepository.upload(imageBinary, 'contents')
-      return imageUrl
-    }))
+  private async replaceBinaryToUrlImages(content: string, binaryImages: string[]): Promise<string> {
+    const urlImages = await Promise.all(
+      binaryImages.map(async (imageBinary) => {
+        const imageUrl = await this.imageRepository.upload(imageBinary, 'contents')
+        return imageUrl
+      })
+    )
 
     let newContent = content
 
