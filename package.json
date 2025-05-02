@@ -8,7 +8,9 @@
     "start": "node dist/start-server.js",
     "build": "rimraf dist && tsc",
     "dev": "nodemon",
-    "debug": "nodemon --inspect=5858"
+    "debug": "nodemon --inspect=5858",
+    "lint": "eslint 'src/**' --fix --no-error-on-unmatched-pattern",
+    "format": "prettier 'src/**' --write --ignore-unknown"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.1",
