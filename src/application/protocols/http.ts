@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface HttpRequest {
-  headers?: unknown
-  body?: unknown
-  params?: unknown
-  query?: unknown
+  headers?: any
+  body?: any
+  params?: any
+  query?: any
+  file?: any
   userId?: string
-  file?: unknown
 }
 
 export interface HttpResponse {
