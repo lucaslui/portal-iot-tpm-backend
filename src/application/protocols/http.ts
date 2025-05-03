@@ -1,13 +1,13 @@
 export interface HttpRequest {
-  headers?: any
-  body?: any
-  params?: any
-  query?: any
+  headers?: unknown
+  body?: unknown
+  params?: unknown
+  query?: unknown
   userId?: string
-  file?: any
+  file?: unknown
 }
 
 export interface HttpResponse {
   statusCode: number
-  body: any
+  body: unknown
 }

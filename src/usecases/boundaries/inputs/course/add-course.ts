@@ -1,14 +1,8 @@
 import { CourseModel } from '@/domain/entities/course'
+import { ImageBinary } from '@/usecases/models/image-binary'
 
 export type AddCourseModel = Omit<CourseModel, 'id' | 'imageUrl' | 'updatedAt' | 'createdAt'> & {
-  imageBinary?: {
-    fieldname: string
-    originalname: string
-    encoding: string
-    mimetype: string
-    buffer: Buffer
-    size: number
-  }
+  imageBinary?: ImageBinary
 }
 
 export interface AddCourse {

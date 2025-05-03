@@ -16,8 +16,12 @@ export class DbEditUserProfile implements EditUserProfile {
       if (data.imageBinary) {
         imageUrl = await this.imageStorage.upload(data.imageBinary, 'profiles')
       }
-      const { imageBinary, ...user } = { ...data, imageUrl }
-      await this.userRepository.update(userId, user)
+      const userDataToUpdate = {
+        ...data,
+        imageBinary: undefined,
+        imageUrl
+      }
+      await this.userRepository.update(userId, userDataToUpdate)
     }
   }
 }

@@ -7,10 +7,11 @@ import { DeleteCategoryRepository } from '@/usecases/boundaries/outputs/database
 import { EditCategoryRepository } from '@/usecases/boundaries/outputs/database/category/edit-category-repository'
 import { LoadCategoriesRepository } from '@/usecases/boundaries/outputs/database/category/load-categories-repository'
 import { LoadCategoriesQueryModel } from '@/usecases/boundaries/inputs/category/load-categories'
+import { MongoInstance } from '@/infrastructure/database/mongodb/mongo-instance'
 
 export class CategoryMongoRepository implements AddCategoryRepository, DeleteCategoryRepository, EditCategoryRepository, LoadCategoriesRepository {
   async add(category: AddCategoryModel): Promise<CategoryModel> {
-    const categoryCollection = await MongoHelper.getCollection('categories')
+    const categoryCollection = await MongoInstance.getCollection('categories')
     const { categoryParentId, ...rest } = category
     const result = await categoryCollection.insertOne({
       ...rest,
@@ -21,14 +22,14 @@ export class CategoryMongoRepository implements AddCategoryRepository, DeleteCat
   }
 
   async delete(categoryId: string): Promise<void> {
-    const categoryCollection = await MongoHelper.getCollection('categories')
+    const categoryCollection = await MongoInstance.getCollection('categories')
     await categoryCollection.deleteOne({
       _id: MongoHelper.toObjectId(categoryId)
     })
   }
 
   async edit(categoryId: string, category: EditCategoryModel): Promise<void> {
-    const categoryCollection = await MongoHelper.getCollection('categories')
+    const categoryCollection = await MongoInstance.getCollection('categories')
     await categoryCollection.updateOne(
       { _id: MongoHelper.toObjectId(categoryId) },
       {
@@ -43,7 +44,7 @@ export class CategoryMongoRepository implements AddCategoryRepository, DeleteCat
   }
 
   async load(query?: LoadCategoriesQueryModel): Promise<CategoryModel[]> {
-    const categoryCollection = await MongoHelper.getCollection('categories')
+    const categoryCollection = await MongoInstance.getCollection('categories')
     const pipeline: object[] = []
 
     if (query?.categoryId) {

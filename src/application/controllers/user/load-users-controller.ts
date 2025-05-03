@@ -8,8 +8,8 @@ export class LoadUsersController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const { page } = httpRequest.query
-      const users = await this.loadUsers.loadUsers(page)
+      const { page, limit } = httpRequest.query
+      const users = await this.loadUsers.loadUsers({ page, limit })
       return ok(users)
     } catch (error) {
       return serverError(error)

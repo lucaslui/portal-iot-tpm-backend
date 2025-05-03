@@ -2,7 +2,7 @@ import { ServerError } from '../errors/server-error'
 import { UnauthorizedError } from '../errors/unauthorized-error'
 import { HttpResponse } from '../protocols/http'
 
-export const ok = (data: any): HttpResponse => ({
+export const ok = (data: unknown): HttpResponse => ({
   statusCode: 200,
   body: data
 })

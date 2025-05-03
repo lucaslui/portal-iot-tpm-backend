@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { adaptMiddleware } from '@/configuration/adapters/express-middleware-adapter'
 import { adaptRoute } from '@/configuration/adapters/express-route-adapter'
 import { makeAuthMiddleware } from '@/configuration/factories/middlewares/auth-middleware'

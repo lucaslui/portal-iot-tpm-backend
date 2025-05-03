@@ -9,10 +9,11 @@ import { LoadArticlesQueryModel, LoadArticlesResponseModel } from '@/usecases/bo
 import { FilterQuery } from 'mongodb'
 import { LoadArticleByIdRepository } from '@/usecases/boundaries/outputs/database/article/load-article-by-id-repository'
 import { LoadArticleByIdParams, ArticleViewModel } from '@/usecases/boundaries/inputs/article/load-article-by-id'
+import { MongoInstance } from '@/infrastructure/database/mongodb/mongo-instance'
 
 export class ArticleMongoRepository implements AddArticleRepository, EditArticleRepository, DeleteArticleRepository, LoadArticlesRepository, LoadArticleByIdRepository {
   async add(article: AddArticleRepositoryModel): Promise<ArticleModel> {
-    const articleCollection = await MongoHelper.getCollection('articles')
+    const articleCollection = await MongoInstance.getCollection('articles')
     const result = await articleCollection.insertOne({
       title: article.title,
       description: article.description,
@@ -27,11 +28,11 @@ export class ArticleMongoRepository implements AddArticleRepository, EditArticle
       createdAt: new Date()
     })
     const articleAdded = result.ops[0]
-    return MongoHelper.map(articleAdded)
+    return MongoHelper.map<ArticleModel>(articleAdded)
   }
 
   async edit(articleId: string, newArticle: EditArticleRepositoryModel): Promise<void> {
-    const articleCollection = await MongoHelper.getCollection('articles')
+    const articleCollection = await MongoInstance.getCollection('articles')
     const newArticleWithAllowedFields = {
       title: newArticle.title,
       description: newArticle.description,
@@ -54,17 +55,17 @@ export class ArticleMongoRepository implements AddArticleRepository, EditArticle
   }
 
   async delete(articleId: string): Promise<void> {
-    const articleCollection = await MongoHelper.getCollection('articles')
+    const articleCollection = await MongoInstance.getCollection('articles')
     await articleCollection.deleteOne({
       _id: MongoHelper.toObjectId(articleId)
     })
   }
 
   async load(query?: LoadArticlesQueryModel): Promise<LoadArticlesResponseModel> {
-    const articleCollection = await MongoHelper.getCollection('articles')
+    const articleCollection = await MongoInstance.getCollection('articles')
     const pipeline: object[] = []
 
-    const queryMatch: FilterQuery<any> = {}
+    const queryMatch: FilterQuery<unknown> = {}
 
     if (query?.type) {
       queryMatch.type = query.type
@@ -212,7 +213,7 @@ export class ArticleMongoRepository implements AddArticleRepository, EditArticle
   }
 
   async loadById(params: LoadArticleByIdParams): Promise<ArticleViewModel> {
-    const articleCollection = await MongoHelper.getCollection('articles')
+    const articleCollection = await MongoInstance.getCollection('articles')
     const pipeline: object[] = []
 
     pipeline.push({

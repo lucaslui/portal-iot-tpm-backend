@@ -1,43 +1,20 @@
-import { MongoClient, Collection, ObjectId } from 'mongodb'
+import { ObjectId } from 'mongodb'
 
 export const MongoHelper = {
-  client: null as MongoClient,
-  uri: null as string,
-
-  async connect(uri: string): Promise<void> {
-    this.uri = uri
-    this.client = await MongoClient.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
-  },
-
-  async disconnect(): Promise<void> {
-    await this.client.close()
-    this.client = null
-  },
-
-  async getCollection(name: string): Promise<Collection> {
-    if (!this.client?.isConnected()) {
-      await this.connect(this.uri)
-    }
-    return this.client.db().collection(name)
-  },
-
-  toObjectId: (data: string): ObjectId => {
+  toObjectId(data: string): ObjectId {
     return new ObjectId(data)
   },
 
-  mapToObjectId: (data: string[]): any => {
-    return data.map((d) => MongoHelper.toObjectId(d))
+  mapToObjectId(data: string[]): ObjectId[] {
+    return data.map((d) => this.toObjectId(d))
   },
 
-  map: (data: any): any => {
+  map<T>(data: { _id: ObjectId; rest: Omit<T, '_id'> }): T {
     const { _id, ...rest } = data
-    return { ...rest, id: _id }
+    return { ...rest, id: _id } as T
   },
 
-  mapCollection: (collection: any[]): any[] => {
-    return collection.map((c) => MongoHelper.map(c))
+  mapCollection<T>(collection: { _id: ObjectId; rest: Omit<T, '_id'> }[]): { id: ObjectId; rest: Omit<T, '_id'> }[] {
+    return collection.map((c) => this.map(c))
   }
 }

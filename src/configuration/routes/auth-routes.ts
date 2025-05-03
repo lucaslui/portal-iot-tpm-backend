@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { adaptRoute } from '../adapters/express-route-adapter'
 import { makeLoginController } from '../factories/controllers/auth/login-controller-factory'
 // import { makeSignUpController } from '../factories/controllers/auth/signup-controller-factory'

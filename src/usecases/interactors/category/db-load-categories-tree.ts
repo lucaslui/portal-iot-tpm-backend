@@ -10,7 +10,7 @@ export class DbLoadCategoriesTree implements LoadCategoriesTree {
     if (categories) {
       let tree = this.toTree(categories)
       if (query?.categoryId) {
-        const category = tree.filter((category): Boolean => category.id?.toString() === query.categoryId.toString())
+        const category = tree.filter((category): boolean => category.id?.toString() === query.categoryId.toString())
         tree = category[0].children
       }
       return tree
@@ -20,11 +20,11 @@ export class DbLoadCategoriesTree implements LoadCategoriesTree {
 
   toTree(categories: CategoryModel[], tree?: CategoriesTreeModel[]): CategoriesTreeModel[] {
     if (!tree) {
-      const notParentId = (category): Boolean => !category.categoryParentId
+      const notParentId = (category): boolean => !category.categoryParentId
       tree = categories.filter(notParentId)
     }
     tree = tree.map((parentNode) => {
-      const isChild = (node): Boolean => node.categoryParentId?.toString() === parentNode.id.toString()
+      const isChild = (node): boolean => node.categoryParentId?.toString() === parentNode.id.toString()
       parentNode.children = this.toTree(categories, categories.filter(isChild))
       return parentNode
     })

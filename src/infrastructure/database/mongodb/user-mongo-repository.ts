@@ -9,6 +9,9 @@ import { LoadUsersRepository } from '@/usecases/boundaries/outputs/database/user
 import { UserModel } from '@/domain/entities/user'
 import { AddUserParamsModel } from '@/usecases/boundaries/inputs/auth/add-user'
 import { MongoHelper } from './mongo-helper'
+import { FilterQuery } from 'mongodb'
+import { LoadUsersQueryModel } from '@/usecases/boundaries/inputs/user/load-users'
+import { MongoInstance } from '@/infrastructure/database/mongodb/mongo-instance'
 
 export class UserMongoRepository
   implements
@@ -22,7 +25,7 @@ export class UserMongoRepository
     ChangeUserPasswordRepository
 {
   async add(createUserParams: AddUserParamsModel): Promise<boolean> {
-    const userCollection = await MongoHelper.getCollection('users')
+    const userCollection = await MongoInstance.getCollection('users')
     const result = await userCollection.insertOne({
       ...createUserParams,
       updatedAt: new Date(),
@@ -33,22 +36,22 @@ export class UserMongoRepository
   }
 
   async update(userId: string, data: UpdateUserRepositoryData): Promise<void> {
-    const userCollection = await MongoHelper.getCollection('users')
+    const userCollection = await MongoInstance.getCollection('users')
     await userCollection.updateOne({ _id: MongoHelper.toObjectId(userId) }, { $set: { ...data, updatedAt: new Date() } })
   }
 
   async updateAccessToken(id: string, token: string): Promise<void> {
-    const userCollection = await MongoHelper.getCollection('users')
+    const userCollection = await MongoInstance.getCollection('users')
     await userCollection.updateOne({ _id: MongoHelper.toObjectId(id) }, { $set: { accessToken: token } })
   }
 
   async changePassword(userId: string, hashedPassword: string): Promise<void> {
-    const userCollection = await MongoHelper.getCollection('users')
+    const userCollection = await MongoInstance.getCollection('users')
     await userCollection.updateOne({ _id: MongoHelper.toObjectId(userId) }, { $set: { password: hashedPassword } })
   }
 
   async loadById(userId: string): Promise<UserModel> {
-    const userCollection = await MongoHelper.getCollection('users')
+    const userCollection = await MongoInstance.getCollection('users')
     const user = await userCollection.findOne({
       _id: MongoHelper.toObjectId(userId)
     })
@@ -56,13 +59,13 @@ export class UserMongoRepository
   }
 
   async loadByEmail(email: string): Promise<UserModel> {
-    const userCollection = await MongoHelper.getCollection('users')
+    const userCollection = await MongoInstance.getCollection('users')
     const user = await userCollection.findOne({ email })
     return user && MongoHelper.map(user)
   }
 
   async loadByToken(token: string, role?: string): Promise<UserModel> {
-    const userCollection = await MongoHelper.getCollection('users')
+    const userCollection = await MongoInstance.getCollection('users')
     const user = await userCollection.findOne({
       accessToken: token,
       $or: [
@@ -77,20 +80,35 @@ export class UserMongoRepository
     return user && MongoHelper.map(user)
   }
 
-  async loadUsers(page?: number): Promise<UserModel[]> {
-    const userCollection = await MongoHelper.getCollection('users')
-    const users = await userCollection
-      .aggregate([
+  async loadUsers(query?: LoadUsersQueryModel): Promise<UserModel[]> {
+    const userCollection = await MongoInstance.getCollection('users')
+    const pipeline: object[] = []
+
+    const queryMatch: FilterQuery<unknown> = {}
+
+    if (query.page && query.limit) {
+      const limitAsNumber = Number(query.limit)
+      const pageAsNumber = Number(query.page)
+      pipeline.push(
         {
-          $project: {
-            name: '$name',
-            email: '$email',
-            nickname: '$profile.nickname',
-            createdAt: '$createdAt'
-          }
-        }
-      ])
-      .toArray()
+          $skip: pageAsNumber ? pageAsNumber * limitAsNumber - limitAsNumber : 0
+        },
+        { $limit: limitAsNumber }
+      )
+    }
+
+    pipeline.push({ $match: queryMatch })
+    pipeline.push({
+      $project: {
+        name: '$name',
+        email: '$email',
+        nickname: '$profile.nickname',
+        createdAt: '$createdAt'
+      }
+    })
+
+    const users = await userCollection.aggregate(pipeline).toArray()
+
     return users
   }
 }

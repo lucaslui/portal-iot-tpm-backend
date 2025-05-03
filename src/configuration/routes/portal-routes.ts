@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
 
 import { adaptRoute } from '@/configuration/adapters/express-route-adapter'

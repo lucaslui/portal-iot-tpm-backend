@@ -1,4 +1,5 @@
 import { MongoHelper } from '@/infrastructure/database/mongodb/mongo-helper'
+import { MongoInstance } from '@/infrastructure/database/mongodb/mongo-instance'
 import { LoadArticleByIdParams, ArticleViewModel } from '@/usecases/boundaries/inputs/article/load-article-by-id'
 import { LoadArticlesQueryModel } from '@/usecases/boundaries/inputs/article/load-articles'
 import { LoadCoursesQueryModel, LoadCoursesResponseModel } from '@/usecases/boundaries/inputs/course/load-courses'
@@ -10,10 +11,10 @@ import { FilterQuery } from 'mongodb'
 
 export class PortalMongoRepository implements LoadPortalCoursesRepository, LoadPortalArticlesRepository, LoadPortalArticleByIdRepository {
   async loadCourses(query?: LoadCoursesQueryModel): Promise<LoadCoursesResponseModel> {
-    const courseCollection = await MongoHelper.getCollection('courses')
+    const courseCollection = await MongoInstance.getCollection('courses')
     const pipeline: object[] = []
 
-    const queryMatch: FilterQuery<any> = {}
+    const queryMatch: FilterQuery<{ [key: string]: unknown }> = {}
 
     if (query?.type) {
       queryMatch.type = query.type
@@ -160,10 +161,10 @@ export class PortalMongoRepository implements LoadPortalCoursesRepository, LoadP
   }
 
   async loadArticles(query?: LoadArticlesQueryModel): Promise<LoadPortalArticlesResponseModel> {
-    const articleCollection = await MongoHelper.getCollection('articles')
+    const articleCollection = await MongoInstance.getCollection('articles')
     const pipeline: object[] = []
 
-    const queryMatch: FilterQuery<any> = {}
+    const queryMatch: FilterQuery<{ [key: string]: unknown }> = {}
 
     if (query?.type) {
       queryMatch.type = query.type
@@ -311,7 +312,7 @@ export class PortalMongoRepository implements LoadPortalCoursesRepository, LoadP
   }
 
   async loadArticlesById(params: LoadArticleByIdParams): Promise<ArticleViewModel> {
-    const articleCollection = await MongoHelper.getCollection('articles')
+    const articleCollection = await MongoInstance.getCollection('articles')
     const pipeline: object[] = []
 
     pipeline.push({

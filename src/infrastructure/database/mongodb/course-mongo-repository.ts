@@ -1,5 +1,6 @@
 import { CourseModel } from '@/domain/entities/course'
 import { MongoHelper } from '@/infrastructure/database/mongodb/mongo-helper'
+import { MongoInstance } from '@/infrastructure/database/mongodb/mongo-instance'
 import { LoadCourseByIdParams, CourseViewModel } from '@/usecases/boundaries/inputs/course/load-course-by-id'
 import { LoadCoursesQueryModel, LoadCoursesResponseModel } from '@/usecases/boundaries/inputs/course/load-courses'
 import { AddCourseRepository, AddCourseRepositoryModel } from '@/usecases/boundaries/outputs/database/course/add-course-repository'
@@ -11,7 +12,7 @@ import { FilterQuery } from 'mongodb'
 
 export class CourseMongoRepository implements AddCourseRepository, EditCourseRepository, DeleteCourseRepository, LoadCoursesRepository, LoadCourseByIdRepository {
   async add(course: AddCourseRepositoryModel): Promise<CourseModel> {
-    const courseCollection = await MongoHelper.getCollection('courses')
+    const courseCollection = await MongoInstance.getCollection('courses')
     const result = await courseCollection.insertOne({
       title: course.title,
       description: course.description,
@@ -25,11 +26,11 @@ export class CourseMongoRepository implements AddCourseRepository, EditCourseRep
       createdAt: new Date()
     })
     const courseAdded = result.ops[0]
-    return MongoHelper.map(courseAdded)
+    return MongoHelper.map<CourseModel>(courseAdded)
   }
 
   async edit(courseId: string, newCourse: EditCourseRepositoryModel): Promise<void> {
-    const courseCollection = await MongoHelper.getCollection('courses')
+    const courseCollection = await MongoInstance.getCollection('courses')
     const newCourseWithAllowedFields = {
       title: newCourse.title,
       description: newCourse.description,
@@ -51,15 +52,15 @@ export class CourseMongoRepository implements AddCourseRepository, EditCourseRep
   }
 
   async delete(courseId: string): Promise<void> {
-    const courseCollection = await MongoHelper.getCollection('courses')
+    const courseCollection = await MongoInstance.getCollection('courses')
     await courseCollection.deleteOne({ _id: MongoHelper.toObjectId(courseId) })
   }
 
   async load(query?: LoadCoursesQueryModel): Promise<LoadCoursesResponseModel> {
-    const courseCollection = await MongoHelper.getCollection('courses')
+    const courseCollection = await MongoInstance.getCollection('courses')
     const pipeline: object[] = []
 
-    const queryMatch: FilterQuery<any> = {}
+    const queryMatch: FilterQuery<{ [key: string]: unknown }> = {}
 
     if (query?.type) {
       queryMatch.type = query.type
@@ -206,7 +207,7 @@ export class CourseMongoRepository implements AddCourseRepository, EditCourseRep
   }
 
   async loadById(params: LoadCourseByIdParams): Promise<CourseViewModel> {
-    const courseCollection = await MongoHelper.getCollection('courses')
+    const courseCollection = await MongoInstance.getCollection('courses')
     const pipeline: object[] = []
 
     pipeline.push({ $match: { _id: MongoHelper.toObjectId(params.courseId) } })

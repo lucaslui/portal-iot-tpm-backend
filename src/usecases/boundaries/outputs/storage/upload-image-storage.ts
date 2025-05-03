@@ -1,3 +1,5 @@
+import { ImageBinary } from '@/usecases/models/image-binary'
+
 export interface UploadImageStorage {
-  upload: (file: any, folder: string) => Promise<string>
+  upload: (file: ImageBinary, folder: string) => Promise<string>
 }
